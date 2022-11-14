@@ -369,6 +369,26 @@
 
   
 
+   
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+
+var gitalk = new Gitalk({
+    clientID: '65194a3497f75e4e6808',
+    clientSecret: '4595f2b4aafe3a6d7f3f59926418b36d9ac99dad',
+    repo: 'LakeMoun.github.io',
+    owner: 'LakeMoun',
+    admin: ['LakeMoun'],
+    id: md5(location.pathname),
+    distractionFreeMode: true 
+}).render('gitalk-container')
+
+</script>
+
+   
+
 
 
 
