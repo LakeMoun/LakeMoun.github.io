@@ -256,6 +256,126 @@
 
 
   
+    <article id="post-Prometheus学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://prometheus.io/docs/introduction/first_steps/">官方文档</a></p>
+<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus">Prometheus</a>是一个开源监控系统，它前身是SoundCloud的警告工具包。从2012年开始，许多公司和组织开始使用Prometheus。该项目的开发人员和用户社区非常活跃，越来越多的开发人员和用户参与到该项目中。目前它是一个独立的开源项目，且不依赖与任何公司。不一定会使用此系统，但可以吸收优秀开源框架的优点。下面记录Prometheus的入门案例</p>
+<h3 id="二-监控自身的Demo案例"><a href="#二-监控自身的Demo案例" class="headerlink" title="二 监控自身的Demo案例"></a>二 监控自身的Demo案例</h3><p>下面记录Prometheus的安装配置和使用</p>
+<h4 id="1-下载和运行Prometheus"><a href="#1-下载和运行Prometheus" class="headerlink" title="1 下载和运行Prometheus"></a>1 下载和运行Prometheus</h4><p>在<a target="_blank" rel="noopener" href="https://prometheus.io/download">下载地址</a>选择对应版本，然后解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xvfz prometheus-*.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> prometheus-*</span><br></pre></td></tr></table></figure>
+
+<p>下载例:</p>
+<p><img src="/../assets/blogImg/image-20221121101426822.png" alt="image-20221121101426822"></p>
+<h4 id="2-配置监控Prometheus服务本身"><a href="#2-配置监控Prometheus服务本身" class="headerlink" title="2 配置监控Prometheus服务本身"></a>2 配置监控Prometheus服务本身</h4><p>Prometheus需要通过Http请求的方式拉取目标机器上的度量指标。prometheus服务本身也暴露自己运行产生的数据，可以抓取和监控自己的健康状况</p>
+<p>修改配置文件prometheus.yml如下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line">  <span class="attr">scrape_interval:</span>     <span class="string">15s</span></span><br><span class="line">  <span class="attr">evaluation_interval:</span> <span class="string">15s</span></span><br><span class="line"></span><br><span class="line"><span class="attr">rule_files:</span></span><br><span class="line">  <span class="comment"># - &quot;first.rules&quot;</span></span><br><span class="line">  <span class="comment"># - &quot;second.rules&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">prometheus</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> [<span class="string">&#x27;localhost:9091&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-启动"><a href="#3-启动" class="headerlink" title="3 启动"></a>3 启动</h4><p>运行下面命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./prometheus --config.file=prometheus.yml --web.listen-address=:9091 &amp;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221121105800688.png" alt="image-20221121105800688"></p>
+<p><img src="/../assets/blogImg/image-20221121105838896.png" alt="image-20221121105838896"></p>
+<p>可以看到启动成功，服务监听9091端口</p>
+<p>访问对应端口可以看到服务正在运行</p>
+<p>访问<code>地址/metrics</code>可以看到服务正在提供自身指标</p>
+<p><img src="/../assets/blogImg/image-20221121110650812.png" alt="image-20221121110650812"></p>
+<h3 id="三-使用expression-browser"><a href="#三-使用expression-browser" class="headerlink" title="三 使用expression browser"></a>三 使用expression browser</h3><p>访问<code>地址/graph</code>使用Prometheus内置的浏览器查看服务本身的数据</p>
+<p><img src="/../assets/blogImg/image-20221121111845962.png" alt="image-20221121111845962"></p>
+<p>输入<code>promhttp_metric_handler_requests_total</code>并选择table选项卡查看Prometheus处理的请求记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promhttp_metric_handler_requests_total</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221121112654551.png" alt="image-20221121112654551"></p>
+<p>返回了三个series,每个series由不同的标签区分，代表了不同的请求状态</p>
+<p>如果我们只对特定的 HTTP 代码的请求感兴趣，我们可以使用下面查询来检索该信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promhttp_metric_handler_requests_total&#123;code=&quot;200&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221121113141941.png" alt="image-20221121113141941"></p>
+<p>要计算返回的series的数量，使用下面的查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count(promhttp_metric_handler_requests_total)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221121113719114.png" alt="image-20221121113719114"></p>
+<h3 id="四-使用图形界面"><a href="#四-使用图形界面" class="headerlink" title="四 使用图形界面"></a>四 使用图形界面</h3><p>若要绘制图形界面选择Graph选项卡</p>
+<p>例如，输入以下表达式以绘制抓取自Prometheus服务中，发生的返回状态代码为200的每秒HTTP请求速率</p>
+<p><img src="/../assets/blogImg/image-20221121114230160.png" alt="image-20221121114230160"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-node-redistemplete" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -280,7 +400,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="怪异的redis异常"><a href="#怪异的redis异常" class="headerlink" title="怪异的redis异常"></a>怪异的redis异常</h3><p>最近公司项目不太稳定，被安排实现一个监控服务，监控其他服务的运行状态并校验相应的业务数据，设计上使用redis来传递心跳和业务数据来解耦，避免影响到主流程。然而不同的监控对象使用的redis库不尽相同，业务上需要实现动态redis库的功能，首先尝试在网络上寻找到工具类如下</p>
+        <h3 id="怪异的redis异常"><a href="#怪异的redis异常" class="headerlink" title="怪异的redis异常"></a>怪异的redis异常</h3><p>实现一个监控服务，监控其他服务的运行状态并校验相应的业务数据，设计上使用redis来传递心跳和业务数据来解耦，避免影响到主流程。然而不同的监控对象使用的redis库不尽相同，业务上需要实现动态redis库的功能，首先尝试在网络上寻找到工具类如下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate <span class="title function_">setDataBase</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">LettuceConnectionFactory</span> <span class="variable">connectionFactory</span> <span class="operator">=</span> (LettuceConnectionFactory) redisTemplate.getConnectionFactory();</span><br><span class="line">        <span class="keyword">if</span> (connectionFactory != <span class="literal">null</span> &amp;&amp; num != connectionFactory.getDatabase()) &#123;</span><br><span class="line">            connectionFactory.setDatabase(num);</span><br><span class="line">            <span class="built_in">this</span>.redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">            connectionFactory.resetConnection();</span><br><span class="line">            connectionFactory.afterPropertiesSet();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 序列化注入spring容器的RedisTemplate</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Serializable, Object&gt; <span class="title function_">getRedisTemplate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">serializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line"><span class="comment">//        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span></span><br><span class="line">        serializer.setObjectMapper(mapper);</span><br><span class="line">        <span class="comment">//使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setValueSerializer(serializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setHashValueSerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.afterPropertiesSet();</span><br><span class="line"><span class="comment">//        redisTemplate.setEnableTransactionSupport(true);</span></span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2022/11/09/node-redistemplete/#more">more >></a>
@@ -540,6 +660,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Prometheus</a>
               </li>
              
               <li class="article-tag-list-item">
