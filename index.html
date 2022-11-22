@@ -256,6 +256,250 @@
 
 
   
+    <article id="post-PromeQL学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">PromeQL学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/04_quick_start_of_promql.html">参考文章</a></p>
+<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p>PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。</p>
+<p>简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到PromQL。例如：监控指标的设置、报警指标的设置等等。</p>
+<h3 id="二-基础用法"><a href="#二-基础用法" class="headerlink" title="二 基础用法"></a>二 基础用法</h3><p>当Prometheus通过Exporter采集到相应的监控指标样本数据后，我们就可以通过PromQL对监控样本数据进行查询。</p>
+<p>在expression browser中输入监控指标prometheus_http_requests_total并执行:</p>
+<p><img src="/../assets/blogImg/image-20221122102106423.png" alt="image-20221122102106423"></p>
+<h4 id="1-完全匹配"><a href="#1-完全匹配" class="headerlink" title="1 完全匹配"></a>1 完全匹配</h4><p>PromQL 支持使用 &#x3D; 和 !&#x3D; 两种完全匹配模式。</p>
+<ul>
+<li>等于。通过使用 <code>label=value</code> 可以选择那些标签满足表达式定义的时间序列。</li>
+<li>不等于。通过使用 <code>label!=value</code> 则可以根据标签匹配排除时间序列。</li>
+</ul>
+<p>例如我们上面查询出了所有指标名称为 <code>prometheus_http_requests_total</code> 的数据。这时候我们希望只查看错误的请求，即过滤掉所有 code 标签不是 200 的数据。那么我们的 PromQL 表达式可以修改为：<code>prometheus_http_requests_total&#123;code!=&quot;200&quot;&#125;</code>。</p>
+<p><img src="/../assets/blogImg/image-20221122102404300.png" alt="image-20221122102404300"></p>
+<p>可以看到已经过滤掉了code为200的数据</p>
+<h4 id="2-正则匹配"><a href="#2-正则匹配" class="headerlink" title="2 正则匹配"></a>2 正则匹配</h4><p>PromQL 还可以使用正则表达式作为匹配条件，并且可以使用多个匹配条件。</p>
+<ul>
+<li>正向匹配。使用 <code>label=~regx</code> 表示选择那些标签符合正则表达式定义的时间序列。</li>
+<li>反向匹配。使用 <code>label!~regx</code> 进行排除。</li>
+</ul>
+<p>例如查询指标 prometheus_http_requests_total 中，所有 handler 标签以 <code>/api/v1</code> 开头的记录，那表达式为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total&#123;handler=~<span class="string">&quot;/api/v1/.*&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221122102551352.png" alt="image-20221122102551352"></p>
+<h4 id="3-范围查询"><a href="#3-范围查询" class="headerlink" title="3 范围查询"></a>3 范围查询</h4><p>上面直接通过类似 prometheus_http_requests_total 表达式查询时间序列时，同一个指标同一标签只会返回一条数据。这样的表达式我们称之为<strong>瞬间向量表达式</strong>，而返回的结果称之为<strong>瞬间向量</strong>。</p>
+<p>而如果我们想查询一段时间范围内的样本数据，那么我们就需要用到<strong>区间向量表达式</strong>，其查询出来的结果称之为<strong>区间向量</strong>。时间范围通过时间范围选择器 <code>[]</code> 进行定义。例如，通过以下表达式可以选择最近5分钟内的所有样本数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total&#123;&#125;[5m]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221122103334566.png" alt="image-20221122103334566"></p>
+<p>通过查询结果可以看到，此时我们查询出了所有的样本数据，而不再是一个样本数据的统计值。</p>
+<p>除了使用m表示分钟以外，PromQL的时间范围选择器支持其它时间单位：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>时间单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s</td>
+<td>秒</td>
+</tr>
+<tr>
+<td>m</td>
+<td>分</td>
+</tr>
+<tr>
+<td>h</td>
+<td>小时</td>
+</tr>
+<tr>
+<td>d</td>
+<td>天</td>
+</tr>
+<tr>
+<td>w</td>
+<td>周</td>
+</tr>
+<tr>
+<td>y</td>
+<td>年</td>
+</tr>
+</tbody></table>
+<h4 id="4-时间位移操作"><a href="#4-时间位移操作" class="headerlink" title="4 时间位移操作"></a>4 时间位移操作</h4><p>在瞬时向量表达式或者区间向量表达式中，都是以当前时间为基准：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 瞬时向量表达式，选择当前最新的数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125; </span><br><span class="line"><span class="comment"># 区间向量表达式，选择以当前时间为基准，5分钟内的数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125;[5m] </span><br></pre></td></tr></table></figure>
+
+<p>如果想查询 5 分钟前的瞬时样本数据，或昨天一天的区间内的样本数据可以则可以使用位移操作，位移操作的关键字为 offset</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询 5 分钟前的最新数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125; offset 5m</span><br><span class="line"><span class="comment"># 往前移动 1 天，查询 1 天前的数据</span></span><br><span class="line"><span class="comment"># 例如现在是 2020-11-22 00:00:00</span></span><br><span class="line"><span class="comment"># 那么这个表达式查询的数据是：2020-11-20 至 2020-11-21 的数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125;[1d] offset 1d</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-聚合操作"><a href="#5-聚合操作" class="headerlink" title="5 聚合操作"></a>5 聚合操作</h4><p>一般情况下，通过 PromQL 查询到的数据都是很多的。PromQL 提供的聚合操作可以用来对这些时间序列进行处理，形成一条新的时间序列。</p>
+<p>以 <code>prometheus_http_requests_total</code> 指标为例，不加任何条件查询到的数据为：</p>
+<p><img src="/../assets/blogImg/image-20221122102106423.png" alt="image-20221122102106423"></p>
+<h5 id="5-1-count"><a href="#5-1-count" class="headerlink" title="5.1 count()"></a>5.1 count()</h5><p>计算一共有几条数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count(prometheus_http_requests_total)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221122110303181.png" alt="image-20221122110303181"></p>
+<h5 id="5-2-sum"><a href="#5-2-sum" class="headerlink" title="5.2 sum()"></a>5.2 sum()</h5><p>计算所有数据的 value 总和</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span>(prometheus_http_requests_total)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221122110419452.png" alt="image-20221122110419452"></p>
+<p>更多内置函数参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/nandao158/article/details/120486812">PromQL内置函数详解</a></p>
+<h3 id="三-PromQL-操作符"><a href="#三-PromQL-操作符" class="headerlink" title="三 PromQL 操作符"></a>三 PromQL 操作符</h3><h4 id="1-数学运算符"><a href="#1-数学运算符" class="headerlink" title="1 数学运算符"></a>1 数学运算符</h4><p>PromQL支持的所有数学运算符如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>运算</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>除法</td>
+</tr>
+<tr>
+<td>%</td>
+<td>求余</td>
+</tr>
+<tr>
+<td>^</td>
+<td>幂运算</td>
+</tr>
+</tbody></table>
+<p>使用例:</p>
+<p><img src="/../assets/blogImg/image-20221122131648207.png" alt="image-20221122131648207"></p>
+<h4 id="2-布尔运算符"><a href="#2-布尔运算符" class="headerlink" title="2 布尔运算符"></a>2 布尔运算符</h4><p>PromQL支持的所有布尔运算符如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>运算</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;&#x3D;</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>!&#x3D;</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td>小于等于</td>
+</tr>
+</tbody></table>
+<p>使用例：</p>
+<p>列出所有value超过20的数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total &gt; 20			</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221122132331452.png" alt="image-20221122132331452"></p>
+<p>展示所有数据，原value超过20的value为1，反之为0：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total &gt; bool 20</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/blogImg/image-20221122132739429.png" alt="image-20221122132739429"></p>
+<h4 id="3-集合运算符"><a href="#3-集合运算符" class="headerlink" title="3 集合运算符"></a>3 集合运算符</h4><p>通过集合运算，可以在两个瞬时向量与瞬时向量之间进行相应的集合操作。目前，Prometheus支持以下集合运算符：</p>
+<ul>
+<li>and 与操作</li>
+<li>or 或操作</li>
+<li>unless 排除操作</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Prometheus学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
