@@ -163,6 +163,268 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-结合Prometheus和Grafana面板的可视化DEMO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">结合Prometheus和Grafana面板的可视化DEMO</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/" class="archive-article-date">
+  	<time datetime="2022-11-22T05:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-22</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-安装运行-Prometheus-服务端"><a href="#一-安装运行-Prometheus-服务端" class="headerlink" title="一 安装运行 Prometheus 服务端"></a>一 安装运行 Prometheus 服务端</h3><p>参考：<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记 | 大头的博客</a></p>
+<h3 id="二-运行-NodeExporter-客户端数据源"><a href="#二-运行-NodeExporter-客户端数据源" class="headerlink" title="二 运行 NodeExporter 客户端数据源"></a>二 运行 NodeExporter 客户端数据源</h3><p>NodeExporter 是 Prometheus 提供的一个可以采集到主机信息的应用程序，它能采集到机器的 CPU、内存、磁盘等信息。</p>
+<p>从 <a target="_blank" rel="noopener" href="https://prometheus.io/download/">https://prometheus.io/download/</a> 获取最新的 Node Exporter 版本的二进制包。</p>
+<p>下载解压后运行 Node Exporter，指定用 9092 端口运行:</p>
+        
+          <a class="article-more-a" href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PromeQL学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">PromeQL学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2022-11-22T01:20:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-22</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/04_quick_start_of_promql.html">参考文章</a></p>
+<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p>PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。</p>
+<p>简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到PromQL。例如：监控指标的设置、报警指标的设置等等。</p>
+<h3 id="二-基础用法"><a href="#二-基础用法" class="headerlink" title="二 基础用法"></a>二 基础用法</h3><p>当Prometheus通过Exporter采集到相应的监控指标样本数据后，我们就可以通过PromQL对监控样本数据进行查询。</p>
+<p>在expression browser中输入监控指标prometheus_http_requests_total并执行:</p>
+        
+          <a class="article-more-a" href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Prometheus学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2022-11-21T01:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-21</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://prometheus.io/docs/introduction/first_steps/">官方文档</a></p>
+<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus">Prometheus</a>是一个开源监控系统，它前身是SoundCloud的警告工具包。从2012年开始，许多公司和组织开始使用Prometheus。该项目的开发人员和用户社区非常活跃，越来越多的开发人员和用户参与到该项目中。目前它是一个独立的开源项目，且不依赖与任何公司。不一定会使用此系统，但可以吸收优秀开源框架的优点。下面记录Prometheus的入门案例</p>
+<h3 id="二-监控自身的Demo案例"><a href="#二-监控自身的Demo案例" class="headerlink" title="二 监控自身的Demo案例"></a>二 监控自身的Demo案例</h3><p>下面记录Prometheus的安装配置和使用</p>
+<h4 id="1-下载和运行Prometheus"><a href="#1-下载和运行Prometheus" class="headerlink" title="1 下载和运行Prometheus"></a>1 下载和运行Prometheus</h4><p>在<a target="_blank" rel="noopener" href="https://prometheus.io/download">下载地址</a>选择对应版本，然后解压</p>
+        
+          <a class="article-more-a" href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-awk学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -227,181 +489,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PromeQL学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">PromeQL学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/04_quick_start_of_promql.html">参考文章</a></p>
-<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p>PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。</p>
-<p>简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到PromQL。例如：监控指标的设置、报警指标的设置等等。</p>
-<h3 id="二-基础用法"><a href="#二-基础用法" class="headerlink" title="二 基础用法"></a>二 基础用法</h3><p>当Prometheus通过Exporter采集到相应的监控指标样本数据后，我们就可以通过PromQL对监控样本数据进行查询。</p>
-<p>在expression browser中输入监控指标prometheus_http_requests_total并执行:</p>
-        
-          <a class="article-more-a" href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Prometheus学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://prometheus.io/docs/introduction/first_steps/">官方文档</a></p>
-<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus">Prometheus</a>是一个开源监控系统，它前身是SoundCloud的警告工具包。从2012年开始，许多公司和组织开始使用Prometheus。该项目的开发人员和用户社区非常活跃，越来越多的开发人员和用户参与到该项目中。目前它是一个独立的开源项目，且不依赖与任何公司。不一定会使用此系统，但可以吸收优秀开源框架的优点。下面记录Prometheus的入门案例</p>
-<h3 id="二-监控自身的Demo案例"><a href="#二-监控自身的Demo案例" class="headerlink" title="二 监控自身的Demo案例"></a>二 监控自身的Demo案例</h3><p>下面记录Prometheus的安装配置和使用</p>
-<h4 id="1-下载和运行Prometheus"><a href="#1-下载和运行Prometheus" class="headerlink" title="1 下载和运行Prometheus"></a>1 下载和运行Prometheus</h4><p>在<a target="_blank" rel="noopener" href="https://prometheus.io/download">下载地址</a>选择对应版本，然后解压</p>
-        
-          <a class="article-more-a" href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
         </p>
       
 

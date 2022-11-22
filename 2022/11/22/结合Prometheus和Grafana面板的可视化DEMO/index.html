@@ -6,32 +6,43 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lakemoun.github.io">
-  <title>PromeQL学习笔记 | 大头的博客</title>
+  <title>结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考文章 一 简介PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。 简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到Prom">
+  <meta name="description" content="一 安装运行 Prometheus 服务端参考：Prometheus学习笔记 | 大头的博客 二 运行 NodeExporter 客户端数据源NodeExporter 是 Prometheus 提供的一个可以采集到主机信息的应用程序，它能采集到机器的 CPU、内存、磁盘等信息。 从 https:&#x2F;&#x2F;prometheus.io&#x2F;download&#x2F; 获取最新的 Node Exporter 版本的二进制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PromeQL学习笔记">
-<meta property="og:url" content="https://lakemoun.github.io/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="结合Prometheus和Grafana面板的可视化DEMO">
+<meta property="og:url" content="https://lakemoun.github.io/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/index.html">
 <meta property="og:site_name" content="大头的博客">
-<meta property="og:description" content="参考文章 一 简介PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。 简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到Prom">
+<meta property="og:description" content="一 安装运行 Prometheus 服务端参考：Prometheus学习笔记 | 大头的博客 二 运行 NodeExporter 客户端数据源NodeExporter 是 Prometheus 提供的一个可以采集到主机信息的应用程序，它能采集到机器的 CPU、内存、磁盘等信息。 从 https:&#x2F;&#x2F;prometheus.io&#x2F;download&#x2F; 获取最新的 Node Exporter 版本的二进制">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122102106423.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122102404300.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122102551352.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122103334566.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122102106423.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122110303181.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122110419452.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122131648207.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122132331452.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122132739429.png">
-<meta property="article:published_time" content="2022-11-09T07:38:23.000Z">
-<meta property="article:modified_time" content="2022-11-22T05:54:55.766Z">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122141714330.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122143756561.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122143925869.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122144029003.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122151226031.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122152113101.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122152221073.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122153455024.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122153755193.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122153924742.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122154020875.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122154313033.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122154616122.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122160633880.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122160649504.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122161415511.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122161525926.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122161556866.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122161701203.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122161736103.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122161832536.png">
+<meta property="article:published_time" content="2022-11-22T05:59:33.000Z">
+<meta property="article:modified_time" content="2022-11-22T08:43:08.331Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Prometheus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122102106423.png">
+<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221122141714330.png">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -175,20 +186,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-PromeQL学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-结合Prometheus和Grafana面板的可视化DEMO" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      PromeQL学习笔记
+      结合Prometheus和Grafana面板的可视化DEMO
     </h1>
   
 
         
-        <a href="/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
+        <a href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/" class="archive-article-date">
+  	<time datetime="2022-11-22T05:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-22</time>
 </a>
         
 
@@ -203,192 +214,81 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/04_quick_start_of_promql.html">参考文章</a></p>
-<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p>PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。</p>
-<p>简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到PromQL。例如：监控指标的设置、报警指标的设置等等。</p>
-<h3 id="二-基础用法"><a href="#二-基础用法" class="headerlink" title="二 基础用法"></a>二 基础用法</h3><p>当Prometheus通过Exporter采集到相应的监控指标样本数据后，我们就可以通过PromQL对监控样本数据进行查询。</p>
-<p>在expression browser中输入监控指标prometheus_http_requests_total并执行:</p>
+        <h3 id="一-安装运行-Prometheus-服务端"><a href="#一-安装运行-Prometheus-服务端" class="headerlink" title="一 安装运行 Prometheus 服务端"></a>一 安装运行 Prometheus 服务端</h3><p>参考：<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记 | 大头的博客</a></p>
+<h3 id="二-运行-NodeExporter-客户端数据源"><a href="#二-运行-NodeExporter-客户端数据源" class="headerlink" title="二 运行 NodeExporter 客户端数据源"></a>二 运行 NodeExporter 客户端数据源</h3><p>NodeExporter 是 Prometheus 提供的一个可以采集到主机信息的应用程序，它能采集到机器的 CPU、内存、磁盘等信息。</p>
+<p>从 <a target="_blank" rel="noopener" href="https://prometheus.io/download/">https://prometheus.io/download/</a> 获取最新的 Node Exporter 版本的二进制包。</p>
+<p>下载解压后运行 Node Exporter，指定用 9092 端口运行:</p>
 <span id="more"></span>
 
-<p><img src="/../assets/blogImg/image-20221122102106423.png" alt="image-20221122102106423"></p>
-<h4 id="1-完全匹配"><a href="#1-完全匹配" class="headerlink" title="1 完全匹配"></a>1 完全匹配</h4><p>PromQL 支持使用 &#x3D; 和 !&#x3D; 两种完全匹配模式。</p>
-<ul>
-<li>等于。通过使用 <code>label=value</code> 可以选择那些标签满足表达式定义的时间序列。</li>
-<li>不等于。通过使用 <code>label!=value</code> 则可以根据标签匹配排除时间序列。</li>
-</ul>
-<p>例如我们上面查询出了所有指标名称为 <code>prometheus_http_requests_total</code> 的数据。这时候我们希望只查看错误的请求，即过滤掉所有 code 标签不是 200 的数据。那么我们的 PromQL 表达式可以修改为：<code>prometheus_http_requests_total&#123;code!=&quot;200&quot;&#125;</code>。</p>
-<p><img src="/../assets/blogImg/image-20221122102404300.png" alt="image-20221122102404300"></p>
-<p>可以看到已经过滤掉了code为200的数据</p>
-<h4 id="2-正则匹配"><a href="#2-正则匹配" class="headerlink" title="2 正则匹配"></a>2 正则匹配</h4><p>PromQL 还可以使用正则表达式作为匹配条件，并且可以使用多个匹配条件。</p>
-<ul>
-<li>正向匹配。使用 <code>label=~regx</code> 表示选择那些标签符合正则表达式定义的时间序列。</li>
-<li>反向匹配。使用 <code>label!~regx</code> 进行排除。</li>
-</ul>
-<p>例如查询指标 prometheus_http_requests_total 中，所有 handler 标签以 <code>/api/v1</code> 开头的记录，那表达式为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total&#123;handler=~<span class="string">&quot;/api/v1/.*&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar xvfz node_exporter-*.tar.gz</span><br><span class="line">./node_exporter --web.listen-address=:9092 &amp;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221122102551352.png" alt="image-20221122102551352"></p>
-<h4 id="3-范围查询"><a href="#3-范围查询" class="headerlink" title="3 范围查询"></a>3 范围查询</h4><p>上面直接通过类似 prometheus_http_requests_total 表达式查询时间序列时，同一个指标同一标签只会返回一条数据。这样的表达式我们称之为<strong>瞬间向量表达式</strong>，而返回的结果称之为<strong>瞬间向量</strong>。</p>
-<p>而如果我们想查询一段时间范围内的样本数据，那么我们就需要用到<strong>区间向量表达式</strong>，其查询出来的结果称之为<strong>区间向量</strong>。时间范围通过时间范围选择器 <code>[]</code> 进行定义。例如，通过以下表达式可以选择最近5分钟内的所有样本数据：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total&#123;&#125;[5m]</span><br></pre></td></tr></table></figure>
+<p><img src="/../assets/blogImg/image-20221122141714330.png" alt="image-20221122141714330"></p>
+<p><img src="/../assets/blogImg/image-20221122143756561.png" alt="image-20221122143756561"></p>
+<p>访问 <code>地址:9092/</code> 可以看到以下页面：</p>
+<p><img src="/../assets/blogImg/image-20221122143925869.png" alt="image-20221122143925869"></p>
+<p>访问 <code>地址:9092/metrics</code> 可以看到以下页面：</p>
+<p><img src="/../assets/blogImg/image-20221122144029003.png" alt="image-20221122144029003"></p>
+<p>每一个监控指标之前都会有一段类似于如下形式的信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HELP node_cpu Seconds the cpus spent in each mode.</span></span><br><span class="line"><span class="comment"># TYPE node_cpu counter</span></span><br><span class="line">node_cpu&#123;cpu=<span class="string">&quot;cpu0&quot;</span>,mode=<span class="string">&quot;idle&quot;</span>&#125; 362812.7890625</span><br><span class="line"><span class="comment"># HELP node_load1 1m load average.</span></span><br><span class="line"><span class="comment"># TYPE node_load1 gauge</span></span><br><span class="line">node_load1 3.0703125</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221122103334566.png" alt="image-20221122103334566"></p>
-<p>通过查询结果可以看到，此时我们查询出了所有的样本数据，而不再是一个样本数据的统计值。</p>
-<p>除了使用m表示分钟以外，PromQL的时间范围选择器支持其它时间单位：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>时间单位</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>s</td>
-<td>秒</td>
-</tr>
-<tr>
-<td>m</td>
-<td>分</td>
-</tr>
-<tr>
-<td>h</td>
-<td>小时</td>
-</tr>
-<tr>
-<td>d</td>
-<td>天</td>
-</tr>
-<tr>
-<td>w</td>
-<td>周</td>
-</tr>
-<tr>
-<td>y</td>
-<td>年</td>
-</tr>
-</tbody></table>
-<h4 id="4-时间位移操作"><a href="#4-时间位移操作" class="headerlink" title="4 时间位移操作"></a>4 时间位移操作</h4><p>在瞬时向量表达式或者区间向量表达式中，都是以当前时间为基准：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 瞬时向量表达式，选择当前最新的数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125; </span><br><span class="line"><span class="comment"># 区间向量表达式，选择以当前时间为基准，5分钟内的数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125;[5m] </span><br></pre></td></tr></table></figure>
+<p>其中 HELP 用于解释当前指标的含义，TYPE 则说明当前指标的数据类型。</p>
+<p>在上面的例子中 node_cpu 的注释表明当前指标是 cpu0 上 idle 进程占用 CPU 的总时间，CPU 占用时间是一个只增不减的度量指标，从类型中也可以看出 node_cpu 的数据类型是计数器(counter)，与该指标的实际含义一致。</p>
+<p>又例如node_load1该指标反映了当前主机在最近一分钟以内的负载情况，系统的负载情况会随系统资源的使用而变化，因此node_load1反映的是当前状态，数据可能增加也可能减少，从注释中可以看出当前指标类型为仪表盘(gauge)，与指标反映的实际含义一致。</p>
+<p>除了这些以外，在当前页面中根据物理主机系统的不同，还可能看到如下监控指标：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">node<span class="emphasis">_boot_</span>time：系统启动时间</span><br><span class="line">node<span class="emphasis">_cpu：系统CPU使用量</span></span><br><span class="line"><span class="emphasis">nodedisk*：磁盘IO</span></span><br><span class="line"><span class="emphasis">nodefilesystem*：文件系统用量</span></span><br><span class="line"><span class="emphasis">node_</span>load1：系统负载</span><br><span class="line">nodememeory<span class="emphasis">*：内存使用量</span></span><br><span class="line"><span class="emphasis">nodenetwork*</span>：网络带宽</span><br><span class="line">node<span class="emphasis">_time：当前系统时间</span></span><br><span class="line"><span class="emphasis">go_</span><span class="emphasis">*：node exporter中go相关指标</span></span><br><span class="line"><span class="emphasis">process_*</span>：node exporter自身进程相关运行指标</span><br></pre></td></tr></table></figure>
 
-<p>如果想查询 5 分钟前的瞬时样本数据，或昨天一天的区间内的样本数据可以则可以使用位移操作，位移操作的关键字为 offset</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询 5 分钟前的最新数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125; offset 5m</span><br><span class="line"><span class="comment"># 往前移动 1 天，查询 1 天前的数据</span></span><br><span class="line"><span class="comment"># 例如现在是 2020-11-22 00:00:00</span></span><br><span class="line"><span class="comment"># 那么这个表达式查询的数据是：2020-11-20 至 2020-11-21 的数据</span></span><br><span class="line">prometheus_http_requests_total&#123;&#125;[1d] offset 1d</span><br></pre></td></tr></table></figure>
+<p>现在运行了 Prometheus 服务器，也运行了业务数据源 NodeExporter。但此时 Prometheus 还获取不到任何数据，还需要配置下 prometheus.yml 文件，让其去拉取 Node Exporter 的数据。</p>
+<p>配置一下 Prometheus 的配置文件，让 Prometheus 服务器定时去业务数据源拉取数据。编辑prometheus.yml 并在 scrape_configs 节点下添加以下内容:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">&#x27;prometheus&#x27;</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> [<span class="string">&#x27;localhost:9091&#x27;</span>]</span><br><span class="line">  <span class="comment"># 采集node exporter监控数据</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">&#x27;node&#x27;</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> [<span class="string">&#x27;localhost:9092&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
-<h4 id="5-聚合操作"><a href="#5-聚合操作" class="headerlink" title="5 聚合操作"></a>5 聚合操作</h4><p>一般情况下，通过 PromQL 查询到的数据都是很多的。PromQL 提供的聚合操作可以用来对这些时间序列进行处理，形成一条新的时间序列。</p>
-<p>以 <code>prometheus_http_requests_total</code> 指标为例，不加任何条件查询到的数据为：</p>
-<p><img src="/../assets/blogImg/image-20221122102106423.png" alt="image-20221122102106423"></p>
-<h5 id="5-1-count"><a href="#5-1-count" class="headerlink" title="5.1 count()"></a>5.1 count()</h5><p>计算一共有几条数据</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count(prometheus_http_requests_total)</span><br></pre></td></tr></table></figure>
+<p>上面配置文件配置了两个任务。一个是名为 prometheus 的任务，其从「localhost:9090」地址读取数据。另一个是名为 node 的任务，其从「localhost:8080」地址读取数据。</p>
+<p>配置完成后，我们重新启动 Prometheus。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./prometheus --config.file=prometheus.yml --web.listen-address=:9091 &amp;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221122110303181.png" alt="image-20221122110303181"></p>
-<h5 id="5-2-sum"><a href="#5-2-sum" class="headerlink" title="5.2 sum()"></a>5.2 sum()</h5><p>计算所有数据的 value 总和</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span>(prometheus_http_requests_total)</span><br></pre></td></tr></table></figure>
+<p>在 Prometheus 面板上输入up可以看到对应的应用的存活状态</p>
+<p><img src="/../assets/blogImg/image-20221122151226031.png" alt="image-20221122151226031"></p>
+<p>例如查看我们所运行 NodeExporter 节点所在机器的内存使用情况，可以输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node_memory_Active_bytes/(1024*1024*1024)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221122110419452.png" alt="image-20221122110419452"></p>
-<p>更多内置函数参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/nandao158/article/details/120486812">PromQL内置函数详解</a></p>
-<h3 id="三-PromQL-操作符"><a href="#三-PromQL-操作符" class="headerlink" title="三 PromQL 操作符"></a>三 PromQL 操作符</h3><h4 id="1-数学运算符"><a href="#1-数学运算符" class="headerlink" title="1 数学运算符"></a>1 数学运算符</h4><p>PromQL支持的所有数学运算符如下所示：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>运算</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>+</td>
-<td>加法</td>
-</tr>
-<tr>
-<td>-</td>
-<td>减法</td>
-</tr>
-<tr>
-<td>*</td>
-<td>乘法</td>
-</tr>
-<tr>
-<td>&#x2F;</td>
-<td>除法</td>
-</tr>
-<tr>
-<td>%</td>
-<td>求余</td>
-</tr>
-<tr>
-<td>^</td>
-<td>幂运算</td>
-</tr>
-</tbody></table>
-<p>使用例:</p>
-<p><img src="/../assets/blogImg/image-20221122131648207.png" alt="image-20221122131648207"></p>
-<h4 id="2-布尔运算符"><a href="#2-布尔运算符" class="headerlink" title="2 布尔运算符"></a>2 布尔运算符</h4><p>PromQL支持的所有布尔运算符如下所示：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>运算</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x3D;&#x3D;</td>
-<td>等于</td>
-</tr>
-<tr>
-<td>!&#x3D;</td>
-<td>不等于</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>大于</td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td>小于</td>
-</tr>
-<tr>
-<td>&gt;&#x3D;</td>
-<td>大于等于</td>
-</tr>
-<tr>
-<td>&lt;&#x3D;</td>
-<td>小于等于</td>
-</tr>
-</tbody></table>
-<p>使用例：</p>
-<p>列出所有value超过20的数据：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total &gt; 20			</span><br></pre></td></tr></table></figure>
+<p><img src="/../assets/blogImg/image-20221122152113101.png" alt="image-20221122152113101"></p>
+<p>查看 NodeExporter 节点所在机器 CPU 1 分钟的负载情况，可以输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node_load1</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221122132331452.png" alt="image-20221122132331452"></p>
-<p>展示所有数据，原value超过20的value为1，反之为0：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prometheus_http_requests_total &gt; bool 20</span><br></pre></td></tr></table></figure>
+<p><img src="/../assets/blogImg/image-20221122152221073.png" alt="image-20221122152221073"></p>
+<h3 id="三-Grafana可视化"><a href="#三-Grafana可视化" class="headerlink" title="三 Grafana可视化"></a>三 Grafana可视化</h3><p>Prometheus UI 提供了快速验证 PromQL 以及临时可视化支持的能力，但其可视化能力却比较弱。一般情况下，使用 Grafana 来实现对 Prometheus 的可视化实现。</p>
+<p>Grafana 是一个用来展示各种各样数据的开源软件，只需要在 Grafana 上配置一个 Prometheus 的数据源。接着我们就可以配置各种图表，Grafana 就会自动去 Prometheus 拉取数据进行展示。</p>
+<h4 id="1-启动Grafana服务"><a href="#1-启动Grafana服务" class="headerlink" title="1 启动Grafana服务"></a>1 启动Grafana服务</h4><p>从 <a target="_blank" rel="noopener" href="https://grafana.com/grafana/download">https://grafana.com/grafana/download</a> 下载linux系统二进制文件安装包，下载解压后用下面的命令启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./grafana-server web &amp;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221122132739429.png" alt="image-20221122132739429"></p>
-<h4 id="3-集合运算符"><a href="#3-集合运算符" class="headerlink" title="3 集合运算符"></a>3 集合运算符</h4><p>通过集合运算，可以在两个瞬时向量与瞬时向量之间进行相应的集合操作。目前，Prometheus支持以下集合运算符：</p>
-<ul>
-<li>and 与操作</li>
-<li>or 或操作</li>
-<li>unless 排除操作</li>
-</ul>
-<h3 id="四-HTTP-API"><a href="#四-HTTP-API" class="headerlink" title="四 HTTP API"></a>四 HTTP API</h3><p>我们不仅仅可以在 Prometheus 的 Graph 页面查询 PromQL，Prometheus 还提供了一种 HTTP API 的方式，可以更灵活的将 PromQL 整合到其他系统中使用，譬如下面要介绍的 Grafana，就是通过 Prometheus 的 HTTP API 来查询指标数据的。实际上，我们在 Prometheus 的 Graph 页面查询也是使用了 HTTP API。</p>
-<p>参考 <a target="_blank" rel="noopener" href="https://prometheus.io/docs/prometheus/latest/querying/api/">Prometheus 的 HTTP API 官方文档</a>，它提供了下面这些接口：</p>
-<ul>
-<li>GET &#x2F;api&#x2F;v1&#x2F;query</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;query_range</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;series</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;label&#x2F;<label_name>&#x2F;values</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;targets</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;rules</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;alerts</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;targets&#x2F;metadata</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;alertmanagers</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;status&#x2F;config</li>
-<li>GET &#x2F;api&#x2F;v1&#x2F;status&#x2F;flags</li>
-</ul>
-<p>从 Prometheus v2.1 开始，又新增了几个用于管理 TSDB 的接口：</p>
-<ul>
-<li>POST &#x2F;api&#x2F;v1&#x2F;admin&#x2F;tsdb&#x2F;snapshot</li>
-<li>POST &#x2F;api&#x2F;v1&#x2F;admin&#x2F;tsdb&#x2F;delete_series</li>
-<li>POST &#x2F;api&#x2F;v1&#x2F;admin&#x2F;tsdb&#x2F;clean_tombstones</li>
-</ul>
+<p>可以看到启动成功</p>
+<p><img src="/../assets/blogImg/image-20221122153455024.png" alt="image-20221122153455024"></p>
+<h4 id="2-配置监控面板"><a href="#2-配置监控面板" class="headerlink" title="2 配置监控面板"></a>2 配置监控面板</h4><p>Grafana 默认使用 3000 端口启动，我们访问对应3000端口查看页面。</p>
+<p><img src="/../assets/blogImg/image-20221122153755193.png" alt="image-20221122153755193"></p>
+<p>默认的账号密码是 admin&#x2F;admin，首次登陆会要求修改密码</p>
+<p><img src="/../assets/blogImg/image-20221122153924742.png" alt="image-20221122153924742"></p>
+<p>配置数据源</p>
+<p><img src="/../assets/blogImg/image-20221122154020875.png" alt="image-20221122154020875"></p>
+<p>配置对应的数据源，填写好Prometheus服务的地址</p>
+<p><img src="/../assets/blogImg/image-20221122154313033.png" alt="image-20221122154313033"></p>
+<p>在 Grafana 中有「Dashboard」和「Panel」的概念，Dashboard 可以理解成「看板」，而 Panel 可以理解成「图表]，一个看看板中包含了无数个图表。</p>
+<p>增加一个Dashboard并创建一个新Panel</p>
+<p><img src="/../assets/blogImg/image-20221122154616122.png" alt="image-20221122154616122"></p>
+<p>进入到如下界面</p>
+<p>设置好数据源、Metrics数据、图表名称，之后点击右上角的 Apply 按钮即可。保存之后我们就可以在面板中看到机器的 CPU 使用率情况了。</p>
+<p><img src="/../assets/blogImg/image-20221122160633880.png" alt="image-20221122160633880"></p>
+<p><img src="/../assets/blogImg/image-20221122160649504.png" alt="image-20221122160649504"></p>
+<p>查询函数参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34556414/article/details/123443187">Node Exporter 常用监控指标详解与实践</a></p>
+<h3 id="四-Grafana模板中心"><a href="#四-Grafana模板中心" class="headerlink" title="四 Grafana模板中心"></a>四 Grafana模板中心</h3><p><a target="_blank" rel="noopener" href="https://grafana.com/grafana/dashboards">Grafana官网 - Dashboards 模块</a> 提供了下载 Dashboard 模板的功能。</p>
+<p>复制其ID</p>
+<p><img src="/../assets/blogImg/image-20221122161415511.png" alt="image-20221122161415511"></p>
+<p>使用ID导入</p>
+<p><img src="/../assets/blogImg/image-20221122161525926.png" alt="image-20221122161525926"></p>
+<p>选择数据源</p>
+<p><img src="/../assets/blogImg/image-20221122161556866.png" alt="image-20221122161556866"></p>
+<p>大功告成！</p>
+<p><img src="/../assets/blogImg/image-20221122161701203.png" alt="image-20221122161701203"></p>
+<p><img src="/../assets/blogImg/image-20221122161736103.png" alt="image-20221122161736103"></p>
+<p><img src="/../assets/blogImg/image-20221122161832536.png" alt="image-20221122161832536"></p>
 
       
 
@@ -493,7 +393,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2022/11/09/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -507,18 +407,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          awk学习笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Prometheus学习笔记</div>
+    <a href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PromeQL学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
