@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123112810631.png">
 <meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123114833254.png">
 <meta property="article:published_time" content="2022-11-23T02:15:14.000Z">
-<meta property="article:modified_time" content="2022-11-23T09:00:25.191Z">
+<meta property="article:modified_time" content="2022-11-23T09:01:58.065Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Prometheus">
@@ -207,6 +207,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mysqld_exporter --config.my-cnf=&quot;.my.cnf&quot;</span><br></pre></td></tr></table></figure>
 
 <p>这里选择使用配置文件，内容如下：</p>
+<span id="more"></span>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">host=localhost</span><br><span class="line">port=3306</span><br><span class="line">user=mysql_exporter</span><br><span class="line">password=*******</span><br></pre></td></tr></table></figure>
 
 <p>执行如下命令指定配置文件启动，并指定端口</p>

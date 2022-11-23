@@ -195,43 +195,9 @@
 <p><img src="/../assets/blogImg/image-20221123143431840.png" alt="image-20221123143431840"></p>
 <p>进入nginx源码目录并增加第三方模块进入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
-
-<p>编译（不要make install）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p>备份旧程序</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /usr/local/nginx/sbin/nginx  /usr/local/nginx/sbin/nginx.bak</span><br></pre></td></tr></table></figure>
-
-<p>拷贝</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r objs/nginx /usr/local/nginx/sbin/nginx</span><br></pre></td></tr></table></figure>
-<p>重启nginx</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/nginx/sbin/nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<h3 id="二-配置nginx-conf"><a href="#二-配置nginx-conf" class="headerlink" title="二 配置nginx.conf"></a>二 配置nginx.conf</h3><p>在<code>http&#123;&#125;</code>块添加</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vhost_traffic_status_zone;</span><br><span class="line">vhost_traffic_status_filter_by_host on;</span><br></pre></td></tr></table></figure>
-
-<p>在80端口配置规则</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /status &#123;</span><br><span class="line">        <span class="comment"># vts功能</span></span><br><span class="line">        vhost_traffic_status_display;</span><br><span class="line">        vhost_traffic_status_display_format html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>访问<code>地址/status</code></p>
-<p><img src="/../assets/blogImg/image-20221123155102340.png" alt="image-20221123155102340"></p>
-<h3 id="三-下载安装nginx-vts-exporter"><a href="#三-下载安装nginx-vts-exporter" class="headerlink" title="三 下载安装nginx-vts-exporter"></a>三 下载安装nginx-vts-exporter</h3><p><a target="_blank" rel="noopener" href="https://github.com/hnlq715/nginx-vts-exporter">下载地址</a></p>
-<p>解压</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf nginx-vts-exporter-*.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>启动nginx_exporter</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nginx-vts-exporter -nginx.scrape_uri=http://39.97.209.29/status/format/json   #地址为上面nginx-module-vts的json接口</span><br></pre></td></tr></table></figure>
-
-<p>默认端口为9913</p>
-<p><img src="/../assets/blogImg/image-20221123163456919.png" alt="image-20221123163456919"></p>
-<h3 id="三-注册到promethues"><a href="#三-注册到promethues" class="headerlink" title="三 注册到promethues"></a>三 注册到promethues</h3><p>修改配置文件prometheus.yml</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集nginx监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;nginx&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9913&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>重启prometheus,输入up，发现已经注册成功</p>
-<p><img src="/../assets/blogImg/image-20221123164336735.png" alt="image-20221123164336735"></p>
-<h3 id="四-创建Grafana面板"><a href="#四-创建Grafana面板" class="headerlink" title="四 创建Grafana面板"></a>四 创建Grafana面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
-<p><img src="/../assets/blogImg/image-20221123164915618.png" alt="image-20221123164915618"></p>
-
+        
+          <a class="article-more-a" href="/2022/11/23/nginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/#more">more >></a>
+        
       
 
       
@@ -323,22 +289,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mysqld_exporter --config.my-cnf=&quot;.my.cnf&quot;</span><br></pre></td></tr></table></figure>
 
 <p>这里选择使用配置文件，内容如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">host=localhost</span><br><span class="line">port=3306</span><br><span class="line">user=mysql_exporter</span><br><span class="line">password=*******</span><br></pre></td></tr></table></figure>
-
-<p>执行如下命令指定配置文件启动，并指定端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mysqld_exporter --config.my-cnf=<span class="string">&quot;.my.cnf&quot;</span> --web.listen-address=:9093</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../assets/blogImg/image-20221123112626715.png" alt="image-20221123112626715"></p>
-<p>默认端口9104,访问<code>地址:9093/metrics</code>可以看到已有mysql指标</p>
-<p><img src="/../assets/blogImg/image-20221123112810631.png" alt="image-20221123112810631"></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gered/p/16567674.html">mysql_exporter的相关启动参数</a></p>
-<h3 id="二-注册监控指标"><a href="#二-注册监控指标" class="headerlink" title="二 注册监控指标"></a>二 注册监控指标</h3><p>将mysql_exporter配置到Prometheus中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集mysql监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;mysql&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9104&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../assets/blogImg/image-20221123114833254.png" alt="image-20221123114833254"></p>
-<p>可以看到Prometheus中已有msql监控数据</p>
-<h3 id="三-创建Grafana监控面板"><a href="#三-创建Grafana监控面板" class="headerlink" title="三 创建Grafana监控面板"></a>三 创建Grafana监控面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
-
+        
+          <a class="article-more-a" href="/2022/11/23/mysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/#more">more >></a>
+        
       
 
       
