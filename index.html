@@ -191,29 +191,9 @@
 <h3 id="一-下载-JMX"><a href="#一-下载-JMX" class="headerlink" title="一 下载 JMX"></a>一 下载 JMX</h3><p>Java 应用的指标一般是通过 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JMX">JMX（Java Management Extensions）</a> 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/prometheus/jmx_exporter">JMX Exporter</a> 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。</p>
 <p>首先下载 JMX Exporter：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.3.1/jmx_prometheus_javaagent-0.3.1.jar</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../assets/blogImg/image-20221124105221982.png" alt="image-20221124105221982"></p>
-<h3 id="二-启动JMX"><a href="#二-启动JMX" class="headerlink" title="二 启动JMX"></a>二 启动JMX</h3><p>JMX Exporter 的有两种用法<br>启动独立进程。JVM 启动时指定参数，暴露 JMX 的 RMI 接口，JMX Exporter 调用 RMI 获取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>VM 进程内启动（in-process）。JVM 启动时指定参数，通过 JAVA Agent 的形式运行 JMX Exporter 的 jar 包，进程内读取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>官方不推荐使用第一种方式，一方面配置复杂，另一方面因为它需要一个单独的进程，而这个进程本身的监控又成了新的问题。</p>
-<p>为此我们准备一个监控对象jar包</p>
-<p><img src="/../assets/blogImg/image-20221124105153272.png" alt="image-20221124105153272"></p>
-<p>进入JMX下载目录配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建配置文件simple-config.yml</span></span><br><span class="line">vim simple-config.yml</span><br><span class="line"> </span><br><span class="line"><span class="comment">#内容如下</span></span><br><span class="line">---</span><br><span class="line">lowercaseOutputLabelNames: <span class="literal">true</span></span><br><span class="line">lowercaseOutputName: <span class="literal">true</span></span><br><span class="line">whitelistObjectNames: [<span class="string">&quot;java.lang:type=OperatingSystem&quot;</span>]</span><br><span class="line">rules:</span><br><span class="line"> - pattern: <span class="string">&#x27;java.lang&lt;type=OperatingSystem&gt;&lt;&gt;((?!process_cpu_time)\w+):&#x27;</span></span><br><span class="line">   name: os_<span class="variable">$1</span></span><br><span class="line">   <span class="built_in">type</span>: GAUGE</span><br><span class="line">   attrNameSnakeCase: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>部署java应用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> java -javaagent:/data/prometheus/jmx_exporter/jmx_prometheus_javaagent-0.16.0.jar=30100:/data/prometheus/jmx_exporter/simple-config.yml -jar /mnt/baimao/sim/sim.jar &gt;&gt; /mnt/baimao/logs/sim.out 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="comment"># 参数注释</span></span><br><span class="line"><span class="comment"># -javaagent:/data/prometheus/jmx_exporter/jmx_prometheus_javaagent-0.16.0.jar=30100 表示 JMX Exporter 的代理端口为30100</span></span><br><span class="line"><span class="comment"># :/data/prometheus/jmx_exporter/simple-config.yml 表示 JMX Exporter 的配置文件</span></span><br><span class="line"><span class="comment"># /mnt/baimao/sim/sim.jar 表示 java 应用的位置</span></span><br><span class="line"><span class="comment"># /mnt/baimao/logs/sim.out 表示 java 应用的日志</span></span><br></pre></td></tr></table></figure>
-
-<p>访问对应端口可以看到已有应用指标</p>
-<p><img src="/../assets/blogImg/image-20221124110429070.png" alt="image-20221124110429070"></p>
-<h3 id="三-注册指标到promethues"><a href="#三-注册指标到promethues" class="headerlink" title="三 注册指标到promethues"></a>三 注册指标到promethues</h3><p>修改promethues配置文件增加如下监控指标</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集java应用监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;javaApplecationSim&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9095&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>重启promethues，输入up查看</p>
-<p><img src="/../assets/blogImg/image-20221124110947398.png" alt="image-20221124110947398"></p>
-<p>可以看到注册成功</p>
-<h3 id="三-创建Grafana监控面板"><a href="#三-创建Grafana监控面板" class="headerlink" title="三 创建Grafana监控面板"></a>三 创建Grafana监控面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
-<p><img src="/../assets/blogImg/image-20221124111706468.png" alt="image-20221124111706468"></p>
-
+        
+          <a class="article-more-a" href="/2022/11/24/JMX%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/#more">more >></a>
+        
       
 
       
