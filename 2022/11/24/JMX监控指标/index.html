@@ -6,18 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lakemoun.github.io">
-  <title>大头的博客</title>
+  <title>JMX指标监控 | 大头的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随便写写的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="大头的博客">
-<meta property="og:url" content="https://lakemoun.github.io/index.html">
+  <meta name="description" content="参考文章 一 下载 JMXJava 应用的指标一般是通过 JMX（Java Management Extensions） 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。 JMX Exporter 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。 首先下载 JMX E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMX指标监控">
+<meta property="og:url" content="https://lakemoun.github.io/2022/11/24/JMX%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/index.html">
 <meta property="og:site_name" content="大头的博客">
-<meta property="og:description" content="随便写写的博客">
+<meta property="og:description" content="参考文章 一 下载 JMXJava 应用的指标一般是通过 JMX（Java Management Extensions） 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。 JMX Exporter 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。 首先下载 JMX E">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124105221982.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124105153272.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124110429070.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124110947398.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124111706468.png">
+<meta property="article:published_time" content="2022-11-24T01:10:12.000Z">
+<meta property="article:modified_time" content="2022-11-24T03:23:24.907Z">
 <meta property="article:author" content="一个大头鬼">
-<meta property="article:tag" content="java,后端,菜鸟,ffer">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Prometheus">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124105221982.png">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -161,16 +170,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-JMX监控指标" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-JMX监控指标" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/24/JMX%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/">JMX指标监控</a>
+    <h1 class="article-title" itemprop="name">
+      JMX指标监控
     </h1>
   
 
@@ -181,6 +188,10 @@
         
 
 
+                
+                    <span class="archive-article-date">
+                            阅读量 <span id="busuanzi_value_page_pv"></span>
+                    </span>
                 
 
       </header>
@@ -239,16 +250,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/24/JMX%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2022/11/24/JMX%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/11/23/nginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nginx指标监控</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -268,732 +338,24 @@
 
 
 
-
-  
-    <article id="post-nginx指标监控" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/23/nginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">nginx指标监控</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/23/nginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" class="archive-article-date">
-  	<time datetime="2022-11-23T06:27:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-23</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-nginx-module-vts模块的编译"><a href="#一-nginx-module-vts模块的编译" class="headerlink" title="一 nginx-module-vts模块的编译"></a>一 nginx-module-vts模块的编译</h3><p>nginx_vts_exporter依赖nginx-module-vts模块</p>
-<p>进入nginx安装路径下载源码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://github.com/vozlt/nginx-module-vts.git</span><br></pre></td></tr></table></figure>
-
-<p>同时准备好nginx源码</p>
-<p><img src="/../assets/blogImg/image-20221123143431840.png" alt="image-20221123143431840"></p>
-<p>进入nginx源码目录并增加第三方模块进入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/11/23/nginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/23/nginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql指标监控" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/23/mysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">mysql指标监控</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/23/mysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" class="archive-article-date">
-  	<time datetime="2022-11-23T02:15:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-23</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-安装启动-mysql-exporter"><a href="#一-安装启动-mysql-exporter" class="headerlink" title="一 安装启动 mysql_exporter"></a>一 安装启动 mysql_exporter</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter">mysqld_exporter</a> 是 Prometheus 官方提供的一个 exporter，我们首先 <a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter/releases">下载最新版本</a>。</p>
-<p>首先为 mysqld_exporter <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/create-user.html">创建一个单独的用户</a>，并<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/grant.html">赋予它受限的权限</a>（PROCESS、REPLICATION CLIENT、SELECT），限制它的最大连接数（MAX_USER_CONNECTIONS）。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;mysql_exporter&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;*******&#x27; WITH MAX_USER_CONNECTIONS 3;</span><br><span class="line">GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO &#x27;mysql_exporter&#x27;@&#x27;localhost&#x27;;</span><br></pre></td></tr></table></figure>
-
-<p>mysqld_exporter 需要连接到 mysqld 才能收集它的指标，可以通过两种方式来设置 mysqld 数据源。第一种是通过环境变量 <code>DATA_SOURCE_NAME</code>，这被称为 **<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Data_source_name">DSN（数据源名称）</a>**，它必须符合 <a target="_blank" rel="noopener" href="https://github.com/go-sql-driver/mysql#dsn-data-source-name">DSN 的格式</a>，一个典型的 DSN 格式像这样：<code>user:password@(host:port)/</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ export DATA_SOURCE_NAME=&#x27;root:123456@(192.168.0.107:3306)/&#x27;``$ ./mysqld_exporter</span><br></pre></td></tr></table></figure>
-
-<p>另一种方式是通过配置文件，默认的配置文件是 <code>~/.my.cnf</code>，或者通过 <code>--config.my-cnf</code> 参数指定：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mysqld_exporter --config.my-cnf=&quot;.my.cnf&quot;</span><br></pre></td></tr></table></figure>
-
-<p>这里选择使用配置文件，内容如下：</p>
-        
-          <a class="article-more-a" href="/2022/11/23/mysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/23/mysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-结合Prometheus和Grafana面板的可视化DEMO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">结合Prometheus和Grafana面板的可视化DEMO</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/" class="archive-article-date">
-  	<time datetime="2022-11-22T05:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-22</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-安装运行-Prometheus-服务端"><a href="#一-安装运行-Prometheus-服务端" class="headerlink" title="一 安装运行 Prometheus 服务端"></a>一 安装运行 Prometheus 服务端</h3><p>参考：<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/09/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记 | 大头的博客</a></p>
-<h3 id="二-运行-NodeExporter-客户端数据源"><a href="#二-运行-NodeExporter-客户端数据源" class="headerlink" title="二 运行 NodeExporter 客户端数据源"></a>二 运行 NodeExporter 客户端数据源</h3><p>NodeExporter 是 Prometheus 提供的一个可以采集到主机信息的应用程序，它能采集到机器的 CPU、内存、磁盘等信息。</p>
-<p>从 <a target="_blank" rel="noopener" href="https://prometheus.io/download/">https://prometheus.io/download/</a> 获取最新的 Node Exporter 版本的二进制包。</p>
-<p>下载解压后运行 Node Exporter，指定用 9092 端口运行:</p>
-        
-          <a class="article-more-a" href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PromeQL学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">PromeQL学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2022-11-22T01:20:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-22</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/04_quick_start_of_promql.html">参考文章</a></p>
-<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p>PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。</p>
-<p>简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到PromQL。例如：监控指标的设置、报警指标的设置等等。</p>
-<h3 id="二-基础用法"><a href="#二-基础用法" class="headerlink" title="二 基础用法"></a>二 基础用法</h3><p>当Prometheus通过Exporter采集到相应的监控指标样本数据后，我们就可以通过PromQL对监控样本数据进行查询。</p>
-<p>在expression browser中输入监控指标prometheus_http_requests_total并执行:</p>
-        
-          <a class="article-more-a" href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/22/PromeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Prometheus学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2022-11-21T01:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-21</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://prometheus.io/docs/introduction/first_steps/">官方文档</a></p>
-<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus">Prometheus</a>是一个开源监控系统，它前身是SoundCloud的警告工具包。从2012年开始，许多公司和组织开始使用Prometheus。该项目的开发人员和用户社区非常活跃，越来越多的开发人员和用户参与到该项目中。目前它是一个独立的开源项目，且不依赖与任何公司。不一定会使用此系统，但可以吸收优秀开源框架的优点。下面记录Prometheus的入门案例</p>
-<h3 id="二-监控自身的Demo案例"><a href="#二-监控自身的Demo案例" class="headerlink" title="二 监控自身的Demo案例"></a>二 监控自身的Demo案例</h3><p>下面记录Prometheus的安装配置和使用</p>
-<h4 id="1-下载和运行Prometheus"><a href="#1-下载和运行Prometheus" class="headerlink" title="1 下载和运行Prometheus"></a>1 下载和运行Prometheus</h4><p>在<a target="_blank" rel="noopener" href="https://prometheus.io/download">下载地址</a>选择对应版本，然后解压</p>
-        
-          <a class="article-more-a" href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/21/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-awk学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">awk学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2022-11-11T01:13:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-11</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/anqixiang/article/details/117903529">awk命令详解</a></p>
-<h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>awk是专门为文本处理设计的编程语言，是一门数据驱动的编程语言，与sed类似都是以数据驱动的行处理软件，主要用于<code>数据扫描、过滤、统计汇总</code>工作，数据可以来自标准输入、管道或者文件。</p>
-<p>awk在20世纪70年代诞生与贝尔实验室。现在使用的版本是1988年发布的<code>Gnu awk</code>。</p>
-<h2 id="二、基础语法"><a href="#二、基础语法" class="headerlink" title="二、基础语法"></a>二、基础语法</h2><h3 id="2-1-记录与字段"><a href="#2-1-记录与字段" class="headerlink" title="2.1 记录与字段"></a>2.1 记录与字段</h3><p>awk是一种处理文本文件的编程语言，文件的每行数据都被称为<code>记录</code>，默认以空格或制表符为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E9%9A%94%E7%AC%A6&spm=1001.2101.3001.7020">分隔符</a>，每条记录被分成若干<code>字段(列)</code>，awk每次从文件中读取一条记录。</p>
-<p><strong>语法格式：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk [选项] ‘条件&#123;动作&#125;  条件&#123;动作&#125; ... ...’  文件名</span><br></pre></td></tr></table></figure>
-
-<p>awk语法由一系列条件和动作组成，在花括号内可以有多个动作，多个动作之间用分号分隔，在多个条件和动作之间可以有若干空格，也可以没有。</p>
-<p>如果没有指定条件则匹配所有数据，如果没有指定动作则<strong>默认为print打印</strong>。</p>
-<p><strong>awk是对文档中每一行的记录执行的</strong></p>
-        
-          <a class="article-more-a" href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-node-redistemplete" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/09/node-redistemplete/">动态redis库实现与问题</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/09/node-redistemplete/" class="archive-article-date">
-  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="怪异的redis异常"><a href="#怪异的redis异常" class="headerlink" title="怪异的redis异常"></a>怪异的redis异常</h3><p>实现一个监控服务，监控其他服务的运行状态并校验相应的业务数据，设计上使用redis来传递心跳和业务数据来解耦，避免影响到主流程。然而不同的监控对象使用的redis库不尽相同，业务上需要实现动态redis库的功能，首先尝试在网络上寻找到工具类如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate <span class="title function_">setDataBase</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">LettuceConnectionFactory</span> <span class="variable">connectionFactory</span> <span class="operator">=</span> (LettuceConnectionFactory) redisTemplate.getConnectionFactory();</span><br><span class="line">        <span class="keyword">if</span> (connectionFactory != <span class="literal">null</span> &amp;&amp; num != connectionFactory.getDatabase()) &#123;</span><br><span class="line">            connectionFactory.setDatabase(num);</span><br><span class="line">            <span class="built_in">this</span>.redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">            connectionFactory.resetConnection();</span><br><span class="line">            connectionFactory.afterPropertiesSet();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 序列化注入spring容器的RedisTemplate</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Serializable, Object&gt; <span class="title function_">getRedisTemplate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">serializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line"><span class="comment">//        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span></span><br><span class="line">        serializer.setObjectMapper(mapper);</span><br><span class="line">        <span class="comment">//使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setValueSerializer(serializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setHashValueSerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.afterPropertiesSet();</span><br><span class="line"><span class="comment">//        redisTemplate.setEnableTransactionSupport(true);</span></span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/11/09/node-redistemplete/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/09/node-redistemplete/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2012/12/18/hello-world/">Hexo博客框架 Hello World汉化</a>
-    </h1>
-  
-
-        
-        <a href="/2012/12/18/hello-world/" class="archive-article-date">
-  	<time datetime="2012-12-18T15:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2012-12-18</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>欢迎使用<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! 这是你的第一篇文章。检查<a target="_blank" rel="noopener" href="https://hexo.io/docs/">文档</a>了解更多信息。如果您在使用Hexo时遇到任何问题，可以在<a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">疑难解答</a>中找到答案或者你可以在<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>上问我.</p>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建新博客"><a href="#创建新博客" class="headerlink" title="创建新博客"></a>创建新博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="创建新页面"><a href="#创建新页面" class="headerlink" title="创建新页面"></a>创建新页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page <span class="string">&quot;new page&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">写作</a></p>
-<h3 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">服务</a></p>
-<h3 id="构建静态服务"><a href="#构建静态服务" class="headerlink" title="构建静态服务"></a>构建静态服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">构建</a></p>
-<h3 id="推送到远程站点"><a href="#推送到远程站点" class="headerlink" title="推送到远程站点"></a>推送到远程站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">部署</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2012/12/18/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+  
+
+  
+
+  
+
+  
+
+   
+
+
+       
+
+
+
+
 
 
           </div>
@@ -1026,8 +388,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
