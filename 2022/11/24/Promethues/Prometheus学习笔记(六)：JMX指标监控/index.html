@@ -6,26 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lakemoun.github.io">
-  <title>Prometheus学习笔记(五)：mysql指标监控 | 大头的博客</title>
+  <title>Prometheus学习笔记(六)：JMX指标监控 | 大头的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一 安装启动 mysql_exportermysqld_exporter 是 Prometheus 官方提供的一个 exporter，我们首先 下载最新版本。 首先为 mysqld_exporter 创建一个单独的用户，并赋予它受限的权限（PROCESS、REPLICATION CLIENT、SELECT），限制它的最大连接数（MAX_USER_CONNECTIONS）。 12CREATE USE">
+  <meta name="description" content="参考文章 一 下载 JMXJava 应用的指标一般是通过 JMX（Java Management Extensions） 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。 JMX Exporter 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。 首先下载 JMX E">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Prometheus学习笔记(五)：mysql指标监控">
-<meta property="og:url" content="https://lakemoun.github.io/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Amysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/index.html">
+<meta property="og:title" content="Prometheus学习笔记(六)：JMX指标监控">
+<meta property="og:url" content="https://lakemoun.github.io/2022/11/24/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9AJMX%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/index.html">
 <meta property="og:site_name" content="大头的博客">
-<meta property="og:description" content="一 安装启动 mysql_exportermysqld_exporter 是 Prometheus 官方提供的一个 exporter，我们首先 下载最新版本。 首先为 mysqld_exporter 创建一个单独的用户，并赋予它受限的权限（PROCESS、REPLICATION CLIENT、SELECT），限制它的最大连接数（MAX_USER_CONNECTIONS）。 12CREATE USE">
+<meta property="og:description" content="参考文章 一 下载 JMXJava 应用的指标一般是通过 JMX（Java Management Extensions） 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。 JMX Exporter 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。 首先下载 JMX E">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123112626715.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123112810631.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123114833254.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123190622280.png">
-<meta property="article:published_time" content="2022-11-23T02:15:14.000Z">
-<meta property="article:modified_time" content="2022-11-29T02:40:49.009Z">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124105221982.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124105153272.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124110429070.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124110947398.png">
+<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124111706468.png">
+<meta property="article:published_time" content="2022-11-24T01:10:12.000Z">
+<meta property="article:modified_time" content="2022-11-29T02:55:02.502Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Prometheus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123112626715.png">
+<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221124105221982.png">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -169,20 +170,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Promethues/Prometheus学习笔记(五)：mysql指标监控" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Promethues/Prometheus学习笔记(六)：JMX指标监控" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Prometheus学习笔记(五)：mysql指标监控
+      Prometheus学习笔记(六)：JMX指标监控
     </h1>
   
 
         
-        <a href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Amysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" class="archive-article-date">
-  	<time datetime="2022-11-23T02:15:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-23</time>
+        <a href="/2022/11/24/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9AJMX%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" class="archive-article-date">
+  	<time datetime="2022-11-24T01:10:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-24</time>
 </a>
         
 
@@ -197,69 +198,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一-安装启动-mysql-exporter"><a href="#一-安装启动-mysql-exporter" class="headerlink" title="一 安装启动 mysql_exporter"></a>一 安装启动 mysql_exporter</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter">mysqld_exporter</a> 是 Prometheus 官方提供的一个 exporter，我们首先 <a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter/releases">下载最新版本</a>。</p>
-<p>首先为 mysqld_exporter <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/create-user.html">创建一个单独的用户</a>，并<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/grant.html">赋予它受限的权限</a>（PROCESS、REPLICATION CLIENT、SELECT），限制它的最大连接数（MAX_USER_CONNECTIONS）。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;mysql_exporter&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;*******&#x27; WITH MAX_USER_CONNECTIONS 3;</span><br><span class="line">GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO &#x27;mysql_exporter&#x27;@&#x27;localhost&#x27;;</span><br></pre></td></tr></table></figure>
-
-<p>mysqld_exporter 需要连接到 mysqld 才能收集它的指标，可以通过两种方式来设置 mysqld 数据源。第一种是通过环境变量 <code>DATA_SOURCE_NAME</code>，这被称为 **<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Data_source_name">DSN（数据源名称）</a>**，它必须符合 <a target="_blank" rel="noopener" href="https://github.com/go-sql-driver/mysql#dsn-data-source-name">DSN 的格式</a>，一个典型的 DSN 格式像这样：<code>user:password@(host:port)/</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ export DATA_SOURCE_NAME=&#x27;root:123456@(192.168.0.107:3306)/&#x27;``$ ./mysqld_exporter</span><br></pre></td></tr></table></figure>
-
-<p>另一种方式是通过配置文件，默认的配置文件是 <code>~/.my.cnf</code>，或者通过 <code>--config.my-cnf</code> 参数指定：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mysqld_exporter --config.my-cnf=&quot;.my.cnf&quot;</span><br></pre></td></tr></table></figure>
-
-<p>这里选择使用配置文件，内容如下：</p>
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/manba_24/article/details/119329293">参考文章</a></p>
+<h3 id="一-下载-JMX"><a href="#一-下载-JMX" class="headerlink" title="一 下载 JMX"></a>一 下载 JMX</h3><p>Java 应用的指标一般是通过 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JMX">JMX（Java Management Extensions）</a> 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/prometheus/jmx_exporter">JMX Exporter</a> 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。</p>
+<p>首先下载 JMX Exporter：</p>
 <span id="more"></span>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">host=localhost</span><br><span class="line">port=3306</span><br><span class="line">user=mysql_exporter</span><br><span class="line">password=*******</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.3.1/jmx_prometheus_javaagent-0.3.1.jar</span><br></pre></td></tr></table></figure>
 
-<p>执行如下命令指定配置文件启动，并指定端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mysqld_exporter --config.my-cnf=<span class="string">&quot;.my.cnf&quot;</span> --web.listen-address=:9093</span><br></pre></td></tr></table></figure>
+<p><img src="/../../assets/blogImg/image-20221124105221982.png" alt="image-20221124105221982"></p>
+<h3 id="二-启动JMX"><a href="#二-启动JMX" class="headerlink" title="二 启动JMX"></a>二 启动JMX</h3><p>JMX Exporter 的有两种用法<br>启动独立进程。JVM 启动时指定参数，暴露 JMX 的 RMI 接口，JMX Exporter 调用 RMI 获取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>VM 进程内启动（in-process）。JVM 启动时指定参数，通过 JAVA Agent 的形式运行 JMX Exporter 的 jar 包，进程内读取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>官方不推荐使用第一种方式，一方面配置复杂，另一方面因为它需要一个单独的进程，而这个进程本身的监控又成了新的问题。</p>
+<p>为此我们准备一个监控对象jar包</p>
+<p><img src="/../../assets/blogImg/image-20221124105153272.png" alt="image-20221124105153272"></p>
+<p>进入JMX下载目录配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建配置文件simple-config.yml</span></span><br><span class="line">vim simple-config.yml</span><br><span class="line"> </span><br><span class="line"><span class="comment">#内容如下</span></span><br><span class="line">---</span><br><span class="line">lowercaseOutputLabelNames: <span class="literal">true</span></span><br><span class="line">lowercaseOutputName: <span class="literal">true</span></span><br><span class="line">whitelistObjectNames: [<span class="string">&quot;java.lang:type=OperatingSystem&quot;</span>]</span><br><span class="line">rules:</span><br><span class="line"> - pattern: <span class="string">&#x27;java.lang&lt;type=OperatingSystem&gt;&lt;&gt;((?!process_cpu_time)\w+):&#x27;</span></span><br><span class="line">   name: os_<span class="variable">$1</span></span><br><span class="line">   <span class="built_in">type</span>: GAUGE</span><br><span class="line">   attrNameSnakeCase: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221123112626715.png" alt="image-20221123112626715"></p>
-<p>默认端口9104,访问<code>地址:9093/metrics</code>可以看到已有mysql指标</p>
-<p><img src="/../assets/blogImg/image-20221123112810631.png" alt="image-20221123112810631"></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gered/p/16567674.html">mysql_exporter的相关启动参数</a></p>
-<h3 id="二-注册监控指标"><a href="#二-注册监控指标" class="headerlink" title="二 注册监控指标"></a>二 注册监控指标</h3><p>将mysql_exporter配置到Prometheus中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集mysql监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;mysql&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9104&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>部署java应用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> java -javaagent:/data/prometheus/jmx_exporter/jmx_prometheus_javaagent-0.16.0.jar=30100:/data/prometheus/jmx_exporter/simple-config.yml -jar /mnt/baimao/sim/sim.jar &gt;&gt; /mnt/baimao/logs/sim.out 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="comment"># 参数注释</span></span><br><span class="line"><span class="comment"># -javaagent:/data/prometheus/jmx_exporter/jmx_prometheus_javaagent-0.16.0.jar=30100 表示 JMX Exporter 的代理端口为30100</span></span><br><span class="line"><span class="comment"># :/data/prometheus/jmx_exporter/simple-config.yml 表示 JMX Exporter 的配置文件</span></span><br><span class="line"><span class="comment"># /mnt/baimao/sim/sim.jar 表示 java 应用的位置</span></span><br><span class="line"><span class="comment"># /mnt/baimao/logs/sim.out 表示 java 应用的日志</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/../assets/blogImg/image-20221123114833254.png" alt="image-20221123114833254"></p>
-<p>可以看到Prometheus中已有msql监控数据</p>
+<p>访问对应端口可以看到已有应用指标</p>
+<p><img src="/../../assets/blogImg/image-20221124110429070.png" alt="image-20221124110429070"></p>
+<h3 id="三-注册指标到promethues"><a href="#三-注册指标到promethues" class="headerlink" title="三 注册指标到promethues"></a>三 注册指标到promethues</h3><p>修改promethues配置文件增加如下监控指标</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集java应用监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;javaApplecationSim&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9095&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>重启promethues，输入up查看</p>
+<p><img src="/../../assets/blogImg/image-20221124110947398.png" alt="image-20221124110947398"></p>
+<p>可以看到注册成功</p>
 <h3 id="三-创建Grafana监控面板"><a href="#三-创建Grafana监控面板" class="headerlink" title="三 创建Grafana监控面板"></a>三 创建Grafana监控面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
-<p><img src="/../assets/blogImg/image-20221123190622280.png" alt="image-20221123190622280"></p>
+<p><img src="/../../assets/blogImg/image-20221124111706468.png" alt="image-20221124111706468"></p>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢老板，老板大气<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/wcpay.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -330,7 +299,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Amysql%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2022/11/24/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9AJMX%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,18 +313,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9Anginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/11/28/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%83)%EF%BC%9ASringBootActuator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Prometheus学习笔记(六)：nginx指标监控
+          Prometheus学习笔记(七)：SringBootActuator学习笔记
         
       </div>
     </a>
   
   
-    <a href="/2022/11/22/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%9B%9B)%EF%BC%9A%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Prometheus学习笔记(四)：结合Prometheus和Grafana面板的可视化DEMO</div>
+    <a href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Anginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Prometheus学习笔记(五)：nginx指标监控</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -501,10 +470,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Prometheus</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -514,6 +479,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Prometheus</a>
               </li>
             
             <div class="clearfix"></div>
