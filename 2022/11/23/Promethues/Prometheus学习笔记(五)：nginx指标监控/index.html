@@ -15,18 +15,18 @@
 <meta property="og:site_name" content="大头的博客">
 <meta property="og:description" content="一 nginx-module-vts模块的编译nginx_vts_exporter依赖nginx-module-vts模块 进入nginx安装路径下载源码 1git clone git:&#x2F;&#x2F;github.com&#x2F;vozlt&#x2F;nginx-module-vts.git  同时准备好nginx源码  进入nginx源码目录并增加第三方模块进入 1.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;loc">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123143431840.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123190024721.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123163456919.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123164336735.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123164915618.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123143431840.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123190024721.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123163456919.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123164336735.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123164915618.png">
 <meta property="article:published_time" content="2022-11-23T06:27:27.000Z">
-<meta property="article:modified_time" content="2022-12-28T05:57:28.478Z">
+<meta property="article:modified_time" content="2023-01-11T06:06:23.525Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Prometheus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221123143431840.png">
+<meta name="twitter:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123143431840.png">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -203,7 +203,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://github.com/vozlt/nginx-module-vts.git</span><br></pre></td></tr></table></figure>
 
 <p>同时准备好nginx源码</p>
-<p><img src="/../../assets/blogImg/image-20221123143431840.png" alt="image-20221123143431840"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123143431840.png" alt="image-20221123143431840"></p>
 <p>进入nginx源码目录并增加第三方模块进入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
@@ -225,7 +225,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /status &#123;</span><br><span class="line">        <span class="comment"># vts功能</span></span><br><span class="line">        vhost_traffic_status_display;</span><br><span class="line">        vhost_traffic_status_display_format html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>访问<code>地址/status</code></p>
-<p><img src="/../../assets/blogImg/image-20221123190024721.png" alt="image-20221123190024721"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123190024721.png" alt="image-20221123190024721"></p>
 <h3 id="三-下载安装nginx-vts-exporter"><a href="#三-下载安装nginx-vts-exporter" class="headerlink" title="三 下载安装nginx-vts-exporter"></a>三 下载安装nginx-vts-exporter</h3><p><a target="_blank" rel="noopener" href="https://github.com/hnlq715/nginx-vts-exporter">下载地址</a></p>
 <p>解压</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf nginx-vts-exporter-*.tar.gz</span><br></pre></td></tr></table></figure>
@@ -234,14 +234,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nginx-vts-exporter -nginx.scrape_uri=http://39.97.209.29/status/format/json   #地址为上面nginx-module-vts的json接口</span><br></pre></td></tr></table></figure>
 
 <p>默认端口为9913</p>
-<p><img src="/../../assets/blogImg/image-20221123163456919.png" alt="image-20221123163456919"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123163456919.png" alt="image-20221123163456919"></p>
 <h3 id="三-注册到promethues"><a href="#三-注册到promethues" class="headerlink" title="三 注册到promethues"></a>三 注册到promethues</h3><p>修改配置文件prometheus.yml</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集nginx监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;nginx&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9913&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
 <p>重启prometheus,输入up，发现已经注册成功</p>
-<p><img src="/../../assets/blogImg/image-20221123164336735.png" alt="image-20221123164336735"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123164336735.png" alt="image-20221123164336735"></p>
 <h3 id="四-创建Grafana面板"><a href="#四-创建Grafana面板" class="headerlink" title="四 创建Grafana面板"></a>四 创建Grafana面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)%EF%BC%9A%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">Prometheus学习笔记(三)：结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
-<p><img src="/../../assets/blogImg/image-20221123164915618.png" alt="image-20221123164915618"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123164915618.png" alt="image-20221123164915618"></p>
 
       
 

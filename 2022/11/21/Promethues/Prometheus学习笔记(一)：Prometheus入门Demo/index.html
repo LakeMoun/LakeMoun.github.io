@@ -15,22 +15,22 @@
 <meta property="og:site_name" content="大头的博客">
 <meta property="og:description" content="官方文档 一 简介Prometheus是一个开源监控系统，它前身是SoundCloud的警告工具包。从2012年开始，许多公司和组织开始使用Prometheus。该项目的开发人员和用户社区非常活跃，越来越多的开发人员和用户参与到该项目中。目前它是一个独立的开源项目，且不依赖与任何公司。不一定会使用此系统，但可以吸收优秀开源框架的优点。下面记录Prometheus的入门案例 二 监控自身的Demo案">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121101426822.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121105800688.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121105838896.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121110650812.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121111845962.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121112654551.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121113141941.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121113719114.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121114230160.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121101426822.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121105800688.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121105838896.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121110650812.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121111845962.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121112654551.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121113141941.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121113719114.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121114230160.png">
 <meta property="article:published_time" content="2022-11-21T01:30:12.000Z">
-<meta property="article:modified_time" content="2022-11-29T02:55:02.501Z">
+<meta property="article:modified_time" content="2023-01-11T06:06:23.525Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Prometheus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221121101426822.png">
+<meta name="twitter:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121101426822.png">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -211,7 +211,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xvfz prometheus-*.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> prometheus-*</span><br></pre></td></tr></table></figure>
 
 <p>下载例:</p>
-<p><img src="/../../assets/blogImg/image-20221121101426822.png" alt="image-20221121101426822"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121101426822.png" alt="image-20221121101426822"></p>
 <h4 id="2-配置监控Prometheus服务本身"><a href="#2-配置监控Prometheus服务本身" class="headerlink" title="2 配置监控Prometheus服务本身"></a>2 配置监控Prometheus服务本身</h4><p>Prometheus需要通过Http请求的方式拉取目标机器上的度量指标。prometheus服务本身也暴露自己运行产生的数据，可以抓取和监控自己的健康状况</p>
 <p>修改配置文件prometheus.yml如下</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line">  <span class="attr">scrape_interval:</span>     <span class="string">15s</span></span><br><span class="line">  <span class="attr">evaluation_interval:</span> <span class="string">15s</span></span><br><span class="line"></span><br><span class="line"><span class="attr">rule_files:</span></span><br><span class="line">  <span class="comment"># - &quot;first.rules&quot;</span></span><br><span class="line">  <span class="comment"># - &quot;second.rules&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">prometheus</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> [<span class="string">&#x27;localhost:9091&#x27;</span>]</span><br></pre></td></tr></table></figure>
@@ -219,30 +219,30 @@
 <h4 id="3-启动"><a href="#3-启动" class="headerlink" title="3 启动"></a>3 启动</h4><p>运行下面命令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./prometheus --config.file=prometheus.yml --web.listen-address=:9091 &amp;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../../assets/blogImg/image-20221121105800688.png" alt="image-20221121105800688"></p>
-<p><img src="/../../assets/blogImg/image-20221121105838896.png" alt="image-20221121105838896"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121105800688.png" alt="image-20221121105800688"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121105838896.png" alt="image-20221121105838896"></p>
 <p>可以看到启动成功，服务监听9091端口</p>
 <p>访问对应端口可以看到服务正在运行</p>
 <p>访问<code>地址/metrics</code>可以看到服务正在提供自身指标</p>
-<p><img src="/../../assets/blogImg/image-20221121110650812.png" alt="image-20221121110650812"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121110650812.png" alt="image-20221121110650812"></p>
 <h3 id="三-使用expression-browser"><a href="#三-使用expression-browser" class="headerlink" title="三 使用expression browser"></a>三 使用expression browser</h3><p>访问<code>地址/graph</code>使用Prometheus内置的浏览器查看服务本身的数据</p>
-<p><img src="/../../assets/blogImg/image-20221121111845962.png" alt="image-20221121111845962"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121111845962.png" alt="image-20221121111845962"></p>
 <p>输入<code>promhttp_metric_handler_requests_total</code>并选择table选项卡查看Prometheus处理的请求记录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promhttp_metric_handler_requests_total</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../../assets/blogImg/image-20221121112654551.png" alt="image-20221121112654551"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121112654551.png" alt="image-20221121112654551"></p>
 <p>返回了三个series,每个series由不同的标签区分，代表了不同的请求状态</p>
 <p>如果我们只对特定的 HTTP 代码的请求感兴趣，我们可以使用下面查询来检索该信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promhttp_metric_handler_requests_total&#123;code=&quot;200&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../../assets/blogImg/image-20221121113141941.png" alt="image-20221121113141941"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121113141941.png" alt="image-20221121113141941"></p>
 <p>要计算返回的series的数量，使用下面的查询</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count(promhttp_metric_handler_requests_total)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../../assets/blogImg/image-20221121113719114.png" alt="image-20221121113719114"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121113719114.png" alt="image-20221121113719114"></p>
 <h3 id="四-使用图形界面"><a href="#四-使用图形界面" class="headerlink" title="四 使用图形界面"></a>四 使用图形界面</h3><p>若要绘制图形界面选择Graph选项卡</p>
 <p>例如，输入以下表达式以绘制抓取自Prometheus服务中，发生的返回状态代码为200的每秒HTTP请求速率</p>
-<p><img src="/../../assets/blogImg/image-20221121114230160.png" alt="image-20221121114230160"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121114230160.png" alt="image-20221121114230160"></p>
 
       
 

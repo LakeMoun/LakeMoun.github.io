@@ -15,27 +15,27 @@
 <meta property="og:site_name" content="大头的博客">
 <meta property="og:description" content="参考资料 一 Spring监控机制在 Spring 2.x 之前，SpringBoot 使用 Actuator 模块进行监控，而在 Spring 2.x 之后，SpringBoot 使用了 Micrometer 进行监控。 Spring Boot Actuator 模块提供了生产级别的功能，比如健康检查，审计，指标收集，HTTP 跟踪等，帮助我们监控和管理 Spring Boot 应用。这个模块是">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128092727134.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128093717708.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128095644111.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128101039335.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128093717708.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128101524180.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128101736215.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128102308246.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128102928803.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128103158801.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128103731174.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128104200558.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128111517163.png">
-<meta property="og:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128112020949.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128092727134.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128093717708.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128095644111.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128101039335.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128093717708.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128101524180.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128101736215.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128102308246.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128102928803.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128103158801.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128103731174.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128104200558.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128111517163.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128112020949.png">
 <meta property="article:published_time" content="2022-11-28T01:15:21.000Z">
-<meta property="article:modified_time" content="2022-12-28T05:57:28.477Z">
+<meta property="article:modified_time" content="2023-01-11T06:06:23.525Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Prometheus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lakemoun.github.io/assets/blogImg/image-20221128092727134.png">
+<meta name="twitter:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128092727134.png">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -222,7 +222,7 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Actuator Web 访问端口</span></span><br><span class="line"><span class="string">management.server.port=9096</span></span><br><span class="line"><span class="string">management.endpoints.jmx.exposure.include=*</span></span><br><span class="line"><span class="string">management.endpoints.web.exposure.include=*</span></span><br><span class="line"><span class="string">management.endpoint.health.show-details=always</span></span><br><span class="line"><span class="comment"># 应用服务 WEB 访问端口</span></span><br><span class="line"><span class="string">server.port=8083</span></span><br></pre></td></tr></table></figure>
 
 <p>运行项目访问<a target="_blank" rel="noopener" href="http://localhost:9096/actuator/health">localhost:9096&#x2F;actuator&#x2F;health</a> 查看应用健康状态，正常情况返回UP信息</p>
-<p><img src="/../../assets/blogImg/image-20221128092727134.png" alt="image-20221128092727134"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128092727134.png" alt="image-20221128092727134"></p>
 <p>除了提供最基本的健康检查外，actuator 还提供了许多其他的端点（Endpoints）信息。</p>
 <h3 id="三-端点暴露配置"><a href="#三-端点暴露配置" class="headerlink" title="三 端点暴露配置"></a>三 端点暴露配置</h3><p>不同于 Actuator 1.x，Actuator 2.x 的大多数端点默认被关闭。在查看对应端点之前，需要做好配置。</p>
 <p>可以通过以下配置，来配置通过 JMX 和 HTTP 暴露的端点。</p>
@@ -263,7 +263,7 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management.endpoints.web.exposure.include</span>=*</span><br></pre></td></tr></table></figure>
 
 <p>接着我们访问地址：<a target="_blank" rel="noopener" href="http://localhost:9096/actuator/metrics">localhost:9096&#x2F;actuator&#x2F;metrics</a>，可以看到所有的指标地址。</p>
-<p><img src="/../../assets/blogImg/image-20221128093717708.png" alt="image-20221128093717708"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128093717708.png" alt="image-20221128093717708"></p>
 <h3 id="四-常用端点"><a href="#四-常用端点" class="headerlink" title="四 常用端点"></a>四 常用端点</h3><p>Spring Boot Actuator 提供了 Endpoints（端点）给外部来与应用程序进行访问和交互。</p>
 <p>例如 <code>/health</code> 端点提供了关于应用健康情况的一些基础信息。<code>/metrics</code> 端点提供了一些有用的应用程序指标（JVM 内存使用、系统 CPU 使用等）。</p>
 <p>一般来说，端点可以分为几类：</p>
@@ -301,7 +301,7 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management.endpoint.health.show-components</span>=always</span><br></pre></td></tr></table></figure>
 
 <p>配置一下redis链接然后启动项目，最终我们再次访问地址：<a target="_blank" rel="noopener" href="http://localhost:9096/actuator/health">localhost:9096&#x2F;actuator&#x2F;health</a>。可以看到 redis 的信息。</p>
-<p><img src="/../../assets/blogImg/image-20221128095644111.png" alt="image-20221128095644111"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128095644111.png" alt="image-20221128095644111"></p>
 <p>我们也可以通过配置禁用某个组件的健康监测。例如下面的配置禁用了 mongodb 的组件健康监测。</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management.health.mongo.enabled</span>=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
@@ -374,16 +374,16 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">CustomHealthIndicator</span> <span class="keyword">extends</span> <span class="title">AbstractHealthIndicator</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> void doHealthCheck(<span class="type">Health</span>.<span class="type">Builder</span> builder) <span class="keyword">throws</span> <span class="type">Exception</span> &#123;</span><br><span class="line">        <span class="comment">// 使用 builder 来创建健康状态信息</span></span><br><span class="line">        <span class="comment">// 如果你throw 了一个 exception，那么status 就会被置为DOWN，异常信息会被记录下来</span></span><br><span class="line">        builder.up()</span><br><span class="line">                .withDetail(<span class="string">&quot;app&quot;</span>, <span class="string">&quot;李磊：项目健康&quot;</span>)</span><br><span class="line">                .withDetail(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;李磊：项目异常&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>重启应用并访问地址：<a target="_blank" rel="noopener" href="http://localhost:9096/actuator/health">localhost:9096&#x2F;actuator&#x2F;health</a>，可以看到自定义的健康信息。</p>
-<p><img src="/../../assets/blogImg/image-20221128101039335.png" alt="image-20221128101039335"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128101039335.png" alt="image-20221128101039335"></p>
 <h4 id="2-metrics端点"><a href="#2-metrics端点" class="headerlink" title="2 metrics端点"></a>2 metrics端点</h4><p><code>/metrics</code> 端点用来返回当前应用的各类重要度量指标，比如：内存信息、线程信息、垃圾回收信息、tomcat、数据库连接池等。当我们访问：<a target="_blank" rel="noopener" href="http://localhost:9096/actuator/metrics">localhost:9096&#x2F;actuator&#x2F;metrics</a> 时，会返回 SpringBoot Actuator 的所有可查看端点信息。</p>
-<p><img src="/../../assets/blogImg/image-20221128093717708.png" alt="image-20221128093717708"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128093717708.png" alt="image-20221128093717708"></p>
 <p>可以进一步使用如下格式的 URL 访问到对应的信息：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:9096/actuator/metrics/&#123;MetricName&#125;</span><br></pre></td></tr></table></figure>
 
 <p>例如我想访问 <code>system.cpu.count</code> 这个指标，那么我访问这个链接即可：<a target="_blank" rel="noopener" href="http://localhost:9096/actuator/metrics/system.cpu.count">localhost:9096&#x2F;actuator&#x2F;metrics&#x2F;system.cpu.count</a>，返回值为：</p>
-<p><img src="/../../assets/blogImg/image-20221128101524180.png" alt="image-20221128101524180"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128101524180.png" alt="image-20221128101524180"></p>
 <h4 id="3-loggers端点"><a href="#3-loggers端点" class="headerlink" title="3 loggers端点"></a>3 loggers端点</h4><p>&#x2F;loggers 端点暴露了我们程序内部配置的所有 logger 的信息，访问这个链接就可以看到：<a target="_blank" rel="noopener" href="http://localhost:9096/actuator/loggers">localhost:9096&#x2F;actuator&#x2F;loggers</a>。</p>
-<p><img src="/../../assets/blogImg/image-20221128101736215.png" alt="image-20221128101736215"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128101736215.png" alt="image-20221128101736215"></p>
 <p>也可以通过下述方式访问某一个 logger</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:9096/actuator/loggers/&#123;name&#125;</span><br></pre></td></tr></table></figure>
 
@@ -395,18 +395,18 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">info.app.name</span>=actuator-test-demo</span><br><span class="line"><span class="attr">info.app.encoding</span>=UTF-<span class="number">8</span></span><br><span class="line"><span class="attr">info.app.java.source</span>=<span class="number">1.8</span></span><br><span class="line"><span class="attr">info.app.java.target</span>=<span class="number">1.8</span></span><br></pre></td></tr></table></figure>
 
 <p>再次访问 <a target="_blank" rel="noopener" href="http://localhost:9096/actuator/info">localhost:9096&#x2F;actuator&#x2F;info</a> 会返回 info 节点的信息：</p>
-<p><img src="/../../assets/blogImg/image-20221128102308246.png" alt="image-20221128102308246"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128102308246.png" alt="image-20221128102308246"></p>
 <p>info 端点只会返回 info 节点下的信息，而不会返回其他节点下的信息。</p>
 <h4 id="5-beans端点"><a href="#5-beans端点" class="headerlink" title="5 beans端点"></a>5 beans端点</h4><p><code>/beans</code> 端点会返回 Spring 容器中所有 bean 的别名、类型、是否单例、依赖等信息。</p>
 <p>当我们访问 <a target="_blank" rel="noopener" href="http://localhost:9096/actuator/beans">localhost:9096&#x2F;actuator&#x2F;beans</a> 时，会返回如下信息：</p>
-<p><img src="/../../assets/blogImg/image-20221128102928803.png" alt="image-20221128102928803"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128102928803.png" alt="image-20221128102928803"></p>
 <h4 id="6-heapdump端点"><a href="#6-heapdump端点" class="headerlink" title="6 heapdump端点"></a>6 heapdump端点</h4><p>访问 <a target="_blank" rel="noopener" href="http://localhost:9096/actuator/threaddump">localhost:9096&#x2F;actuator&#x2F;threaddump</a> 会返回应用的线程信息，包括线程名、线程 ID、线程的状态、是否等待锁资源、线程堆栈等信息。</p>
-<p><img src="/../../assets/blogImg/image-20221128103158801.png" alt="image-20221128103158801"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128103158801.png" alt="image-20221128103158801"></p>
 <h4 id="7-shutdown端点"><a href="#7-shutdown端点" class="headerlink" title="7 shutdown端点"></a>7 shutdown端点</h4><p>这个端点属于操作控制类端点，可以关闭 Spring Boot 应用。要使用这个功能首先需要在配置文件中开启：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management.endpoint.shutdown.enabled</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>由于 shutdown 接口默认只支持 POST 请求，启动 Demo 项目，向 <a target="_blank" rel="noopener" href="http://localhost:9096/actuator/shutdown">http://localhost:9096/actuator/shutdown</a> 发起 POST 请求。</p>
-<p><img src="/../../assets/blogImg/image-20221128103731174.png" alt="image-20221128103731174"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128103731174.png" alt="image-20221128103731174"></p>
 <h3 id="五-整合Prometheus"><a href="#五-整合Prometheus" class="headerlink" title="五 整合Prometheus"></a>五 整合Prometheus</h3><p>上面用 actuator 暴露应用本身的线程、bean 等信息，但是这些信息还是独立于 Prometheus 之外的。下面将 SpringBoot Actuator 与 Prometheus 结合。</p>
 <p>在上面项目的基础上添加Prometheus依赖</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.micrometer<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>micrometer-registry-prometheus<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -415,14 +415,14 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management.endpoint.metrics.enabled</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">management.endpoint.prometheus.enabled</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">management.metrics.export.prometheus.enabled</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>接着启动项目，访问 <a target="_blank" rel="noopener" href="http://localhost:9096/actuator/prometheus">localhost:9096&#x2F;actuator&#x2F;prometheus</a> 可以看到 SpringBoot 的应用信息都以 Prometheus 的标准形式输出了。</p>
-<p><img src="/../../assets/blogImg/image-20221128104200558.png" alt="image-20221128104200558"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128104200558.png" alt="image-20221128104200558"></p>
 <p>接下来部署到Prometheus中去</p>
 <p>添加Prometheus配置</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="comment"># 采集java应用监控数据</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">&#x27;javaApplecationSim&#x27;</span></span><br><span class="line">    <span class="attr">metrics_path:</span> <span class="string">&#x27;/actuator/prometheus&#x27;</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span> [<span class="string">&#x27;localhost:9096&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="/../../assets/blogImg/image-20221128111517163.png" alt="image-20221128111517163"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128111517163.png" alt="image-20221128111517163"></p>
 <h3 id="六-添加Grafana监控面板"><a href="#六-添加Grafana监控面板" class="headerlink" title="六 添加Grafana监控面板"></a>六 添加Grafana监控面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)%EF%BC%9A%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">Prometheus学习笔记(三)：结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
-<p><img src="/../../assets/blogImg/image-20221128112020949.png" alt="image-20221128112020949"></p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221128112020949.png" alt="image-20221128112020949"></p>
 
       
 
