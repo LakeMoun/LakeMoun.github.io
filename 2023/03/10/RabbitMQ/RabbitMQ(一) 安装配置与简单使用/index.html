@@ -6,20 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lakemoun.github.io">
-  <title>相册 | 大头的博客</title>
+  <title>RabbitMQ(一) 安装配置与简单使用 | 大头的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随便写写的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="相册">
-<meta property="og:url" content="https://lakemoun.github.io/%E7%9B%B8%E5%86%8C/index.html">
+  <meta name="description" content="参考文章 一 使用docker安装RabbitMQ+docker安装教程 二 手动安装RabbitMQ是一个开源的遵循 AMQP协议实现的基于 Erlang语言编写，即需要先安装部署Erlang环境再安装RabbitMQ环境 RabbitMQ和Erlang的版本对应关系参考:RabbitMQ Erlang Version Requirements — RabbitMQ 下面以CentOS7安装Ra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ(一) 安装配置与简单使用">
+<meta property="og:url" content="https://lakemoun.github.io/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="大头的博客">
-<meta property="og:description" content="随便写写的博客">
+<meta property="og:description" content="参考文章 一 使用docker安装RabbitMQ+docker安装教程 二 手动安装RabbitMQ是一个开源的遵循 AMQP协议实现的基于 Erlang语言编写，即需要先安装部署Erlang环境再安装RabbitMQ环境 RabbitMQ和Erlang的版本对应关系参考:RabbitMQ Erlang Version Requirements — RabbitMQ 下面以CentOS7安装Ra">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-09T02:25:53.000Z">
-<meta property="article:modified_time" content="2022-11-09T02:44:50.327Z">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310131330853.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310131804307.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310132415311.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310133116083.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310133844505.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310145442318.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310145636907.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310145730646.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310150647234.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310151443126.png">
+<meta property="article:published_time" content="2023-03-10T05:34:10.000Z">
+<meta property="article:modified_time" content="2023-03-10T08:45:19.982Z">
 <meta property="article:author" content="一个大头鬼">
-<meta property="article:tag" content="java,后端,菜鸟,ffer">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="RabbitMQ">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310131330853.png">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -163,20 +175,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-RabbitMQ/RabbitMQ(一) 安装配置与简单使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      相册
+      RabbitMQ(一) 安装配置与简单使用
     </h1>
   
 
         
-        <a href="/%E7%9B%B8%E5%86%8C/index.html" class="archive-article-date">
-  	<time datetime="2022-11-09T02:25:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
+        <a href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2023-03-10T05:34:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
 </a>
         
 
@@ -191,7 +203,90 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_67392182/article/details/126040124">参考文章</a></p>
+<h3 id="一-使用docker安装"><a href="#一-使用docker安装" class="headerlink" title="一 使用docker安装"></a>一 使用docker安装</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51560103/article/details/121507773">RabbitMQ+docker安装教程</a></p>
+<h3 id="二-手动安装"><a href="#二-手动安装" class="headerlink" title="二 手动安装"></a>二 手动安装</h3><p><strong>RabbitMQ</strong>是一个开源的遵循 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=AMQP&spm=1001.2101.3001.7020">AMQP</a>协议实现的基于 <strong>Erlang</strong>语言编写，即需要先安装部署<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Erlang&spm=1001.2101.3001.7020">Erlang</a>环境再安装RabbitMQ环境</p>
+<p>RabbitMQ和Erlang的版本对应关系参考:<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/which-erlang.html">RabbitMQ Erlang Version Requirements — RabbitMQ</a></p>
+<p>下面以CentOS7安装<strong>RabbitMQ-3.8.13</strong>为例</p>
+<h4 id="1-安装Erlang"><a href="#1-安装Erlang" class="headerlink" title="1 安装Erlang"></a>1 安装Erlang</h4><p>下载Erlang-22.3.4.12</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --content-disposition https://packagecloud.io/rabbitmq/erlang/packages/el/7/erlang-22.3.4.12-1.el7.x86_64.rpm/download.rpm</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall erlang-22.3.4.12-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>安装完成</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310131330853.png" alt="image-20230310131330853"></p>
+<h4 id="2-安装rabbitMQ"><a href="#2-安装rabbitMQ" class="headerlink" title="2 安装rabbitMQ"></a>2 安装rabbitMQ</h4><p>下载rabbitMQ-3.8.13</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --content-disposition https://packagecloud.io/rabbitmq/rabbitmq-server/packages/el/7/rabbitmq-server-3.8.13-1.el7.noarch.rpm/download.rpm</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm --import https://www.rabbitmq.com/rabbitmq-release-signing-key.asc</span><br><span class="line">yum localinstall rabbitmq-server-3.8.13-1.el7.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>安装完成</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310131804307.png" alt="image-20230310131804307"></p>
+<h3 id="三-启动关闭和重启"><a href="#三-启动关闭和重启" class="headerlink" title="三 启动关闭和重启"></a>三 启动关闭和重启</h3><p>启动rabbitMQ默认端口**<code>5672</code>**</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>关闭rabbitMQ</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>重启rabbitMQ</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>查看rabbitMQ启动状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>设置开机自启动命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="四-RabbitMQ-Web界面管理"><a href="#四-RabbitMQ-Web界面管理" class="headerlink" title="四 RabbitMQ Web界面管理"></a>四 RabbitMQ Web界面管理</h3><p>安装web客户端管理插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_management</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310132415311.png" alt="image-20230310132415311"></p>
+<p>重启服务即可</p>
+<p>配置防火墙开放<strong>15672</strong>端口</p>
+<p>rabbitmq有一个默认<strong>账号</strong>和<strong>密码</strong>是:<strong>guest 。</strong>默认情况只能在 localhost本机下访问（见下图），所以需要新增一个远程登录的用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_user 账号 密码</span><br></pre></td></tr></table></figure>
+
+<p>添加成功</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310133116083.png" alt="image-20230310133116083"></p>
+<p>设置用户分配操作权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl set_user_tags 账号 administrator</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>http://IP地址:15672</code> 进行Web页面登录，输入账号密码，完成页面访问</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310133844505.png" alt="image-20230310133844505"></p>
+<h3 id="五-MQ集群搭建"><a href="#五-MQ集群搭建" class="headerlink" title="五 MQ集群搭建"></a>五 MQ集群搭建</h3><p>参考<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1923650">RabbitMQ集群搭建 - 腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<h3 id="六-认识RabbitMQ-Management"><a href="#六-认识RabbitMQ-Management" class="headerlink" title="六 认识RabbitMQ Management"></a>六 认识RabbitMQ Management</h3><p>在RabbitMQ Management界面可以看到 RabbitMQ 中的一些基本概念，例如每个菜单分别是：</p>
+<ul>
+<li>Override：整体一览。</li>
+<li>Connections：<strong>网络连接</strong>，比如一个 TCP 连接。</li>
+<li>Channels：<strong>信道</strong>，多路复用连接中的一条独立的双向数据流通道。信道是建立在真实的 TCP 连接内地虚拟连接，AMQP 命令都是通过信道发出去的，不管是发布消息、订阅队列还是接收消息，这些动作都是通过信道完成。因为对于操作系统来说建立和销毁 TCP 都是非常昂贵的开销，所以引入了信道的概念，以复用一条 TCP 连接。</li>
+<li>Exchanges：<strong>交换器</strong>，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。</li>
+<li>Queues：<strong>消息队列</strong>，用来保存消息直到发送给消费者。它是消息的容器，也是消息的终点。一个消息可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将其取走。</li>
+</ul>
+<p>具体后续文章详细学习</p>
+<p>在这里进行一些配置方便后续测试</p>
+<h4 id="1-创建虚拟主机"><a href="#1-创建虚拟主机" class="headerlink" title="1 创建虚拟主机"></a>1 创建虚拟主机</h4><p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310145442318.png" alt="image-20230310145442318"></p>
+<h4 id="2-检查权限"><a href="#2-检查权限" class="headerlink" title="2 检查权限"></a>2 检查权限</h4><p>检查刚刚创建的用户是否可以访问该虚拟主机</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310145636907.png" alt="image-20230310145636907"></p>
+<p>没有权限点击红框处添加对应虚拟主机</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310145730646.png" alt="image-20230310145730646"></p>
+<h3 id="七-简单示例"><a href="#七-简单示例" class="headerlink" title="七 简单示例"></a>七 简单示例</h3><p>引入maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.rabbitmq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>amqp-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.7.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-RabbitMQProducer"><a href="#1-RabbitMQProducer" class="headerlink" title="1 RabbitMQProducer"></a>1 RabbitMQProducer</h4><p>创建 RabbitMQProducer 类，使用 Channel 发送消息。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitMQProducer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">IP_ADDRESS</span> <span class="operator">=</span> <span class="string">&quot;ip地址&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">PORT</span> <span class="operator">=</span> <span class="number">5672</span>; <span class="comment">//默认端口</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">USERNAME</span> <span class="operator">=</span> <span class="string">&quot;账号&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">PASSWORD</span> <span class="operator">=</span> <span class="string">&quot;密码&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;exchange_demo&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ROUTING_KEY</span> <span class="operator">=</span> <span class="string">&quot;routingkey_demo&quot;</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 只有 QUEUE_NAME 需要共享给 RabbitMQConsumer</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;queue_demo&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, TimeoutException &#123;</span><br><span class="line">        <span class="comment">// 创建连接</span></span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> getConnection();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建信道</span></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> connection.createChannel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化测试用的 Exchange 和 Queue</span></span><br><span class="line">        initExchangeAndQueue(channel);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送 3 条消息</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="string">&quot;Hello World&quot;</span> + i;</span><br><span class="line">            channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 关闭</span></span><br><span class="line">        channel.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title function_">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> IOException, TimeoutException &#123;</span><br><span class="line">        <span class="type">ConnectionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConnectionFactory</span>();</span><br><span class="line">        factory.setHost(IP_ADDRESS);</span><br><span class="line">        factory.setPort(PORT);</span><br><span class="line">        factory.setUsername(USERNAME);</span><br><span class="line">        factory.setPassword(PASSWORD);</span><br><span class="line">        factory.setVirtualHost(<span class="string">&quot;/test&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> factory.newConnection();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建 RabbitMQ Exchange 和 Queue ，然后使用 ROUTING_KEY 路由键将两者绑定。</span></span><br><span class="line">    <span class="comment">// 该步骤，其实可以在 RabbitMQ Management 上操作，并不一定需要在代码中</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">initExchangeAndQueue</span><span class="params">(Channel channel)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">// 创建交换器：direct、持久化、不自动删除</span></span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, <span class="string">&quot;direct&quot;</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建队列：持久化、非排他、非自动删除的队列</span></span><br><span class="line">        channel.queueDeclare(QUEUE_NAME, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将交换器与队列通过路由键绑定</span></span><br><span class="line">        channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行测试后发现队列中已有三条测试发送的消息</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310150647234.png" alt="image-20230310150647234"></p>
+<h4 id="2-RabbitMQConsumer"><a href="#2-RabbitMQConsumer" class="headerlink" title="2 RabbitMQConsumer"></a>2 RabbitMQConsumer</h4><p>创建 RabbitMQConsumer类，使用 Channel 发送消息。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RabbitMQConsumer.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitMQConsumer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, TimeoutException &#123;</span><br><span class="line">        <span class="comment">// 创建连接</span></span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> RabbitMQProducer.getConnection();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建信道</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> connection.createChannel();</span><br><span class="line">        channel.basicQos(<span class="number">64</span>); <span class="comment">// 设置客户端最多接收未被 ack 的消息数量为 64 。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建消费者</span></span><br><span class="line">        <span class="type">Consumer</span> <span class="variable">consumer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultConsumer</span>(channel) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleDelivery</span><span class="params">(String consumerTag, Envelope envelope, </span></span><br><span class="line"><span class="params">                                       AMQP.BasicProperties properties, <span class="type">byte</span>[] body)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">                <span class="comment">// 打印日志</span></span><br><span class="line">                System.out.println(String.format(<span class="string">&quot;[线程：%s][路由键：%s][消息内容：%s]&quot;</span>,</span><br><span class="line">                        Thread.currentThread(), envelope.getRoutingKey(), <span class="keyword">new</span> <span class="title class_">String</span>(body)));</span><br><span class="line">                <span class="comment">// ack 消息已经消费</span></span><br><span class="line">                channel.basicAck(envelope.getDeliveryTag(), <span class="literal">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">// 订阅消费 QUEUE_NAME 队列</span></span><br><span class="line">        channel.basicConsume(RabbitMQProducer.QUEUE_NAME, consumer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 关闭</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.HOURS.sleep(<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException ignore) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        channel.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到刚刚的消息被成功消费了</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310151443126.png" alt="image-20230310151443126"></p>
+
       
 
       
@@ -199,6 +294,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMQ</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -249,7 +359,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/%E7%9B%B8%E5%86%8C/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -261,6 +371,25 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          RabbitMQ(一) 安装配置与简单使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/08/ES/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)%EF%BC%9A%E6%95%B4%E5%90%88Spring/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Kibana学习笔记(二)：整合spring</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -331,7 +460,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

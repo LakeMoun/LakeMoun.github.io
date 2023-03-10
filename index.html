@@ -163,6 +163,440 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-RabbitMQ/RabbitMQ(二) SpringBoot整合RabbitMQ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/">RabbitMQ(一) 安装配置与简单使用</a>
+    </h1>
+  
+
+        
+        <a href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/" class="archive-article-date">
+  	<time datetime="2023-03-10T07:18:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.iocoder.cn/Spring-Boot/RabbitMQ/?self">参考文章</a></p>
+<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.oschina.net/p/rabbitmq">《AMQP 消息服务器 RabbitMQ》</a></p>
+<p>RabbitMQ 是由 LShift 提供的一个 Advanced Message Queuing Protocol (AMQP) 的开源实现，由以高性能、健壮以及可伸缩性出名的 Erlang 写成，因此也是继承了这些优点。</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/991c599424d61e17aea8eb76571715c9.jpeg" alt="img"></p>
+<ul>
+<li>AMQP 里主要要说两个组件：Exchange 和 Queue ，绿色的 X 就是 Exchange ，红色的是 Queue ，这两者都在 Server 端，又称作 Broker ，这部分是 RabbitMQ 实现的。</li>
+<li>而蓝色的则是客户端，通常有 Producer 和 Consumer 两种类型（角色）。</li>
+</ul>
+</blockquote>
+        
+          <a class="article-more-a" href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMQ</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-RabbitMQ/RabbitMQ(一) 安装配置与简单使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">RabbitMQ(一) 安装配置与简单使用</a>
+    </h1>
+  
+
+        
+        <a href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2023-03-10T05:34:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_67392182/article/details/126040124">参考文章</a></p>
+<h3 id="一-使用docker安装"><a href="#一-使用docker安装" class="headerlink" title="一 使用docker安装"></a>一 使用docker安装</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51560103/article/details/121507773">RabbitMQ+docker安装教程</a></p>
+<h3 id="二-手动安装"><a href="#二-手动安装" class="headerlink" title="二 手动安装"></a>二 手动安装</h3><p><strong>RabbitMQ</strong>是一个开源的遵循 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=AMQP&spm=1001.2101.3001.7020">AMQP</a>协议实现的基于 <strong>Erlang</strong>语言编写，即需要先安装部署<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Erlang&spm=1001.2101.3001.7020">Erlang</a>环境再安装RabbitMQ环境</p>
+<p>RabbitMQ和Erlang的版本对应关系参考:<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/which-erlang.html">RabbitMQ Erlang Version Requirements — RabbitMQ</a></p>
+<p>下面以CentOS7安装<strong>RabbitMQ-3.8.13</strong>为例</p>
+<h4 id="1-安装Erlang"><a href="#1-安装Erlang" class="headerlink" title="1 安装Erlang"></a>1 安装Erlang</h4><p>下载Erlang-22.3.4.12</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --content-disposition https://packagecloud.io/rabbitmq/erlang/packages/el/7/erlang-22.3.4.12-1.el7.x86_64.rpm/download.rpm</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall erlang-22.3.4.12-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMQ</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ES/ElasticSearch学习笔记(二)：整合Spring" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/08/ES/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)%EF%BC%9A%E6%95%B4%E5%90%88Spring/">Kibana学习笔记(二)：整合spring</a>
+    </h1>
+  
+
+        
+        <a href="/2023/03/08/ES/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)%EF%BC%9A%E6%95%B4%E5%90%88Spring/" class="archive-article-date">
+  	<time datetime="2023-03-08T08:09:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-08</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.iocoder.cn/Spring-Boot/Elasticsearch/?self#">参考文档</a></p>
+<h3 id="一-引入依赖"><a href="#一-引入依赖" class="headerlink" title="一 引入依赖"></a>一 引入依赖</h3><p>引入elasticsearch依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-elasticsearch<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二-配置"><a href="#二-配置" class="headerlink" title="二 配置"></a>二 配置</h3><p>配置如下参数</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">elasticsearch:</span></span><br><span class="line">  <span class="attr">schema:</span> <span class="string">http</span></span><br><span class="line">  <span class="attr">address:</span> <span class="string">ip:port</span> <span class="comment">#服务器地址</span></span><br><span class="line">  <span class="attr">connectTimeout:</span> <span class="number">5000</span></span><br><span class="line">  <span class="attr">socketTimeout:</span> <span class="number">5000</span></span><br><span class="line">  <span class="attr">connectionRequestTimeout:</span> <span class="number">5000</span></span><br><span class="line">  <span class="attr">maxConnectNum:</span> <span class="number">100</span></span><br><span class="line">  <span class="attr">maxConnectPerRoute:</span> <span class="number">100</span></span><br><span class="line">  <span class="attr">UserName:</span> <span class="string">xxxxx</span> <span class="comment">#账号</span></span><br><span class="line">  <span class="attr">Password:</span> <span class="string">xxxxx</span> <span class="comment">#elasticsearch密码</span></span><br></pre></td></tr></table></figure>
+
+<p>创建配置类如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableElasticsearchRepositories</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ElasticsearchConfiguration</span> <span class="keyword">extends</span> <span class="title class_">AbstractElasticsearchConfiguration</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 协议</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.schema:http&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String schema;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 集群地址，如果有多个用“,”隔开</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.address&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 连接超时时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.connectTimeout&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> connectTimeout;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Socket 连接超时时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.socketTimeout&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> socketTimeout;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取连接的超时时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.connectionRequestTimeout&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> connectionRequestTimeout;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 最大连接数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.maxConnectNum&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> maxConnectNum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 最大路由连接数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.maxConnectPerRoute&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> maxConnectPerRoute;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.UserName&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;elasticsearch.Password&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RestHighLevelClient <span class="title function_">elasticsearchClient</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 拆分地址</span></span><br><span class="line">        List&lt;HttpHost&gt; hostLists = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        String[] hostList = address.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (String addr : hostList) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">host</span> <span class="operator">=</span> addr.split(<span class="string">&quot;:&quot;</span>)[<span class="number">0</span>];</span><br><span class="line">            <span class="type">String</span> <span class="variable">port</span> <span class="operator">=</span> addr.split(<span class="string">&quot;:&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">            hostLists.add(<span class="keyword">new</span> <span class="title class_">HttpHost</span>(host, Integer.parseInt(port), schema));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> <span class="type">CredentialsProvider</span> <span class="variable">credentialsProvider</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BasicCredentialsProvider</span>();</span><br><span class="line">        credentialsProvider.setCredentials(AuthScope.ANY, <span class="keyword">new</span> <span class="title class_">UsernamePasswordCredentials</span>(userName, password));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 转换成 HttpHost 数组</span></span><br><span class="line">        HttpHost[] httpHost = hostLists.toArray(<span class="keyword">new</span> <span class="title class_">HttpHost</span>[]&#123;&#125;);</span><br><span class="line">        <span class="comment">// 构建连接对象</span></span><br><span class="line">        <span class="type">RestClientBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> RestClient.builder(httpHost);</span><br><span class="line">        <span class="comment">// 异步连接延时配置</span></span><br><span class="line">        builder.setRequestConfigCallback(requestConfigBuilder -&gt; &#123;</span><br><span class="line">            requestConfigBuilder.setConnectTimeout(connectTimeout);</span><br><span class="line">            requestConfigBuilder.setSocketTimeout(socketTimeout);</span><br><span class="line">            requestConfigBuilder.setConnectionRequestTimeout(connectionRequestTimeout);</span><br><span class="line">            <span class="keyword">return</span> requestConfigBuilder;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 异步连接数配置</span></span><br><span class="line">        builder.setHttpClientConfigCallback(httpClientBuilder -&gt; &#123;</span><br><span class="line">            httpClientBuilder.setMaxConnTotal(maxConnectNum);</span><br><span class="line">            httpClientBuilder.setMaxConnPerRoute(maxConnectPerRoute);</span><br><span class="line">            <span class="keyword">return</span> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RestHighLevelClient</span>(builder);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(&quot;esRestTemplate&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ElasticsearchRestTemplate <span class="title function_">esRestTemplate</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ElasticsearchRestTemplate</span>(elasticsearchClient());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时已经可以注入ElasticsearchRestTemplate进行操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> ElasticsearchRestTemplate esRestTemplate;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三-ElasticsearchRepository的使用"><a href="#三-ElasticsearchRepository的使用" class="headerlink" title="三 ElasticsearchRepository的使用"></a>三 ElasticsearchRepository的使用</h3><p>创建测试用实体类如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Document(indexName = &quot;product&quot;)</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ESProductDO</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ID 主键</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * SPU 名字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Field(analyzer = FieldAnalyzer.IK_MAX_WORD, type = FieldType.Text)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 卖点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Field(analyzer = FieldAnalyzer.IK_MAX_WORD, type = FieldType.Text)</span></span><br><span class="line">    <span class="keyword">private</span> String sellPoint;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 描述</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Field(analyzer = FieldAnalyzer.IK_MAX_WORD, type = FieldType.Text)</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 分类编号</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer cid;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 分类名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Field(analyzer = FieldAnalyzer.IK_MAX_WORD, type = FieldType.Text)</span></span><br><span class="line">    <span class="keyword">private</span> String categoryName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ik分词器枚举类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FieldAnalyzer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * IK 最大化分词</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 会将文本做最细粒度的拆分</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">IK_MAX_WORD</span> <span class="operator">=</span> <span class="string">&quot;ik_max_word&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * IK 智能分词</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 会做最粗粒度的拆分</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">IK_SMART</span> <span class="operator">=</span> <span class="string">&quot;ik_smart&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建Repository类继承ElasticsearchRepository</p>
+<p>其中泛型Integer为实体类中 ID 主键的类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableElasticsearchRepositories</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ProductRepository</span> <span class="keyword">extends</span> <span class="title class_">ElasticsearchRepository</span>&lt;ESProductDO,Integer&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = ElasticApplication.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ElasticApplicationTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ProductRepository productRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ElasticsearchRestTemplate esRestTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 插入一条记录</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testInsert</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ESProductDO</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ESProductDO</span>();</span><br><span class="line">        product.setId(<span class="number">3</span>); <span class="comment">// 一般 ES 的 ID 编号，使用 DB 数据对应的编号。这里，先写死</span></span><br><span class="line">        product.setName(<span class="string">&quot;测试名字3&quot;</span>);</span><br><span class="line">        product.setSellPoint(<span class="string">&quot;测试卖点3&quot;</span>);</span><br><span class="line">        product.setDescription(<span class="string">&quot;测试描述3&quot;</span>);</span><br><span class="line">        product.setCid(<span class="number">3</span>);</span><br><span class="line">        product.setCategoryName(<span class="string">&quot;技术&quot;</span>);</span><br><span class="line">        esRestTemplate.save(product);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里要注意，如果使用 save 方法来更新的话，必须是全量字段，否则其它字段会被覆盖。</span></span><br><span class="line">    <span class="comment">// 所以，这里仅仅是作为一个示例。</span></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 更新一条记录</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ESProductDO</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ESProductDO</span>();</span><br><span class="line">        product.setId(<span class="number">1</span>);</span><br><span class="line">        product.setCid(<span class="number">2</span>);</span><br><span class="line">        product.setCategoryName(<span class="string">&quot;技术-Java&quot;</span>);</span><br><span class="line">        productRepository.save(product);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 根据 ID 编号，删除一条记录</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testDelete</span><span class="params">()</span> &#123;</span><br><span class="line">        productRepository.deleteById(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 根据 ID 编号，查询一条记录</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSelectById</span><span class="params">()</span> &#123;</span><br><span class="line">        Optional&lt;ESProductDO&gt; userDO = productRepository.findById(<span class="number">1</span>);</span><br><span class="line">        System.out.println(userDO.isPresent());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 根据 ID 编号数组，查询多条记录</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSelectByIds</span><span class="params">()</span> &#123;</span><br><span class="line">        Iterable&lt;ESProductDO&gt; users = productRepository.findAllById(Arrays.asList(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line">        users.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四-基于方法名查询"><a href="#四-基于方法名查询" class="headerlink" title="四 基于方法名查询"></a>四 基于方法名查询</h3><p>在 Spring Data 中，支持根据方法名作生成对应的查询（<code>WHERE</code>）条件，进一步简化使用 JPA</p>
+<p>具体是方法名以 <code>findBy</code>、<code>existsBy</code>、<code>countBy</code>、<code>deleteBy</code> 开头，后面跟具体的条件。</p>
+<p>规则参考 <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-data/jpa/docs/2.2.0.RELEASE/reference/html/#jpa.query-methods.query-creation">《Spring Data JPA —— Query Creation》</a> 文档</p>
+<p>具体如下</p>
+<table>
+<thead>
+<tr>
+<th align="left">关键字</th>
+<th align="left">方法示例</th>
+<th align="left">JPQL snippet</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>And</code></td>
+<td align="left"><code>findByLastnameAndFirstname</code></td>
+<td align="left"><code>… where x.lastname = ?1 and x.firstname = ?2</code></td>
+</tr>
+<tr>
+<td align="left"><code>Or</code></td>
+<td align="left"><code>findByLastnameOrFirstname</code></td>
+<td align="left"><code>… where x.lastname = ?1 or x.firstname = ?2</code></td>
+</tr>
+<tr>
+<td align="left"><code>Is</code>, <code>Equals</code></td>
+<td align="left"><code>findByFirstname</code>,<code>findByFirstnameIs</code>,<code>findByFirstnameEquals</code></td>
+<td align="left"><code>… where x.firstname = ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>Between</code></td>
+<td align="left"><code>findByStartDateBetween</code></td>
+<td align="left"><code>… where x.startDate between ?1 and ?2</code></td>
+</tr>
+<tr>
+<td align="left"><code>LessThan</code></td>
+<td align="left"><code>findByAgeLessThan</code></td>
+<td align="left"><code>… where x.age &lt; ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>LessThanEqual</code></td>
+<td align="left"><code>findByAgeLessThanEqual</code></td>
+<td align="left"><code>… where x.age &lt;= ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>GreaterThan</code></td>
+<td align="left"><code>findByAgeGreaterThan</code></td>
+<td align="left"><code>… where x.age &gt; ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>GreaterThanEqual</code></td>
+<td align="left"><code>findByAgeGreaterThanEqual</code></td>
+<td align="left"><code>… where x.age &gt;= ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>After</code></td>
+<td align="left"><code>findByStartDateAfter</code></td>
+<td align="left"><code>… where x.startDate &gt; ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>Before</code></td>
+<td align="left"><code>findByStartDateBefore</code></td>
+<td align="left"><code>… where x.startDate &lt; ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>IsNull</code>, <code>Null</code></td>
+<td align="left"><code>findByAge(Is)Null</code></td>
+<td align="left"><code>… where x.age is null</code></td>
+</tr>
+<tr>
+<td align="left"><code>IsNotNull</code>, <code>NotNull</code></td>
+<td align="left"><code>findByAge(Is)NotNull</code></td>
+<td align="left"><code>… where x.age not null</code></td>
+</tr>
+<tr>
+<td align="left"><code>Like</code></td>
+<td align="left"><code>findByFirstnameLike</code></td>
+<td align="left"><code>… where x.firstname like ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>NotLike</code></td>
+<td align="left"><code>findByFirstnameNotLike</code></td>
+<td align="left"><code>… where x.firstname not like ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>StartingWith</code></td>
+<td align="left"><code>findByFirstnameStartingWith</code></td>
+<td align="left"><code>… where x.firstname like ?1</code> (parameter bound with appended <code>%</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>EndingWith</code></td>
+<td align="left"><code>findByFirstnameEndingWith</code></td>
+<td align="left"><code>… where x.firstname like ?1</code> (parameter bound with prepended <code>%</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Containing</code></td>
+<td align="left"><code>findByFirstnameContaining</code></td>
+<td align="left"><code>… where x.firstname like ?1</code> (parameter bound wrapped in <code>%</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>OrderBy</code></td>
+<td align="left"><code>findByAgeOrderByLastnameDesc</code></td>
+<td align="left"><code>… where x.age = ?1 order by x.lastname desc</code></td>
+</tr>
+<tr>
+<td align="left"><code>Not</code></td>
+<td align="left"><code>findByLastnameNot</code></td>
+<td align="left"><code>… where x.lastname &lt;&gt; ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>In</code></td>
+<td align="left"><code>findByAgeIn(Collection ages)</code></td>
+<td align="left"><code>… where x.age in ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>NotIn</code></td>
+<td align="left"><code>findByAgeNotIn(Collection ages)</code></td>
+<td align="left"><code>… where x.age not in ?1</code></td>
+</tr>
+<tr>
+<td align="left"><code>True</code></td>
+<td align="left"><code>findByActiveTrue()</code></td>
+<td align="left"><code>… where x.active = true</code></td>
+</tr>
+<tr>
+<td align="left"><code>False</code></td>
+<td align="left"><code>findByActiveFalse()</code></td>
+<td align="left"><code>… where x.active = false</code></td>
+</tr>
+<tr>
+<td align="left"><code>IgnoreCase</code></td>
+<td align="left"><code>findByFirstnameIgnoreCase</code></td>
+<td align="left"><code>… where UPPER(x.firstame) = UPPER(?1)</code></td>
+</tr>
+</tbody></table>
+<p>如果有排序需求，可以使用 <code>OrderBy</code> 关键字</p>
+<h4 id="1-示例repository"><a href="#1-示例repository" class="headerlink" title="1 示例repository"></a>1 示例repository</h4><p>创建ProductRepository02Test</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ProductRepository02</span> <span class="keyword">extends</span> <span class="title class_">ElasticsearchRepository</span>&lt;ESProductDO, Integer&gt; &#123;</span><br><span class="line"></span><br><span class="line">    ESProductDO <span class="title function_">findByName</span><span class="params">(String name)</span>;</span><br><span class="line"></span><br><span class="line">    Page&lt;ESProductDO&gt; <span class="title function_">findByNameLike</span><span class="params">(String name, Pageable pageable)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于分页操作，需要使用到 Pageable 参数，需要作为方法的最后一个参数</p>
+<h4 id="2-测试"><a href="#2-测试" class="headerlink" title="2 测试"></a>2 测试</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = ElasticApplication.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProductRepository02Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ProductRepository02 productRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 根据名字获得一条记录</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testFindByName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ESProductDO</span> <span class="variable">product</span> <span class="operator">=</span> productRepository.findByName(<span class="string">&quot;lilei&quot;</span>);</span><br><span class="line">        System.out.println(product);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 使用 name 模糊查询，分页返回结果</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testFindByNameLike</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 根据情况，是否要制造测试数据</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            testInsert();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建排序条件</span></span><br><span class="line">        <span class="type">Sort</span> <span class="variable">sort</span> <span class="operator">=</span> Sort.by(Sort.Direction.DESC, <span class="string">&quot;id&quot;</span>); <span class="comment">// ID 倒序</span></span><br><span class="line">        <span class="comment">// 创建分页条件。</span></span><br><span class="line">        <span class="type">Pageable</span> <span class="variable">pageable</span> <span class="operator">=</span> PageRequest.of(<span class="number">0</span>, <span class="number">10</span>, sort);</span><br><span class="line">        <span class="comment">// 执行分页操作</span></span><br><span class="line">        Page&lt;ESProductDO&gt; page = productRepository.findByNameLike(<span class="string">&quot;lilei&quot;</span>, pageable);</span><br><span class="line">        <span class="comment">// 打印</span></span><br><span class="line">        List&lt;ESProductDO&gt; collect = page.get().collect(Collectors.toList());</span><br><span class="line">        <span class="keyword">for</span> (ESProductDO esProductDO : collect) &#123;</span><br><span class="line">            System.out.println(esProductDO.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(page.getTotalElements());</span><br><span class="line">        System.out.println(page.getTotalPages());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 为了给分页制造一点数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">testInsert</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="type">ESProductDO</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ESProductDO</span>();</span><br><span class="line">            product.setId(i); <span class="comment">// 一般 ES 的 ID 编号，使用 DB 数据对应的编号。这里，先写死</span></span><br><span class="line">            product.setName(<span class="string">&quot;name：&quot;</span> + i);</span><br><span class="line">            product.setSellPoint(<span class="string">&quot;Sell Point&quot;</span>);</span><br><span class="line">            product.setDescription(<span class="string">&quot;Description&quot;</span>);</span><br><span class="line">            product.setCid(<span class="number">1</span>);</span><br><span class="line">            product.setCategoryName(<span class="string">&quot;Catrgroty&quot;</span>);</span><br><span class="line">            productRepository.save(product);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四-ElasticsearchRestTemplate的使用"><a href="#四-ElasticsearchRestTemplate的使用" class="headerlink" title="四 ElasticsearchRestTemplate的使用"></a>四 ElasticsearchRestTemplate的使用</h3><p>待补充</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ElasticSearch</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/03/08/ES/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)%EF%BC%9A%E6%95%B4%E5%90%88Spring/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ES/Kibana学习笔记(一)：安装与配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -770,274 +1204,6 @@
 
 
   
-    <article id="post-Promethues/Prometheus学习笔记(七)：SringBootActuator学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/28/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%83)%EF%BC%9ASringBootActuator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Prometheus学习笔记(七)：SringBootActuator学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/28/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%83)%EF%BC%9ASringBootActuator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2022-11-28T01:15:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-28</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/06_prometheus_with_springboot_actuator.html">参考资料</a></p>
-<h3 id="一-Spring监控机制"><a href="#一-Spring监控机制" class="headerlink" title="一 Spring监控机制"></a>一 Spring监控机制</h3><p>在 Spring 2.x 之前，SpringBoot 使用 Actuator 模块进行监控，而在 Spring 2.x 之后，SpringBoot 使用了 Micrometer 进行监控。</p>
-<p>Spring Boot Actuator 模块提供了生产级别的功能，比如健康检查，审计，指标收集，HTTP 跟踪等，帮助我们监控和管理 Spring Boot 应用。这个模块是一个采集应用内部信息暴露给外部的模块，上述的功能都可以通过 HTTP 和 JMX 访问。</p>
-<p>在 Spring 2.x 之后，Actuator 使用 Micrometer 与这些外部应用程序监视系统集成。这样一来，只需很少的配置即可轻松集成外部的监控系统。</p>
-<p>Micrometer 为 Java 平台上的性能数据收集提供了一个通用的 API，应用程序只需要使用 Micrometer 的通用 API 来收集性能指标即可。Micrometer 会负责完成与不同监控系统的适配工作。这就使得切换监控系统变得很容易。</p>
-<p><strong>简单地说，actuator 是真正去采集数据的模块，而 Micrometer 更像是一个适配器，将 actuator 采集到的数据适合给各种监控工具。</strong></p>
-<h3 id="二-Spring-Actuator-Demo"><a href="#二-Spring-Actuator-Demo" class="headerlink" title="二 Spring Actuator Demo"></a>二 Spring Actuator Demo</h3><p>添加如下依赖</p>
-        
-          <a class="article-more-a" href="/2022/11/28/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%83)%EF%BC%9ASringBootActuator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/28/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%83)%EF%BC%9ASringBootActuator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Promethues/Prometheus学习笔记(六)：JMX指标监控" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/24/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9AJMX%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">Prometheus学习笔记(六)：JMX指标监控</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/24/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9AJMX%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" class="archive-article-date">
-  	<time datetime="2022-11-24T01:10:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-24</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/manba_24/article/details/119329293">参考文章</a></p>
-<h3 id="一-下载-JMX"><a href="#一-下载-JMX" class="headerlink" title="一 下载 JMX"></a>一 下载 JMX</h3><p>Java 应用的指标一般是通过 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JMX">JMX（Java Management Extensions）</a> 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/prometheus/jmx_exporter">JMX Exporter</a> 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。</p>
-<p>首先下载 JMX Exporter：</p>
-        
-          <a class="article-more-a" href="/2022/11/24/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9AJMX%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/24/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)%EF%BC%9AJMX%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Promethues/Prometheus学习笔记(五)：nginx指标监控" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Anginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">Prometheus学习笔记(五)：nginx指标监控</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Anginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/" class="archive-article-date">
-  	<time datetime="2022-11-23T06:27:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-23</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-nginx-module-vts模块的编译"><a href="#一-nginx-module-vts模块的编译" class="headerlink" title="一 nginx-module-vts模块的编译"></a>一 nginx-module-vts模块的编译</h3><p>nginx_vts_exporter依赖nginx-module-vts模块</p>
-<p>进入nginx安装路径下载源码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://github.com/vozlt/nginx-module-vts.git</span><br></pre></td></tr></table></figure>
-
-<p>同时准备好nginx源码</p>
-<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123143431840.png" alt="image-20221123143431840"></p>
-<p>进入nginx源码目录并增加第三方模块进入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Anginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Anginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
@@ -1164,6 +1330,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Prometheus</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMQ</a>
               </li>
              
               <li class="article-tag-list-item">

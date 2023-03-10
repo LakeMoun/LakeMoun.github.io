@@ -6,20 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lakemoun.github.io">
-  <title>相册 | 大头的博客</title>
+  <title>RabbitMQ(一) 安装配置与简单使用 | 大头的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随便写写的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="相册">
-<meta property="og:url" content="https://lakemoun.github.io/%E7%9B%B8%E5%86%8C/index.html">
+  <meta name="description" content="参考文章 一 概述 《AMQP 消息服务器 RabbitMQ》 RabbitMQ 是由 LShift 提供的一个 Advanced Message Queuing Protocol (AMQP) 的开源实现，由以高性能、健壮以及可伸缩性出名的 Erlang 写成，因此也是继承了这些优点。   AMQP 里主要要说两个组件：Exchange 和 Queue ，绿色的 X 就是 Exchange ，红">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ(一) 安装配置与简单使用">
+<meta property="og:url" content="https://lakemoun.github.io/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/index.html">
 <meta property="og:site_name" content="大头的博客">
-<meta property="og:description" content="随便写写的博客">
+<meta property="og:description" content="参考文章 一 概述 《AMQP 消息服务器 RabbitMQ》 RabbitMQ 是由 LShift 提供的一个 Advanced Message Queuing Protocol (AMQP) 的开源实现，由以高性能、健壮以及可伸缩性出名的 Erlang 写成，因此也是继承了这些优点。   AMQP 里主要要说两个组件：Exchange 和 Queue ，绿色的 X 就是 Exchange ，红">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-09T02:25:53.000Z">
-<meta property="article:modified_time" content="2022-11-09T02:44:50.327Z">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/991c599424d61e17aea8eb76571715c9.jpeg">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/aeb33c91bbf83726c24ba1dae9dc4e00.jpeg">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310164059522.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310164157264.png">
+<meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310164241932.png">
+<meta property="article:published_time" content="2023-03-10T07:18:46.000Z">
+<meta property="article:modified_time" content="2023-03-10T08:45:19.982Z">
 <meta property="article:author" content="一个大头鬼">
-<meta property="article:tag" content="java,后端,菜鸟,ffer">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="RabbitMQ">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/991c599424d61e17aea8eb76571715c9.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
   
@@ -163,20 +170,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-RabbitMQ/RabbitMQ(二) SpringBoot整合RabbitMQ" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      相册
+      RabbitMQ(一) 安装配置与简单使用
     </h1>
   
 
         
-        <a href="/%E7%9B%B8%E5%86%8C/index.html" class="archive-article-date">
-  	<time datetime="2022-11-09T02:25:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
+        <a href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/" class="archive-article-date">
+  	<time datetime="2023-03-10T07:18:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
 </a>
         
 
@@ -191,7 +198,96 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><a target="_blank" rel="noopener" href="https://www.iocoder.cn/Spring-Boot/RabbitMQ/?self">参考文章</a></p>
+<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.oschina.net/p/rabbitmq">《AMQP 消息服务器 RabbitMQ》</a></p>
+<p>RabbitMQ 是由 LShift 提供的一个 Advanced Message Queuing Protocol (AMQP) 的开源实现，由以高性能、健壮以及可伸缩性出名的 Erlang 写成，因此也是继承了这些优点。</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/991c599424d61e17aea8eb76571715c9.jpeg" alt="img"></p>
+<ul>
+<li>AMQP 里主要要说两个组件：Exchange 和 Queue ，绿色的 X 就是 Exchange ，红色的是 Queue ，这两者都在 Server 端，又称作 Broker ，这部分是 RabbitMQ 实现的。</li>
+<li>而蓝色的则是客户端，通常有 Producer 和 Consumer 两种类型（角色）。</li>
+</ul>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="二-Spring-AMQP"><a href="#二-Spring-AMQP" class="headerlink" title="二 Spring-AMQP"></a>二 Spring-AMQP</h2><p>在 <code>Spring-Boot</code> 项目中，提供了 AMQP 和 RabbitMQ 的自动化配置，仅需引入 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp"><code>spring-boot-starter-amqp</code></a> 依赖</p>
+<h3 id="1-Direct-Exchange"><a href="#1-Direct-Exchange" class="headerlink" title="1 Direct Exchange"></a>1 Direct Exchange</h3><p>Direct 类型的 Exchange 路由规则比较简单，它会把消息路由到那些 binding key 与 routing key 完全匹配的 Queue 中。以下图的配置为例：</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/aeb33c91bbf83726c24ba1dae9dc4e00.jpeg" alt="Direct Exchange"></p>
+<ul>
+<li>以 <code>routingKey=&quot;error&quot;</code> 发送消息到 Exchange ，则消息会路由到 Queue1(<code>amqp.gen-S9b…</code>) 。</li>
+<li>以 <code>routingKey=&quot;info&quot;</code> 或 <code>routingKey=&quot;warning&quot;</code> 来发送消息，则消息只会路由到 Queue2(<code>amqp.gen-Agl…</code>) 。</li>
+<li>如果我们以其它 routingKey 发送消息，则消息不会路由到这两个 Queue 中。</li>
+<li>总结来说，指定 Exchange + routing key ，有且仅会路由到至多一个 Queue 中。</li>
+<li>极端情况下，如果没有匹配，消息就发送到“空气”中，不会进入任何 Queue 中。</li>
+</ul>
+<p>下面创建一个 Direct Exchange 的使用示例</p>
+<h4 id="1-1-引入依赖"><a href="#1-1-引入依赖" class="headerlink" title="1.1 引入依赖"></a>1.1 引入依赖</h4><p>引入maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 实现对 RabbitMQ 的自动化配置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-配置"><a href="#1-2-配置" class="headerlink" title="1.2 配置"></a>1.2 配置</h4><p>配置<code>application.yaml</code>配置如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="comment"># RabbitMQ 配置项，对应 RabbitProperties 配置类</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="string">ip</span> <span class="comment"># RabbitMQ 服务的地址</span></span><br><span class="line">    <span class="attr">port:</span> <span class="string">port</span> <span class="comment"># RabbitMQ 服务的端口</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">user</span> <span class="comment"># RabbitMQ 服务的账号</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">password</span> <span class="comment"># RabbitMQ 服务的密码</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/test</span> <span class="comment">#账号配置的可访问虚拟主机</span></span><br></pre></td></tr></table></figure>
+
+<p>在启动类添加<code>@EnableAsync</code>注解用于后续测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAsync</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitMqApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">( String[] args )</span> &#123;</span><br><span class="line">        SpringApplication.run(RabbitMqApplication.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-创建消息类"><a href="#1-3-创建消息类" class="headerlink" title="1.3 创建消息类"></a>1.3 创建消息类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo01Message</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE</span> <span class="operator">=</span> <span class="string">&quot;QUEUE_DEMO_01&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE</span> <span class="operator">=</span> <span class="string">&quot;EXCHANGE_DEMO_01&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ROUTING_KEY</span> <span class="operator">=</span> <span class="string">&quot;ROUTING_KEY_01&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 编号</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>消息类需要实现 Java Serializable 序列化接口。因为 RabbitTemplate 默认使用 Java 自带的序列化方式，进行序列化 POJO 类型的消息。</li>
+<li>在消息类里，我们枚举了 Exchange、Queue、RoutingKey 的名字。</li>
+</ul>
+<h4 id="1-4-RabbitConfig"><a href="#1-4-RabbitConfig" class="headerlink" title="1.4 RabbitConfig"></a>1.4 RabbitConfig</h4><p>创建 <code>RabbitConfig</code> 配置类，添加 Direct Exchange 示例相关的 Exchange、Queue、Binding 的配置。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RabbitConfig.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Direct Exchange 示例的配置类</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">DirectExchangeDemoConfiguration</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 Queue</span></span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Queue <span class="title function_">demo01Queue</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(Demo01Message.QUEUE, <span class="comment">// Queue 名字</span></span><br><span class="line">                    <span class="literal">true</span>, <span class="comment">// durable: 是否持久化</span></span><br><span class="line">                    <span class="literal">false</span>, <span class="comment">// exclusive: 是否排它</span></span><br><span class="line">                    <span class="literal">false</span>); <span class="comment">// autoDelete: 是否自动删除</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 Direct Exchange</span></span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> DirectExchange <span class="title function_">demo01Exchange</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(Demo01Message.EXCHANGE,</span><br><span class="line">                    <span class="literal">true</span>,  <span class="comment">// durable: 是否持久化</span></span><br><span class="line">                    <span class="literal">false</span>);  <span class="comment">// exclusive: 是否排它</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 Binding</span></span><br><span class="line">        <span class="comment">// Exchange：Demo01Message.EXCHANGE</span></span><br><span class="line">        <span class="comment">// Routing key：Demo01Message.ROUTING_KEY</span></span><br><span class="line">        <span class="comment">// Queue：Demo01Message.QUEUE</span></span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Binding <span class="title function_">demo01Binding</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> BindingBuilder.bind(demo01Queue()).to(demo01Exchange()).with(Demo01Message.ROUTING_KEY);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在 DirectExchangeDemoConfiguration 内部静态类中，创建了 Exchange、Queue、Binding 三个 Bean ，后续 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-amqp/blob/master/spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitAdmin.java">RabbitAdmin</a> 会自动创建交换器、队列、绑定器。具体查看 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-amqp/blob/master/spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitAdmin.java#L555-L612"><code>RabbitAdmin#initialize()</code></a> 方法，或 <a target="_blank" rel="noopener" href="https://my.oschina.net/huaxian8812/blog/782300">《RabbitMQ 自动创建队列&#x2F;交换器&#x2F;绑定》</a> 文章。</li>
+</ul>
+<h4 id="1-5-Demo01Producer"><a href="#1-5-Demo01Producer" class="headerlink" title="1.5 Demo01Producer"></a>1.5 Demo01Producer</h4><p>创建 <code>Demo01Producer</code> 类，它会使用 Spring-AMQP 封装提供的 RabbitTemplate ，实现发送消息。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo01Producer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">syncSend</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 Demo01Message 消息</span></span><br><span class="line">        <span class="type">Demo01Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Demo01Message</span>();</span><br><span class="line">        message.setId(id);</span><br><span class="line">        <span class="comment">// 同步发送消息</span></span><br><span class="line">        rabbitTemplate.convertAndSend(Demo01Message.EXCHANGE, Demo01Message.ROUTING_KEY, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">syncSendDefault</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 Demo01Message 消息</span></span><br><span class="line">        <span class="type">Demo01Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Demo01Message</span>();</span><br><span class="line">        message.setId(id);</span><br><span class="line">        <span class="comment">// 同步发送消息</span></span><br><span class="line">        rabbitTemplate.convertAndSend(Demo01Message.QUEUE, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Async</span></span><br><span class="line">    <span class="keyword">public</span> ListenableFuture&lt;Void&gt; <span class="title function_">asyncSend</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 发送消息</span></span><br><span class="line">            <span class="built_in">this</span>.syncSend(id);</span><br><span class="line">            <span class="comment">// 返回成功的 Future</span></span><br><span class="line">            <span class="keyword">return</span> AsyncResult.forValue(<span class="literal">null</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">            <span class="comment">// 返回异常的 Future</span></span><br><span class="line">            <span class="keyword">return</span> AsyncResult.forExecutionException(ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>RabbitTemplate 是 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-amqp/blob/master/spring-amqp/src/main/java/org/springframework/amqp/core/AmqpTemplate.java">AmqpTemplate</a> 接口的实现类， RabbitTemplate 还实现了其它接口，操作会更为丰富。</p>
+</li>
+<li><p><code>#syncSend(Integer id)</code> 方法，调用 RabbitTemplate 的同步发送消息方法。方法定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AmqpTemplate.java</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">convertAndSend</span><span class="params">(String exchange, String routingKey, Object message)</span> <span class="keyword">throws</span> AmqpException;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定 Exchange + RoutingKey ，从而路由到一个 Queue 中。</li>
+</ul>
+</li>
+<li><p><code>#syncSendDefault(Integer id)</code> 方法，也调用 RabbitTemplate 的同步发送消息方法。方法定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AmqpTemplate.java</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">convertAndSend</span><span class="params">(String routingKey, Object message)</span> <span class="keyword">throws</span> AmqpException;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里传入的 RoutingKey 实际传入了队列名 因为 RabbitMQ 有一条默认的 <a target="_blank" rel="noopener" href="https://emacsist.github.io/2015/12/06/rabbitmq%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#default-exchange-%E9%BB%98%E8%AE%A4%E4%BA%A4%E6%8D%A2%E6%9C%BA">Exchange: (AMQP default)</a> 规则：<code>The default exchange is implicitly bound to every queue, with a routing key equal to the queue name. It is not possible to explicitly bind to, or unbind from the default exchange. It also cannot be deleted</code> 。</li>
+<li>默认交换器，隐式地绑定到每个队列，路由键等于队列名称。</li>
+<li>所以，此处即使传入的 RoutingKey 为队列名，一样可以发到对应队列。</li>
+</ul>
+</li>
+<li><p><code>#asyncSend(Integer id)</code> 方法，通过 <code>@Async</code> 注解，声明异步调用该方法，从而实现异步消息到 RabbitMQ 中。</p>
+<p>使用 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-amqp/blob/master/spring-rabbit/src/main/java/org/springframework/amqp/rabbit/AsyncRabbitTemplate.java">AsyncRabbitTemplate</a> 类，同样提供异步的 RabbitMQ 操作。</p>
+</li>
+</ul>
+<h3 id="3-1-7-Demo01Consumer"><a href="#3-1-7-Demo01Consumer" class="headerlink" title="3.1.7 Demo01Consumer"></a>3.1.7 Demo01Consumer</h3><p>创建 <code>Demo01Consumer</code> 类，消息消息，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Demo01Consumer.java</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@RabbitListener(queues = Demo01Message.QUEUE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo01Consumer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LoggerFactory.getLogger(getClass());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitHandler</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(Demo01Message message)</span> &#123;</span><br><span class="line">        logger.info(<span class="string">&quot;[onMessage][线程编号:&#123;&#125; 消息内容：&#123;&#125;]&quot;</span>, Thread.currentThread().getId(), message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在类上，添加了 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-amqp/blob/master/spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitListener.java"><code>@RabbitListener</code></a> 注解，声明了消费的队列是 <code>&quot;QUEUE_DEMO_01&quot;</code> 。</li>
+<li>在方法上，添加了 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-amqp/blob/master/spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitHandler.java"><code>@RabbitHandler</code></a> 注解，申明了处理消息的方法。同时，方法入参为消息的类型。</li>
+</ul>
+<h3 id="3-1-8-简单测试"><a href="#3-1-8-简单测试" class="headerlink" title="3.1.8 简单测试"></a>3.1.8 简单测试</h3><p>创建 <a target="_blank" rel="noopener" href="https://github.com/YunaiV/SpringBoot-Labs/blob/master/lab-04-rabbitmq/lab-04-rabbitmq-demo/src/test/java/cn/iocoder/springboot/lab04/rabbitmqdemo/producer/Demo01ProducerTest.java">Demo01ProducerTest</a> 测试类，编写三个单元测试方法，调用 Demo01Producer 三个发送消息的方式。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = RabbitMqApplication.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo01ProducerTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LoggerFactory.getLogger(getClass());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Demo01Producer producer;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSyncSend</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> (<span class="type">int</span>) (System.currentTimeMillis() / <span class="number">1000</span>);</span><br><span class="line">        producer.syncSend(id);</span><br><span class="line">        logger.info(<span class="string">&quot;[testSyncSend][发送编号：[&#123;&#125;] 发送成功]&quot;</span>, id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 阻塞等待，保证消费</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(<span class="number">1</span>).await();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">tesSyncSendDefault</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> (<span class="type">int</span>) (System.currentTimeMillis() / <span class="number">1000</span>);</span><br><span class="line">        producer.syncSendDefault(id);</span><br><span class="line">        logger.info(<span class="string">&quot;[tesSyncSendDefault][发送编号：[&#123;&#125;] 发送成功]&quot;</span>, id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 阻塞等待，保证消费</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(<span class="number">1</span>).await();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAsyncSend</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> (<span class="type">int</span>) (System.currentTimeMillis() / <span class="number">1000</span>);</span><br><span class="line">        producer.asyncSend(id).addCallback(<span class="keyword">new</span> <span class="title class_">ListenableFutureCallback</span>&lt;Void&gt;() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onFailure</span><span class="params">(Throwable e)</span> &#123;</span><br><span class="line">                logger.info(<span class="string">&quot;[testASyncSend][发送编号：[&#123;&#125;] 发送异常]]&quot;</span>, id, e);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onSuccess</span><span class="params">(Void aVoid)</span> &#123;</span><br><span class="line">                logger.info(<span class="string">&quot;[testASyncSend][发送编号：[&#123;&#125;] 发送成功，发送成功]&quot;</span>, id);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">        logger.info(<span class="string">&quot;[testASyncSend][发送编号：[&#123;&#125;] 调用完成]&quot;</span>, id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 阻塞等待，保证消费</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(<span class="number">1</span>).await();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行testSyncSend方法</p>
+<p>成功接收到消息</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310164059522.png" alt="image-20230310164059522"></p>
+<p>执行tesSyncSendDefault方法</p>
+<p>成功接收到消息</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310164157264.png" alt="image-20230310164157264"></p>
+<p>执行testAsyncSend方法</p>
+<p>成功接收到消息</p>
+<p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230310164241932.png" alt="image-20230310164241932"></p>
+
       
 
       
@@ -199,6 +295,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMQ</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -249,7 +360,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/%E7%9B%B8%E5%86%8C/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2023/03/10/RabbitMQ/RabbitMQ(%E4%BA%8C)%20SpringBoot%E6%95%B4%E5%90%88RabbitMQ/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -261,6 +372,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/10/RabbitMQ/RabbitMQ(%E4%B8%80)%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RabbitMQ(一) 安装配置与简单使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -331,7 +452,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
