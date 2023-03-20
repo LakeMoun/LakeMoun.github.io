@@ -163,85 +163,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-业务/MA和MACD" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/20/%E4%B8%9A%E5%8A%A1/MA%E5%92%8CMACD/">MA和MACD</a>
-    </h1>
-  
-
-        
-        <a href="/2023/03/20/%E4%B8%9A%E5%8A%A1/MA%E5%92%8CMACD/" class="archive-article-date">
-  	<time datetime="2023-03-20T06:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-20</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="移动平均-MA"><a href="#移动平均-MA" class="headerlink" title="移动平均(MA)"></a>移动平均(MA)</h3><p>移动平均是通过计算整个数据集中不同子集的各种平均数来分析数据的计算方式，可以消除数列的短期波动，突出长期趋势或周期，简单来说可以把数据变得更平滑。</p>
-<h4 id="1-简单的移动平均-SMA"><a href="#1-简单的移动平均-SMA" class="headerlink" title="1 简单的移动平均(SMA)"></a>1 简单的移动平均(SMA)</h4><p>$$<br>\begin{array}{c}<br>SMA&#x3D;\frac{P_M+P_{M-1}+\cdot \cdot \cdot+P_{M-(n-1)}}{n} \<br>&#x3D;\frac{1}{n} \sum_{i&#x3D;0}^{n-1} P_{m-i}<br>\end{array}<br>$$</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">业务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/03/20/%E4%B8%9A%E5%8A%A1/MA%E5%92%8CMACD/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-RabbitMQ/RabbitMQ(二) SpringBoot整合RabbitMQ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1032,9 +953,98 @@
 
 
   
+    <article id="post-Promethues/Prometheus学习笔记(八)：SpringBoot自定义监控指标" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/29/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AB)%EF%BC%9ASpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/">Prometheus学习笔记(八)：SpringBoot自定义监控指标</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/29/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AB)%EF%BC%9ASpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/" class="archive-article-date">
+  	<time datetime="2022-11-29T01:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/07_springboot_custom_index_monitor.html">参考资料</a></p>
+<h3 id="一-添加业务指标"><a href="#一-添加业务指标" class="headerlink" title="一 添加业务指标"></a>一 添加业务指标</h3><p>在<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/28/SringBootActuator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">原有项目</a>的基础上添加一个 PrometheusCustomMonitor 类。在这里面定义了两个个业务指标：</p>
+<ul>
+<li>order_request_count：下单总次数</li>
+<li>order_amount_sum：下单总金额</li>
+</ul>
+        
+          <a class="article-more-a" href="/2022/11/29/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AB)%EF%BC%9ASpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Prometheus</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/29/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AB)%EF%BC%9ASpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 
