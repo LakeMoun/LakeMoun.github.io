@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230331154814312.png">
 <meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230331154832280.png">
 <meta property="article:published_time" content="2023-03-10T07:18:46.000Z">
-<meta property="article:modified_time" content="2023-03-31T07:51:40.678Z">
+<meta property="article:modified_time" content="2023-03-31T07:54:07.523Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="RabbitMQ">
@@ -764,7 +764,7 @@
 
 <ul>
 <li>总体和上一节<code>ClusteringConsumer</code>是一致，主要差异在两点。</li>
-<li>第一点，在 <code>@Queue</code> 注解的 <code>name</code> 属性，我们通过 Spring EL 表达式，在 Queue 的名字上，使用 UUID 生成其后缀。这样，我们就能保证每个项目启动的 Consumer 的 Queue 不同，以达到广播消费的目的。</li>
+<li>第一点，在 <code>@Queue</code> 注解的 <code>name</code> 属性，我们通过 Spring EL 表达式，在 Queue 的名字上，使用 UUID 生成其后缀。这样，我们就能保证每个项目启动的 Consumer 的 Queue 不同，以达到发布订阅消费的目的。</li>
 <li>第二点，在 <code>@Queue</code> 注解的 <code>autoDelete</code> 属性，我们设置为 <code>&quot;true&quot;</code> ，这样在 Consumer 关闭时，该队列就可以被自动删除了。</li>
 </ul>
 <h5 id="9-2-5-简单测试"><a href="#9-2-5-简单测试" class="headerlink" title="9.2.5 简单测试"></a>9.2.5 简单测试</h5><p>创建测试类，代码如下</p>
