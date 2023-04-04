@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123164336735.png">
 <meta property="og:image" content="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123164915618.png">
 <meta property="article:published_time" content="2022-11-23T06:27:27.000Z">
-<meta property="article:modified_time" content="2023-01-11T06:06:23.525Z">
+<meta property="article:modified_time" content="2023-04-04T04:38:53.146Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Prometheus">
@@ -205,7 +205,7 @@
 <p>同时准备好nginx源码</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123143431840.png" alt="image-20221123143431840"></p>
 <p>进入nginx源码目录并增加第三方模块进入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --with-http_ssl_module --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 <p>编译（不要make install）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>

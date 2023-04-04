@@ -371,7 +371,7 @@
 <p>同时准备好nginx源码</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123143431840.png" alt="image-20221123143431840"></p>
 <p>进入nginx源码目录并增加第三方模块进入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --with-http_ssl_module --add-module=/usr/local/nginx/nginx-module-vts</span><br></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2022/11/23/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)%EF%BC%9Anginx%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/#more">more >></a>
         
