@@ -196,7 +196,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一-下载与安装"><a href="#一-下载与安装" class="headerlink" title="一 下载与安装"></a>一 下载与安装</h3><p>下载与安装ES对应版本的Kibana并解压</p>
+        <h3><span id="一-下载与安装">一 下载与安装</span></h3><p>下载与安装ES对应版本的Kibana并解压</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230308145655884.png" alt="image-20230308145655884"></p>
 <span id="more"></span>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf kibana-7.6.2-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
@@ -204,12 +204,12 @@
 <p>授权安装目录给启动kibana的linux账号</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R lilei:lilei /opt/kibana/kibana-7.6.2/</span><br></pre></td></tr></table></figure>
 
-<h3 id="二-配置"><a href="#二-配置" class="headerlink" title="二 配置"></a>二 配置</h3><p>编辑配置文件如下</p>
+<h3><span id="二-配置">二 配置</span></h3><p>编辑配置文件如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/kibana/kibana-7.6.2/config</span><br><span class="line">vim kibana.yml</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server.port:</span> <span class="number">5601</span></span><br><span class="line"><span class="attr">server.host:</span> <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line"><span class="attr">elasticsearch.hosts:</span> [<span class="string">&quot;http://localhost:9200&quot;</span>]</span><br><span class="line"><span class="attr">kibana.index:</span> <span class="string">&quot;.kibana&quot;</span></span><br><span class="line"><span class="attr">elasticsearch.username:</span> <span class="string">&quot;********&quot;</span></span><br><span class="line"><span class="attr">elasticsearch.password:</span> <span class="string">&quot;********&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="三-启动"><a href="#三-启动" class="headerlink" title="三 启动"></a>三 启动</h3><p>进入非root账号并启动kibana</p>
+<h3><span id="三-启动">三 启动</span></h3><p>进入非root账号并启动kibana</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su lilei</span><br><span class="line">./bin/kibana</span><br></pre></td></tr></table></figure>
 
 <p>启动成功</p>

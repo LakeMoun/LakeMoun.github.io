@@ -197,7 +197,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一-安装启动-mysql-exporter"><a href="#一-安装启动-mysql-exporter" class="headerlink" title="一 安装启动 mysql_exporter"></a>一 安装启动 mysql_exporter</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter">mysqld_exporter</a> 是 Prometheus 官方提供的一个 exporter，我们首先 <a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter/releases">下载最新版本</a>。</p>
+        <h3><span id="一-安装启动-mysql_exporter">一 安装启动 mysql_exporter</span></h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter">mysqld_exporter</a> 是 Prometheus 官方提供的一个 exporter，我们首先 <a target="_blank" rel="noopener" href="https://github.com/prometheus/mysqld_exporter/releases">下载最新版本</a>。</p>
 <p>首先为 mysqld_exporter <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/create-user.html">创建一个单独的用户</a>，并<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/grant.html">赋予它受限的权限</a>（PROCESS、REPLICATION CLIENT、SELECT），限制它的最大连接数（MAX_USER_CONNECTIONS）。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;mysql_exporter&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;*******&#x27; WITH MAX_USER_CONNECTIONS 3;</span><br><span class="line">GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO &#x27;mysql_exporter&#x27;@&#x27;localhost&#x27;;</span><br></pre></td></tr></table></figure>
 
@@ -219,12 +219,12 @@
 <p>默认端口9104,访问<code>地址:9093/metrics</code>可以看到已有mysql指标</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123112810631.png" alt="image-20221123112810631"></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gered/p/16567674.html">mysql_exporter的相关启动参数</a></p>
-<h3 id="二-注册监控指标"><a href="#二-注册监控指标" class="headerlink" title="二 注册监控指标"></a>二 注册监控指标</h3><p>将mysql_exporter配置到Prometheus中</p>
+<h3><span id="二-注册监控指标">二 注册监控指标</span></h3><p>将mysql_exporter配置到Prometheus中</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集mysql监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;mysql&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9104&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123114833254.png" alt="image-20221123114833254"></p>
 <p>可以看到Prometheus中已有msql监控数据</p>
-<h3 id="三-创建Grafana监控面板"><a href="#三-创建Grafana监控面板" class="headerlink" title="三 创建Grafana监控面板"></a>三 创建Grafana监控面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)%EF%BC%9A%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">Prometheus学习笔记(三)：结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
+<h3><span id="三-创建grafana监控面板">三 创建Grafana监控面板</span></h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)%EF%BC%9A%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">Prometheus学习笔记(三)：结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221123190622280.png" alt="image-20221123190622280"></p>
 
       

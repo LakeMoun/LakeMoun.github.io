@@ -199,7 +199,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/manba_24/article/details/119329293">参考文章</a></p>
-<h3 id="一-下载-JMX"><a href="#一-下载-JMX" class="headerlink" title="一 下载 JMX"></a>一 下载 JMX</h3><p>Java 应用的指标一般是通过 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JMX">JMX（Java Management Extensions）</a> 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。</p>
+<h3><span id="一-下载-jmx">一 下载 JMX</span></h3><p>Java 应用的指标一般是通过 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JMX">JMX（Java Management Extensions）</a> 来获取的，顾名思义，JMX 是管理 Java 的一种扩展，它可以方便的管理和监控正在运行的 Java 程序。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/prometheus/jmx_exporter">JMX Exporter</a> 用于收集 JMX 指标，很多使用 Java 的系统，都可以使用它来收集指标，比如：Kafaka、Cassandra 等。</p>
 <p>首先下载 JMX Exporter：</p>
 <span id="more"></span>
@@ -207,7 +207,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.3.1/jmx_prometheus_javaagent-0.3.1.jar</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221124105221982.png" alt="image-20221124105221982"></p>
-<h3 id="二-启动JMX"><a href="#二-启动JMX" class="headerlink" title="二 启动JMX"></a>二 启动JMX</h3><p>JMX Exporter 的有两种用法<br>启动独立进程。JVM 启动时指定参数，暴露 JMX 的 RMI 接口，JMX Exporter 调用 RMI 获取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>VM 进程内启动（in-process）。JVM 启动时指定参数，通过 JAVA Agent 的形式运行 JMX Exporter 的 jar 包，进程内读取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>官方不推荐使用第一种方式，一方面配置复杂，另一方面因为它需要一个单独的进程，而这个进程本身的监控又成了新的问题。</p>
+<h3><span id="二-启动jmx">二 启动JMX</span></h3><p>JMX Exporter 的有两种用法<br>启动独立进程。JVM 启动时指定参数，暴露 JMX 的 RMI 接口，JMX Exporter 调用 RMI 获取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>VM 进程内启动（in-process）。JVM 启动时指定参数，通过 JAVA Agent 的形式运行 JMX Exporter 的 jar 包，进程内读取 JVM 运行时状态数据，转换为 Prometheus metrics 格式，并暴露端口让 Prometheus 采集。<br>官方不推荐使用第一种方式，一方面配置复杂，另一方面因为它需要一个单独的进程，而这个进程本身的监控又成了新的问题。</p>
 <p>为此我们准备一个监控对象jar包</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221124105153272.png" alt="image-20221124105153272"></p>
 <p>进入JMX下载目录配置文件</p>
@@ -218,13 +218,13 @@
 
 <p>访问对应端口可以看到已有应用指标</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221124110429070.png" alt="image-20221124110429070"></p>
-<h3 id="三-注册指标到promethues"><a href="#三-注册指标到promethues" class="headerlink" title="三 注册指标到promethues"></a>三 注册指标到promethues</h3><p>修改promethues配置文件增加如下监控指标</p>
+<h3><span id="三-注册指标到promethues">三 注册指标到promethues</span></h3><p>修改promethues配置文件增加如下监控指标</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  <span class="comment"># 采集java应用监控数据</span></span><br><span class="line">  - job_name: <span class="string">&#x27;javaApplecationSim&#x27;</span></span><br><span class="line">    static_configs:</span><br><span class="line">    - targets: [<span class="string">&#x27;localhost:9095&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
 <p>重启promethues，输入up查看</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221124110947398.png" alt="image-20221124110947398"></p>
 <p>可以看到注册成功</p>
-<h3 id="三-创建Grafana监控面板"><a href="#三-创建Grafana监控面板" class="headerlink" title="三 创建Grafana监控面板"></a>三 创建Grafana监控面板</h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)%EF%BC%9A%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">Prometheus学习笔记(三)：结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
+<h3><span id="三-创建grafana监控面板">三 创建Grafana监控面板</span></h3><p>参考<a target="_blank" rel="noopener" href="http://39.97.209.29:4000/2022/11/22/Promethues/Prometheus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)%EF%BC%9A%E7%BB%93%E5%90%88Prometheus%E5%92%8CGrafana%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96DEMO/">Prometheus学习笔记(三)：结合Prometheus和Grafana面板的可视化DEMO | 大头的博客</a></p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221124111706468.png" alt="image-20221124111706468"></p>
 
       

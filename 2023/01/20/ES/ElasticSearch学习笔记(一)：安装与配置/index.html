@@ -205,18 +205,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>忘的差不多了，重新学习,留个笔记</p>
-<h3 id="一-下载"><a href="#一-下载" class="headerlink" title="一 下载"></a>一 下载</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/elasticsearch</span><br><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.6.2-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
+<h3><span id="一-下载">一 下载</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/elasticsearch</span><br><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.6.2-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
 
-<h3 id="二-解压"><a href="#二-解压" class="headerlink" title="二 解压"></a>二 解压</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf elasticsearch-7.6.2-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
+<h3><span id="二-解压">二 解压</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf elasticsearch-7.6.2-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<h3 id="三-启动用户与权限问题"><a href="#三-启动用户与权限问题" class="headerlink" title="三 启动用户与权限问题"></a>三 启动用户与权限问题</h3><p>ElasticSearch禁止以root用户启动需要创建用户并授权</p>
-<h4 id="3-1-创建用户"><a href="#3-1-创建用户" class="headerlink" title="3.1 创建用户"></a>3.1 创建用户</h4><p>创建用户名为：lilei</p>
+<h3><span id="三-启动用户与权限问题">三 启动用户与权限问题</span></h3><p>ElasticSearch禁止以root用户启动需要创建用户并授权</p>
+<h4><span id="31-创建用户">3.1 创建用户</span></h4><p>创建用户名为：lilei</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser lilei</span><br></pre></td></tr></table></figure>
 
 <p>为该用户<code>lilei</code>创建密码：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd lilei</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-2-授权"><a href="#3-2-授权" class="headerlink" title="3.2 授权"></a>3.2 授权</h4><p>个人用户的权限只可以在本home下有完整权限，其他目录要看别人授权。而经常需要root用户的权限，这时候sudo可以化身为root来操作。<br>新创建的用户并不能使用sudo命令，需要给他添加授权。<br>sudo命令的授权管理是在sudoers文件里的。</p>
+<h4><span id="32-授权">3.2 授权</span></h4><p>个人用户的权限只可以在本home下有完整权限，其他目录要看别人授权。而经常需要root用户的权限，这时候sudo可以化身为root来操作。<br>新创建的用户并不能使用sudo命令，需要给他添加授权。<br>sudo命令的授权管理是在sudoers文件里的。</p>
 <p>查看sudoers文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/sudoers</span><br></pre></td></tr></table></figure>
 
@@ -234,7 +234,7 @@
 <p>把 <code>ElasticSearch</code> 的安装目录执行权限赋予给 <code>lilei</code> 用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R lilei /opt/elasticsearch/elasticsearch-7.6.2/</span><br></pre></td></tr></table></figure>
 
-<h3 id="四-JDK要求"><a href="#四-JDK要求" class="headerlink" title="四 JDK要求"></a>四 JDK要求</h3><p>ElasticSearch从7开始自带JDK并且ES7版本要求JDK版本8+，未来要求11+。这里使用自带的JDK11避免影响其他项目</p>
+<h3><span id="四-jdk要求">四 JDK要求</span></h3><p>ElasticSearch从7开始自带JDK并且ES7版本要求JDK版本8+，未来要求11+。这里使用自带的JDK11避免影响其他项目</p>
 <p>修改安装目录下bin文件夹下的<code>elasticsearch-env</code>配置文件:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入安装目录</span></span><br><span class="line">cd /opt/elasticsearch/elasticsearch-7.6.2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改配置文件</span></span><br><span class="line">vim ./bin/elasticsearch-env</span><br></pre></td></tr></table></figure>
 
@@ -244,14 +244,14 @@
 <p>改为</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if [ &quot;$(uname -s)&quot; = &quot;Darwin&quot; ]; then</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">macOS has a different structure</span></span><br><span class="line">  JAVA=&quot;$ES_HOME/jdk.app/Contents/Home/bin/java&quot;</span><br><span class="line">else</span><br><span class="line">  JAVA=&quot;$ES_HOME/jdk/bin/java&quot;</span><br><span class="line">fi</span><br><span class="line">JAVA_TYPE=&quot;bundled jdk&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="五-配置"><a href="#五-配置" class="headerlink" title="五 配置"></a>五 配置</h3><p>修改<code>config/elasticsearch.yml</code>配置文件</p>
+<h3><span id="五-配置">五 配置</span></h3><p>修改<code>config/elasticsearch.yml</code>配置文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入安装目录</span></span><br><span class="line">cd /opt/elasticsearch/elasticsearch-7.6.2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改配置文件</span></span><br><span class="line">vim ./config/elasticsearch.yml</span><br></pre></td></tr></table></figure>
 
-<h4 id="5-1-配置外网可访问"><a href="#5-1-配置外网可访问" class="headerlink" title="5.1 配置外网可访问"></a>5.1 配置外网可访问</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#外网任意ip可访问</span></span><br><span class="line"><span class="attr">network.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> </span><br><span class="line"><span class="comment">#访问端口</span></span><br><span class="line"><span class="attr">http.port:</span> <span class="number">9200</span></span><br></pre></td></tr></table></figure>
+<h4><span id="51-配置外网可访问">5.1 配置外网可访问</span></h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#外网任意ip可访问</span></span><br><span class="line"><span class="attr">network.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> </span><br><span class="line"><span class="comment">#访问端口</span></span><br><span class="line"><span class="attr">http.port:</span> <span class="number">9200</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="5-2-配置节点和集群名"><a href="#5-2-配置节点和集群名" class="headerlink" title="5.2 配置节点和集群名"></a>5.2 配置节点和集群名</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#集群名</span></span><br><span class="line"><span class="attr">cluster.name:</span> <span class="string">lilei-application</span></span><br><span class="line"><span class="comment">#节点名</span></span><br><span class="line"><span class="attr">node.name:</span> <span class="string">node-lilei-1</span></span><br><span class="line"><span class="comment">#集群主节点信息</span></span><br><span class="line"><span class="attr">cluster.initial_master_nodes:</span> [<span class="string">&quot;node-lilei-1&quot;</span>]</span><br></pre></td></tr></table></figure>
+<h4><span id="52-配置节点和集群名">5.2 配置节点和集群名</span></h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#集群名</span></span><br><span class="line"><span class="attr">cluster.name:</span> <span class="string">lilei-application</span></span><br><span class="line"><span class="comment">#节点名</span></span><br><span class="line"><span class="attr">node.name:</span> <span class="string">node-lilei-1</span></span><br><span class="line"><span class="comment">#集群主节点信息</span></span><br><span class="line"><span class="attr">cluster.initial_master_nodes:</span> [<span class="string">&quot;node-lilei-1&quot;</span>]</span><br></pre></td></tr></table></figure>
 
-<h4 id="5-3-修改内核参数"><a href="#5-3-修改内核参数" class="headerlink" title="5.3 修改内核参数"></a>5.3 修改内核参数</h4><p>Elasticsearch mmapfs默认使用目录来存储其索引。默认的操作系统对mmap计数的限制可能太低，这可能会导致内存不足异常。</p>
+<h4><span id="53-修改内核参数">5.3 修改内核参数</span></h4><p>Elasticsearch mmapfs默认使用目录来存储其索引。默认的操作系统对mmap计数的限制可能太低，这可能会导致内存不足异常。</p>
 <p>在root用户下设置<code>vm.max_map_count</code> 参数值为 262144</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;vm.max_map_count=262144&quot; &gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
 
@@ -259,9 +259,9 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230120112432816.png" alt="image-20230120112432816"></p>
-<h3 id="六-启动"><a href="#六-启动" class="headerlink" title="六 启动"></a>六 启动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换到lilei用户</span></span><br><span class="line">su lilei</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入安装目录</span></span><br><span class="line">cd /opt/elasticsearch/elasticsearch-7.6.2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">后台启动</span></span><br><span class="line">./bin/elasticsearch -d</span><br></pre></td></tr></table></figure>
+<h3><span id="六-启动">六 启动</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换到lilei用户</span></span><br><span class="line">su lilei</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入安装目录</span></span><br><span class="line">cd /opt/elasticsearch/elasticsearch-7.6.2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">后台启动</span></span><br><span class="line">./bin/elasticsearch -d</span><br></pre></td></tr></table></figure>
 
-<h3 id="七-设置密码"><a href="#七-设置密码" class="headerlink" title="七 设置密码"></a>七 设置密码</h3><p>需要在配置文件中开启x-pack验证, 修改<code>config</code>目录下面的<code>elasticsearch.yml</code>文件，在里面添加如下内容,并重启</p>
+<h3><span id="七-设置密码">七 设置密码</span></h3><p>需要在配置文件中开启x-pack验证, 修改<code>config</code>目录下面的<code>elasticsearch.yml</code>文件，在里面添加如下内容,并重启</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置X-Pack</span></span><br><span class="line"><span class="attr">http.cors.enabled:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">http.cors.allow-origin:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="attr">http.cors.allow-headers:</span> <span class="string">Authorization</span></span><br><span class="line"><span class="attr">xpack.security.enabled:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">xpack.security.transport.ssl.enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>重启后输入</p>
@@ -276,7 +276,7 @@
 <li>logstash_system 账号：拥有 logstash_system 角色。用户 Logstash 在 Elasticsearch 中存储监控信息时使用。</li>
 </ul>
 <p>此时访问对应9300端口会提示输入账号密码</p>
-<h3 id="八-SSLHandshake异常"><a href="#八-SSLHandshake异常" class="headerlink" title="八 SSLHandshake异常"></a>八 SSLHandshake异常</h3><p>此时启动ES，虽然可以启动但是抛出SSLHandshake异常警告</p>
+<h3><span id="八-sslhandshake异常">八 SSLHandshake异常</span></h3><p>此时启动ES，虽然可以启动但是抛出SSLHandshake异常警告</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入安装目录</span></span><br><span class="line">cd /opt/elasticsearch/elasticsearch-7.6.2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在ES的根目录生成CA证书</span></span><br><span class="line">bin/elasticsearch-certutil ca</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">途中需要输入证书文件名和密码</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230120133501599.png" alt="image-20230120133501599"></p>
@@ -300,7 +300,7 @@
 <p>重启ES</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后台启动</span></span><br><span class="line">./bin/elasticsearch -d</span><br></pre></td></tr></table></figure>
 
-<h3 id="九-安装IK分词器"><a href="#九-安装IK分词器" class="headerlink" title="九 安装IK分词器"></a>九 安装IK分词器</h3><p>下载<strong>对应版本</strong>的<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v7.6.2">插件</a>并解压到<code>plugins/ik/</code>目录下</p>
+<h3><span id="九-安装ik分词器">九 安装IK分词器</span></h3><p>下载<strong>对应版本</strong>的<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v7.6.2">插件</a>并解压到<code>plugins/ik/</code>目录下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip elasticsearch-analysis-ik-7.6.2.zip -d /opt/elasticsearch/elasticsearch-7.6.2/plugins/ik/</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230308092533231.png" alt="image-20230308092533231"></p>
@@ -311,8 +311,8 @@
 <li>ik_smart ：IK 智能分词，会做最<strong>粗</strong>粒度的拆分。</li>
 </ul>
 <p>我们将 <code>&quot;百事可乐&quot;</code> 进行分词，看看他们之间的差异。</p>
-<h4 id="ik-max-word"><a href="#ik-max-word" class="headerlink" title="ik_max_word:"></a>ik_max_word:</h4><p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230308092845310.png" alt="image-20230308092845310"></p>
-<h4 id="ik-smart"><a href="#ik-smart" class="headerlink" title="ik_smart:"></a>ik_smart:</h4><p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230308093327802.png" alt="image-20230308093327802"></p>
+<h4><span id="ik_max_word">ik_max_word:</span></h4><p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230308092845310.png" alt="image-20230308092845310"></p>
+<h4><span id="ik_smart">ik_smart:</span></h4><p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230308093327802.png" alt="image-20230308093327802"></p>
 <p>注意如果设置了密码需要携带token访问</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20230308093001870.png" alt="image-20230308093001870"></p>
 

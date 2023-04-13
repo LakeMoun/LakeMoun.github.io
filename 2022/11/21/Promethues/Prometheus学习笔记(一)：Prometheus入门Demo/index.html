@@ -203,20 +203,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><a target="_blank" rel="noopener" href="https://prometheus.io/docs/introduction/first_steps/">官方文档</a></p>
-<h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一 简介"></a>一 简介</h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus">Prometheus</a>是一个开源监控系统，它前身是SoundCloud的警告工具包。从2012年开始，许多公司和组织开始使用Prometheus。该项目的开发人员和用户社区非常活跃，越来越多的开发人员和用户参与到该项目中。目前它是一个独立的开源项目，且不依赖与任何公司。不一定会使用此系统，但可以吸收优秀开源框架的优点。下面记录Prometheus的入门案例</p>
-<h3 id="二-监控自身的Demo案例"><a href="#二-监控自身的Demo案例" class="headerlink" title="二 监控自身的Demo案例"></a>二 监控自身的Demo案例</h3><p>下面记录Prometheus的安装配置和使用</p>
-<h4 id="1-下载和运行Prometheus"><a href="#1-下载和运行Prometheus" class="headerlink" title="1 下载和运行Prometheus"></a>1 下载和运行Prometheus</h4><p>在<a target="_blank" rel="noopener" href="https://prometheus.io/download">下载地址</a>选择对应版本，然后解压</p>
+<h3><span id="一-简介">一 简介</span></h3><p><a target="_blank" rel="noopener" href="https://github.com/prometheus">Prometheus</a>是一个开源监控系统，它前身是SoundCloud的警告工具包。从2012年开始，许多公司和组织开始使用Prometheus。该项目的开发人员和用户社区非常活跃，越来越多的开发人员和用户参与到该项目中。目前它是一个独立的开源项目，且不依赖与任何公司。不一定会使用此系统，但可以吸收优秀开源框架的优点。下面记录Prometheus的入门案例</p>
+<h3><span id="二-监控自身的demo案例">二 监控自身的Demo案例</span></h3><p>下面记录Prometheus的安装配置和使用</p>
+<h4><span id="1-下载和运行prometheus">1 下载和运行Prometheus</span></h4><p>在<a target="_blank" rel="noopener" href="https://prometheus.io/download">下载地址</a>选择对应版本，然后解压</p>
 <span id="more"></span>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xvfz prometheus-*.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> prometheus-*</span><br></pre></td></tr></table></figure>
 
 <p>下载例:</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121101426822.png" alt="image-20221121101426822"></p>
-<h4 id="2-配置监控Prometheus服务本身"><a href="#2-配置监控Prometheus服务本身" class="headerlink" title="2 配置监控Prometheus服务本身"></a>2 配置监控Prometheus服务本身</h4><p>Prometheus需要通过Http请求的方式拉取目标机器上的度量指标。prometheus服务本身也暴露自己运行产生的数据，可以抓取和监控自己的健康状况</p>
+<h4><span id="2-配置监控prometheus服务本身">2 配置监控Prometheus服务本身</span></h4><p>Prometheus需要通过Http请求的方式拉取目标机器上的度量指标。prometheus服务本身也暴露自己运行产生的数据，可以抓取和监控自己的健康状况</p>
 <p>修改配置文件prometheus.yml如下</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line">  <span class="attr">scrape_interval:</span>     <span class="string">15s</span></span><br><span class="line">  <span class="attr">evaluation_interval:</span> <span class="string">15s</span></span><br><span class="line"></span><br><span class="line"><span class="attr">rule_files:</span></span><br><span class="line">  <span class="comment"># - &quot;first.rules&quot;</span></span><br><span class="line">  <span class="comment"># - &quot;second.rules&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">prometheus</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> [<span class="string">&#x27;localhost:9091&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-启动"><a href="#3-启动" class="headerlink" title="3 启动"></a>3 启动</h4><p>运行下面命令:</p>
+<h4><span id="3-启动">3 启动</span></h4><p>运行下面命令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./prometheus --config.file=prometheus.yml --web.listen-address=:9091 &amp;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121105800688.png" alt="image-20221121105800688"></p>
@@ -225,7 +225,7 @@
 <p>访问对应端口可以看到服务正在运行</p>
 <p>访问<code>地址/metrics</code>可以看到服务正在提供自身指标</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121110650812.png" alt="image-20221121110650812"></p>
-<h3 id="三-使用expression-browser"><a href="#三-使用expression-browser" class="headerlink" title="三 使用expression browser"></a>三 使用expression browser</h3><p>访问<code>地址/graph</code>使用Prometheus内置的浏览器查看服务本身的数据</p>
+<h3><span id="三-使用expression-browser">三 使用expression browser</span></h3><p>访问<code>地址/graph</code>使用Prometheus内置的浏览器查看服务本身的数据</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121111845962.png" alt="image-20221121111845962"></p>
 <p>输入<code>promhttp_metric_handler_requests_total</code>并选择table选项卡查看Prometheus处理的请求记录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promhttp_metric_handler_requests_total</span><br></pre></td></tr></table></figure>
@@ -240,7 +240,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count(promhttp_metric_handler_requests_total)</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121113719114.png" alt="image-20221121113719114"></p>
-<h3 id="四-使用图形界面"><a href="#四-使用图形界面" class="headerlink" title="四 使用图形界面"></a>四 使用图形界面</h3><p>若要绘制图形界面选择Graph选项卡</p>
+<h3><span id="四-使用图形界面">四 使用图形界面</span></h3><p>若要绘制图形界面选择Graph选项卡</p>
 <p>例如，输入以下表达式以绘制抓取自Prometheus服务中，发生的返回状态代码为200的每秒HTTP请求速率</p>
 <p><img src="https://clan-picgo.oss-cn-beijing.aliyuncs.com/image-20221121114230160.png" alt="image-20221121114230160"></p>
 
