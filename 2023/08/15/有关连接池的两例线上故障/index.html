@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lakemoun.github.io">
-  <title>大头的博客</title>
+  <title>有关连接池的两例线上故障 | 大头的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随便写写的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="大头的博客">
-<meta property="og:url" content="https://lakemoun.github.io/page/3/index.html">
+  <meta name="description" content="一 池​	工作中常常能见到各种池，如对象池、数据库连接池、线程池、等等。这些池本质上是池化思想的体现。池化思想是一种通过创建和管理可重复使用的对象池来提高性能和资源利用率的编程思想。  ​	核心在于在需要时从池中获取对象，而不是每次都创建新的对象，使用完毕后将对象返回到池中，以供其他代码复用。 ​	通过使用池化思想，可以避免不必要的资源创建和销毁操作，减少系统开销，提高程序的性能和可伸缩性。同时，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关连接池的两例线上故障">
+<meta property="og:url" content="https://lakemoun.github.io/2023/08/15/%E6%9C%89%E5%85%B3%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%B8%A4%E4%BE%8B%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C/index.html">
 <meta property="og:site_name" content="大头的博客">
-<meta property="og:description" content="随便写写的博客">
+<meta property="og:description" content="一 池​	工作中常常能见到各种池，如对象池、数据库连接池、线程池、等等。这些池本质上是池化思想的体现。池化思想是一种通过创建和管理可重复使用的对象池来提高性能和资源利用率的编程思想。  ​	核心在于在需要时从池中获取对象，而不是每次都创建新的对象，使用完毕后将对象返回到池中，以供其他代码复用。 ​	通过使用池化思想，可以避免不必要的资源创建和销毁操作，减少系统开销，提高程序的性能和可伸缩性。同时，">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-15T03:14:07.000Z">
+<meta property="article:modified_time" content="2023-08-15T03:15:59.189Z">
 <meta property="article:author" content="一个大头鬼">
-<meta property="article:tag" content="java,后端,菜鸟,ffer">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="连接池 - MySQL - redis">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
@@ -161,39 +164,114 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-动态redis库实现与问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-有关连接池的两例线上故障" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/09/%E5%8A%A8%E6%80%81redis%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%97%AE%E9%A2%98/">动态redis库实现与问题</a>
+    <h1 class="article-title" itemprop="name">
+      有关连接池的两例线上故障
     </h1>
   
 
         
-        <a href="/2022/11/09/%E5%8A%A8%E6%80%81redis%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
+        <a href="/2023/08/15/%E6%9C%89%E5%85%B3%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%B8%A4%E4%BE%8B%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C/" class="archive-article-date">
+  	<time datetime="2023-08-15T03:14:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-15</time>
 </a>
         
 
 
+                
+                    <span class="archive-article-date">
+                            阅读量 <span id="busuanzi_value_page_pv"></span>
+                    </span>
                 
 
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="怪异的redis异常"><a href="#怪异的redis异常" class="headerlink" title="怪异的redis异常"></a>怪异的redis异常</h3><p>实现一个监控服务，监控其他服务的运行状态并校验相应的业务数据，设计上使用redis来传递心跳和业务数据来解耦，避免影响到主流程。然而不同的监控对象使用的redis库不尽相同，业务上需要实现动态redis库的功能，首先尝试在网络上寻找到工具类如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate <span class="title function_">setDataBase</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">LettuceConnectionFactory</span> <span class="variable">connectionFactory</span> <span class="operator">=</span> (LettuceConnectionFactory) redisTemplate.getConnectionFactory();</span><br><span class="line">        <span class="keyword">if</span> (connectionFactory != <span class="literal">null</span> &amp;&amp; num != connectionFactory.getDatabase()) &#123;</span><br><span class="line">            connectionFactory.setDatabase(num);</span><br><span class="line">            <span class="built_in">this</span>.redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">            connectionFactory.resetConnection();</span><br><span class="line">            connectionFactory.afterPropertiesSet();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 序列化注入spring容器的RedisTemplate</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Serializable, Object&gt; <span class="title function_">getRedisTemplate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">serializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line"><span class="comment">//        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span></span><br><span class="line">        serializer.setObjectMapper(mapper);</span><br><span class="line">        <span class="comment">//使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setValueSerializer(serializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setHashValueSerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.afterPropertiesSet();</span><br><span class="line"><span class="comment">//        redisTemplate.setEnableTransactionSupport(true);</span></span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/11/09/%E5%8A%A8%E6%80%81redis%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%97%AE%E9%A2%98/#more">more >></a>
-        
+        <h3><span id="一-池">一 池</span></h3><p>​	工作中常常能见到各种池，如对象池、数据库连接池、线程池、等等。这些池本质上是<strong>池化思想</strong>的体现。<a target="_blank" rel="noopener" href="https://blog.csdn.net/hlzdbk/article/details/130859242">池化思想是一种通过创建和管理可重复使用的对象池来提高性能和资源利用率的编程思想</a>。</p>
+<blockquote>
+<p>​	核心在于在需要时从池中获取对象，而不是每次都创建新的对象，使用完毕后将对象返回到池中，以供其他代码复用。</p>
+<p>​	通过使用池化思想，可以避免不必要的资源创建和销毁操作，减少系统开销，提高程序的性能和可伸缩性。同时，池化思想还能够更好地管理和控制资源的使用，防止资源过度消耗和浪费。</p>
+</blockquote>
+<p>​	下面的两例线上故障虽然说都与池有关，但是其外在表现和<strong>本质原因</strong>都有所不同。</p>
+<h3><span id="二-慢查询稳定性的地雷">二 慢查询——稳定性的地雷</span></h3><p>先来看具体的故障表现</p>
+<ol>
+<li>线上项目不可用，接口报错，但项目服务器cpu、内存占用均未显示异常</li>
+<li>数据库服务器cpu占用高。项目重启后占用下降，恢复可用。</li>
+</ol>
+<p>从表现上大致可以推断问题来源大致是数据库。而服务器cpu占用高可能的原因如下</p>
+<ol>
+<li>cpu内核被线程持续占用</li>
+<li>大量的并发线程cpu频繁进行线程的切换</li>
+<li>JVM频繁执行full gc</li>
+</ol>
+<p>下面分析一下原因</p>
+<p>​	既然是数据库的服务器cpu占用较高，自然想到第一点原因，由于<strong>慢查询</strong>导致数据库服务器cpu占用过高。</p>
+<p>​	线上服务器的内核通常以2-4核为多，而一个1s以上的慢查询，只需要在一秒内有2-4的并发就可以将服务器cpu内核占满。</p>
+<p>​	数据库服务器内核占用将导致线上服务卡顿。在业务高峰期服务的卡顿通常会导致用户的刷新行为，继续加重数据库服务器的cpu压力。但这只能解释第二点故障表现。慢查询导致cpu占用过高，项目的其他查询大不了等待呗，为什么会直接不可用呢。</p>
+<p>​	原因在于<strong>连接池</strong></p>
+<p>​	在慢查询占用cpu的时刻，其他查询获取到数据库链接，此时cpu忙，于是线程持有连接等待。在业务高峰期，数据库连接池很快就会占用满。后续的线程再请求数据库连接时则抛出超时异常。表现为项目的不可用，但是项目服务器的cpu、内存指标未显示异常。</p>
+<p>​	上一故障，其根本原因在与慢查询的出现，这启发我们在工作中应该时刻注意sql的性能问题，多考虑表的数据量，多检查执行计划有没有走索引，将0.1到0.01秒的sql视为健康的sql。在设计表结构的时候考虑该表是查询业务多还是修改业务多，适当的冗余有助于提升查询的效率，但是会导致修改时的一致性问题。</p>
+<h3><span id="三-连接池好心帮倒忙">三 连接池——好心帮倒忙</span></h3><p>第二个线上故障的具体表现如下</p>
+<ol>
+<li>突然某一天出现项目服务器cpu占用过高。</li>
+<li>业务卡顿但是并项目并未宕机。</li>
+<li>项目日志中有redis链接超时错误</li>
+</ol>
+<p>出现问题的项目有如下特点</p>
+<ol>
+<li>大量的定时任务需要连接redis</li>
+<li>新的需要定时任务连接redis业务不断的添加到这一项目中</li>
+</ol>
+<p>下面分析一下原因</p>
+<p>​	由第三点故障表现和项目特点可以很容易想到问题大致出在redis连接方向。通过大致估算发现——项目的redis连接已经超过了配置的连接池连接数上限。不断产生的大量的redis连接请求将连接池的连接全部占用，后续部分线程请求超时导致了第三点故障表现。由于redis在内存中操作数据，速度快，连接很快就被释放，后续连接请求部分仍然可以获取，这使得项目业务卡顿，但并不是所有业务都不可用。那为什么会导致服务器cpu占用过高呢？连接池不就是通过创建和管理可重复使用的对象池来提高性能和资源利用率吗？</p>
+<p>让我们回顾一下服务器cpu占用高可能的原因</p>
+<ol>
+<li>cpu内核被线程持续占用</li>
+<li><strong>大量的并发线程cpu频繁进行线程的切换</strong></li>
+<li>JVM频繁执行full gc</li>
+</ol>
+<p>​	答案呼之欲出，当线程池占用满了之后，后续线程在请求连接时只能等待，线程进入等待，cpu切换其他线程。由于项目中大量线程均频繁的使用redis，切换后的线程仍然需要请求redis连接。于是cpu处于反复频繁的线程切换中。线程的上下文切换仍然需要消耗cpu资源。这就导致了项目服务器的cpu占用过高。</p>
+<p>​	将redis连接池的最大连接数增加后，问题暂时解决。但是仍然需要警惕，单台redis的最大并发量大致在10w左右，如果超过这个数量就要考虑redis部署主从架构了。不过目前项目还达不到。</p>
+<h3><span id="四-总结">四 总结</span></h3><p>​	通过上述两个线上故障案例分析可以发现，连接池的引入会导致系统复杂性增加。虽然确实可以提高性能和资源利用率，但不合适的配置会导致其他问题的出现，需要适时评估资源的使用量，根据实际情况进行配置。除此之外，详细的故障表现的本质原因很可能完全不同，审慎的对待每次故障，分析问题产生根本原因有助于形成牢固的知识体系，知识落实到实际才能融汇贯通。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢老板，老板大气<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wcpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -208,7 +286,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">连接池 - MySQL - redis</a>
         		</li>
       		
 		</ul>
@@ -217,16 +295,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/09/%E5%8A%A8%E6%80%81redis%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2023/08/15/%E6%9C%89%E5%85%B3%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%B8%A4%E4%BE%8B%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2023/06/19/Jenkins/Jenkins(%E4%B8%80)%EF%BC%9A%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jenkins(一)：安装与部署</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -246,111 +383,23 @@
 
 
 
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2012/12/18/hello-world/">Hexo博客框架 Hello World汉化</a>
-    </h1>
-  
-
-        
-        <a href="/2012/12/18/hello-world/" class="archive-article-date">
-  	<time datetime="2012-12-18T15:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2012-12-18</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>欢迎使用<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! 这是你的第一篇文章。检查<a target="_blank" rel="noopener" href="https://hexo.io/docs/">文档</a>了解更多信息。如果您在使用Hexo时遇到任何问题，可以在<a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">疑难解答</a>中找到答案或者你可以在<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>上问我.</p>
-<h2><span id="快速开始">快速开始</span></h2><h3><span id="创建新博客">创建新博客</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3><span id="创建新页面">创建新页面</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page <span class="string">&quot;new page&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">写作</a></p>
-<h3><span id="运行服务">运行服务</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">服务</a></p>
-<h3><span id="构建静态服务">构建静态服务</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">构建</a></p>
-<h3><span id="推送到远程站点">推送到远程站点</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">部署</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2012/12/18/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
   
+
+  
+
+  
+
+  
+
+   
+
+
+       
+
+
+
 
 
 
@@ -384,8 +433,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

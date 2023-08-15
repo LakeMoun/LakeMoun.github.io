@@ -163,6 +163,133 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-有关连接池的两例线上故障" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/08/15/%E6%9C%89%E5%85%B3%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%B8%A4%E4%BE%8B%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C/">有关连接池的两例线上故障</a>
+    </h1>
+  
+
+        
+        <a href="/2023/08/15/%E6%9C%89%E5%85%B3%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%B8%A4%E4%BE%8B%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C/" class="archive-article-date">
+  	<time datetime="2023-08-15T03:14:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-15</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3><span id="一-池">一 池</span></h3><p>​	工作中常常能见到各种池，如对象池、数据库连接池、线程池、等等。这些池本质上是<strong>池化思想</strong>的体现。<a target="_blank" rel="noopener" href="https://blog.csdn.net/hlzdbk/article/details/130859242">池化思想是一种通过创建和管理可重复使用的对象池来提高性能和资源利用率的编程思想</a>。</p>
+<blockquote>
+<p>​	核心在于在需要时从池中获取对象，而不是每次都创建新的对象，使用完毕后将对象返回到池中，以供其他代码复用。</p>
+<p>​	通过使用池化思想，可以避免不必要的资源创建和销毁操作，减少系统开销，提高程序的性能和可伸缩性。同时，池化思想还能够更好地管理和控制资源的使用，防止资源过度消耗和浪费。</p>
+</blockquote>
+<p>​	下面的两例线上故障虽然说都与池有关，但是其外在表现和<strong>本质原因</strong>都有所不同。</p>
+<h3><span id="二-慢查询稳定性的地雷">二 慢查询——稳定性的地雷</span></h3><p>先来看具体的故障表现</p>
+<ol>
+<li>线上项目不可用，接口报错，但项目服务器cpu、内存占用均未显示异常</li>
+<li>数据库服务器cpu占用高。项目重启后占用下降，恢复可用。</li>
+</ol>
+<p>从表现上大致可以推断问题来源大致是数据库。而服务器cpu占用高可能的原因如下</p>
+<ol>
+<li>cpu内核被线程持续占用</li>
+<li>大量的并发线程cpu频繁进行线程的切换</li>
+<li>JVM频繁执行full gc</li>
+</ol>
+<p>下面分析一下原因</p>
+<p>​	既然是数据库的服务器cpu占用较高，自然想到第一点原因，由于<strong>慢查询</strong>导致数据库服务器cpu占用过高。</p>
+<p>​	线上服务器的内核通常以2-4核为多，而一个1s以上的慢查询，只需要在一秒内有2-4的并发就可以将服务器cpu内核占满。</p>
+<p>​	数据库服务器内核占用将导致线上服务卡顿。在业务高峰期服务的卡顿通常会导致用户的刷新行为，继续加重数据库服务器的cpu压力。但这只能解释第二点故障表现。慢查询导致cpu占用过高，项目的其他查询大不了等待呗，为什么会直接不可用呢。</p>
+<p>​	原因在于<strong>连接池</strong></p>
+<p>​	在慢查询占用cpu的时刻，其他查询获取到数据库链接，此时cpu忙，于是线程持有连接等待。在业务高峰期，数据库连接池很快就会占用满。后续的线程再请求数据库连接时则抛出超时异常。表现为项目的不可用，但是项目服务器的cpu、内存指标未显示异常。</p>
+<p>​	上一故障，其根本原因在与慢查询的出现，这启发我们在工作中应该时刻注意sql的性能问题，多考虑表的数据量，多检查执行计划有没有走索引，将0.1到0.01秒的sql视为健康的sql。在设计表结构的时候考虑该表是查询业务多还是修改业务多，适当的冗余有助于提升查询的效率，但是会导致修改时的一致性问题。</p>
+<h3><span id="三-连接池好心帮倒忙">三 连接池——好心帮倒忙</span></h3><p>第二个线上故障的具体表现如下</p>
+<ol>
+<li>突然某一天出现项目服务器cpu占用过高。</li>
+<li>业务卡顿但是并项目并未宕机。</li>
+<li>项目日志中有redis链接超时错误</li>
+</ol>
+<p>出现问题的项目有如下特点</p>
+<ol>
+<li>大量的定时任务需要连接redis</li>
+<li>新的需要定时任务连接redis业务不断的添加到这一项目中</li>
+</ol>
+<p>下面分析一下原因</p>
+<p>​	由第三点故障表现和项目特点可以很容易想到问题大致出在redis连接方向。通过大致估算发现——项目的redis连接已经超过了配置的连接池连接数上限。不断产生的大量的redis连接请求将连接池的连接全部占用，后续部分线程请求超时导致了第三点故障表现。由于redis在内存中操作数据，速度快，连接很快就被释放，后续连接请求部分仍然可以获取，这使得项目业务卡顿，但并不是所有业务都不可用。那为什么会导致服务器cpu占用过高呢？连接池不就是通过创建和管理可重复使用的对象池来提高性能和资源利用率吗？</p>
+<p>让我们回顾一下服务器cpu占用高可能的原因</p>
+<ol>
+<li>cpu内核被线程持续占用</li>
+<li><strong>大量的并发线程cpu频繁进行线程的切换</strong></li>
+<li>JVM频繁执行full gc</li>
+</ol>
+<p>​	答案呼之欲出，当线程池占用满了之后，后续线程在请求连接时只能等待，线程进入等待，cpu切换其他线程。由于项目中大量线程均频繁的使用redis，切换后的线程仍然需要请求redis连接。于是cpu处于反复频繁的线程切换中。线程的上下文切换仍然需要消耗cpu资源。这就导致了项目服务器的cpu占用过高。</p>
+<p>​	将redis连接池的最大连接数增加后，问题暂时解决。但是仍然需要警惕，单台redis的最大并发量大致在10w左右，如果超过这个数量就要考虑redis部署主从架构了。不过目前项目还达不到。</p>
+<h3><span id="四-总结">四 总结</span></h3><p>​	通过上述两个线上故障案例分析可以发现，连接池的引入会导致系统复杂性增加。虽然确实可以提高性能和资源利用率，但不合适的配置会导致其他问题的出现，需要适时评估资源的使用量，根据实际情况进行配置。除此之外，详细的故障表现的本质原因很可能完全不同，审慎的对待每次故障，分析问题产生根本原因有助于形成牢固的知识体系，知识落实到实际才能融汇贯通。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">连接池 - MySQL - redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/08/15/%E6%9C%89%E5%85%B3%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%B8%A4%E4%BE%8B%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Jenkins/Jenkins(一)：安装与部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -975,94 +1102,6 @@
 
 
   
-    <article id="post-kafuka/kafka学习笔记(一)：安装与实例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/08/kafuka/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)%EF%BC%9A%E5%AE%89%E8%A3%85%E4%B8%8E%E5%AE%9E%E4%BE%8B/">kafka学习笔记(一)：安装与实例</a>
-    </h1>
-  
-
-        
-        <a href="/2022/12/08/kafuka/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)%EF%BC%9A%E5%AE%89%E8%A3%85%E4%B8%8E%E5%AE%9E%E4%BE%8B/" class="archive-article-date">
-  	<time datetime="2022-12-08T03:25:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-08</time>
-</a>
-        
-
-
-                
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.iocoder.cn/Kafka/install/#">参考文章</a></p>
-<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h2><h3 id="1-kafka特点"><a href="#1-kafka特点" class="headerlink" title="1 kafka特点"></a>1 kafka特点</h3><p>Kafka 最早是由 LinkedIn 公司开发一种分布式的基于发布&#x2F;订阅的消息系统，之后成为 Apache 的顶级项目。主要特点如下：</p>
-<h4 id="1-1-同时为发布和订阅提供高吞吐量"><a href="#1-1-同时为发布和订阅提供高吞吐量" class="headerlink" title="1.1 同时为发布和订阅提供高吞吐量"></a>1.1 同时为发布和订阅提供高吞吐量</h4><p>Kafka 的设计目标是以时间复杂度为 O(1) 的方式提供消息持久化能力，即使对TB 级以上数据也能保证常数时间的访问性能。即使在非常廉价的商用机器上也能做到单机支持每秒 100K 条消息的传输。</p>
-<h4 id="1-2-消息持久化"><a href="#1-2-消息持久化" class="headerlink" title="1.2 消息持久化"></a>1.2 消息持久化</h4><p>将消息持久化到磁盘，因此可用于批量消费，例如 ETL 以及实时应用程序。通过将数据持久化到硬盘以及 replication 防止数据丢失。</p>
-<h4 id="1-3-分布式"><a href="#1-3-分布式" class="headerlink" title="1.3 分布式"></a>1.3 分布式</h4><p>支持 Server 间的消息分区及分布式消费，同时保证每个 partition 内的消息顺序传输。这样易于向外扩展，所有的producer、broker 和 consumer 都会有多个，均为分布式的。无需停机即可扩展机器。</p>
-        
-          <a class="article-more-a" href="/2022/12/08/kafuka/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)%EF%BC%9A%E5%AE%89%E8%A3%85%E4%B8%8E%E5%AE%9E%E4%BE%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">kafka</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/12/08/kafuka/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)%EF%BC%9A%E5%AE%89%E8%A3%85%E4%B8%8E%E5%AE%9E%E4%BE%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
@@ -1184,11 +1223,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">连接池 - MySQL - redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Prometheus</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1205,10 +1252,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">小说</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Prometheus</a>
               </li>
             
             <div class="clearfix"></div>
