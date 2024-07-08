@@ -163,6 +163,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-awk学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">awk学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2022-11-11T01:13:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-11</time>
+</a>
+        
+
+
+                
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/anqixiang/article/details/117903529">awk命令详解</a></p>
+<h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>awk是专门为文本处理设计的编程语言，是一门数据驱动的编程语言，与sed类似都是以数据驱动的行处理软件，主要用于<code>数据扫描、过滤、统计汇总</code>工作，数据可以来自标准输入、管道或者文件。</p>
+<p>awk在20世纪70年代诞生与贝尔实验室。现在使用的版本是1988年发布的<code>Gnu awk</code>。</p>
+<h2 id="二、基础语法"><a href="#二、基础语法" class="headerlink" title="二、基础语法"></a>二、基础语法</h2><h3 id="2-1-记录与字段"><a href="#2-1-记录与字段" class="headerlink" title="2.1 记录与字段"></a>2.1 记录与字段</h3><p>awk是一种处理文本文件的编程语言，文件的每行数据都被称为<code>记录</code>，默认以空格或制表符为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E9%9A%94%E7%AC%A6&spm=1001.2101.3001.7020">分隔符</a>，每条记录被分成若干<code>字段(列)</code>，awk每次从文件中读取一条记录。</p>
+<p><strong>语法格式：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk [选项] ‘条件&#123;动作&#125;  条件&#123;动作&#125; ... ...’  文件名</span><br></pre></td></tr></table></figure>
+
+<p>awk语法由一系列条件和动作组成，在花括号内可以有多个动作，多个动作之间用分号分隔，在多个条件和动作之间可以有若干空格，也可以没有。</p>
+<p>如果没有指定条件则匹配所有数据，如果没有指定动作则<strong>默认为print打印</strong>。</p>
+<p><strong>awk是对文档中每一行的记录执行的</strong></p>
+        
+          <a class="article-more-a" href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-动态redis库实现与问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -475,15 +568,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Prometheus</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
