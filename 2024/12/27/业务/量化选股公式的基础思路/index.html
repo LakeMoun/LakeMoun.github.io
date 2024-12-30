@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lakemoun.github.io">
-  <title>动态redis库实现与问题 | 大头的博客</title>
+  <title>选股公式的计算与编写基础思路 | 大头的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="怪异的redis异常实现一个监控服务，监控其他服务的运行状态并校验相应的业务数据，设计上使用redis来传递心跳和业务数据来解耦，避免影响到主流程。然而不同的监控对象使用的redis库不尽相同，业务上需要实现动态redis库的功能，首先尝试在网络上寻找到工具类如下 1234567891011121314151617181920212223242526272829303132333435363738">
+  <meta name="description" content="经过一段时间相关工作的生产实践，对于如何运用公式过滤特定形态、特定指标、特定数据的股票产生了一些心得，遂记录如下。 需要提前说明的是，股票的技术分析只能起到辅助的作用。实际的投资决策还需要综合公司经营情况，市场变化等等多方面的因素，不能完全依赖技术分析。 一 计算对象需要明确的是在量化公式的计算中，计算的对象并非一个确定值，公式中的值通常来说是一个时间相关的序列。其形式可以理解为一个形如[val1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态redis库实现与问题">
-<meta property="og:url" content="https://lakemoun.github.io/2022/11/09/%E5%8A%A8%E6%80%81redis%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="选股公式的计算与编写基础思路">
+<meta property="og:url" content="https://lakemoun.github.io/2024/12/27/%E4%B8%9A%E5%8A%A1/%E9%87%8F%E5%8C%96%E9%80%89%E8%82%A1%E5%85%AC%E5%BC%8F%E7%9A%84%E5%9F%BA%E7%A1%80%E6%80%9D%E8%B7%AF/index.html">
 <meta property="og:site_name" content="大头的博客">
-<meta property="og:description" content="怪异的redis异常实现一个监控服务，监控其他服务的运行状态并校验相应的业务数据，设计上使用redis来传递心跳和业务数据来解耦，避免影响到主流程。然而不同的监控对象使用的redis库不尽相同，业务上需要实现动态redis库的功能，首先尝试在网络上寻找到工具类如下 1234567891011121314151617181920212223242526272829303132333435363738">
+<meta property="og:description" content="经过一段时间相关工作的生产实践，对于如何运用公式过滤特定形态、特定指标、特定数据的股票产生了一些心得，遂记录如下。 需要提前说明的是，股票的技术分析只能起到辅助的作用。实际的投资决策还需要综合公司经营情况，市场变化等等多方面的因素，不能完全依赖技术分析。 一 计算对象需要明确的是在量化公式的计算中，计算的对象并非一个确定值，公式中的值通常来说是一个时间相关的序列。其形式可以理解为一个形如[val1">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-09T07:38:23.000Z">
-<meta property="article:modified_time" content="2022-11-29T02:55:02.502Z">
+<meta property="article:published_time" content="2024-12-27T09:17:46.000Z">
+<meta property="article:modified_time" content="2024-12-30T08:42:46.554Z">
 <meta property="article:author" content="一个大头鬼">
-<meta property="article:tag" content="技术">
-<meta property="article:tag" content="redis">
+<meta property="article:tag" content="业务">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="大头的博客" type="application/atom+xml">
@@ -164,20 +163,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-动态redis库实现与问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-业务/量化选股公式的基础思路" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      动态redis库实现与问题
+      选股公式的计算与编写基础思路
     </h1>
   
 
         
-        <a href="/2022/11/09/%E5%8A%A8%E6%80%81redis%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2022-11-09T07:38:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
+        <a href="/2024/12/27/%E4%B8%9A%E5%8A%A1/%E9%87%8F%E5%8C%96%E9%80%89%E8%82%A1%E5%85%AC%E5%BC%8F%E7%9A%84%E5%9F%BA%E7%A1%80%E6%80%9D%E8%B7%AF/" class="archive-article-date">
+  	<time datetime="2024-12-27T09:17:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-27</time>
 </a>
         
 
@@ -192,53 +191,120 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3><span id="怪异的redis异常">怪异的redis异常</span></h3><p>实现一个监控服务，监控其他服务的运行状态并校验相应的业务数据，设计上使用redis来传递心跳和业务数据来解耦，避免影响到主流程。然而不同的监控对象使用的redis库不尽相同，业务上需要实现动态redis库的功能，首先尝试在网络上寻找到工具类如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate <span class="title function_">setDataBase</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">LettuceConnectionFactory</span> <span class="variable">connectionFactory</span> <span class="operator">=</span> (LettuceConnectionFactory) redisTemplate.getConnectionFactory();</span><br><span class="line">        <span class="keyword">if</span> (connectionFactory != <span class="literal">null</span> &amp;&amp; num != connectionFactory.getDatabase()) &#123;</span><br><span class="line">            connectionFactory.setDatabase(num);</span><br><span class="line">            <span class="built_in">this</span>.redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">            connectionFactory.resetConnection();</span><br><span class="line">            connectionFactory.afterPropertiesSet();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 序列化注入spring容器的RedisTemplate</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Serializable, Object&gt; <span class="title function_">getRedisTemplate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">serializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line"><span class="comment">//        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span></span><br><span class="line">        serializer.setObjectMapper(mapper);</span><br><span class="line">        <span class="comment">//使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setValueSerializer(serializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setHashValueSerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.afterPropertiesSet();</span><br><span class="line"><span class="comment">//        redisTemplate.setEnableTransactionSupport(true);</span></span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>经过一段时间相关工作的生产实践，对于如何运用公式过滤特定形态、特定指标、特定数据的股票产生了一些心得，遂记录如下。</p>
+<p>需要提前说明的是，股票的技术分析只能起到辅助的作用。实际的投资决策还需要综合公司经营情况，市场变化等等多方面的因素，不能完全依赖技术分析。</p>
+<h3><span id="一-计算对象">一 计算对象</span></h3><p>需要明确的是在量化公式的计算中，计算的对象并非一个确定值，公式中的值通常来说是一个时间相关的序列。其形式可以理解为一个形如<code>[val1,val2,val3,……,valn]</code>的数组。</p>
+<p>以常见指标MACD的源码（默认参数值）为例：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DIF:EMA(CLOSE,12)-EMA(CLOSE,26);</span><br><span class="line">DEA:EMA(DIF,9);</span><br><span class="line">MACD:(DIF-DEA)*2;</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
+<ul>
+<li>其中参数<code>CLOSE</code>指的是股票的收盘价一个时间序列。序列时间与交易日相关，旧的时间在前，新的时间在后。</li>
+<li>其中公式<code>EMA(CLOSE,12)</code>指的是时间序列<code>CLOSE</code>在12日的指数移动平均值，公式的计算基于入参序列的数值，其结果也是和时间有关序列，具体的公式计算与后文阐述。</li>
+<li>公式中的数字常量分为两类，一是作为基础公式的入参，如<code>EMA(DIF,9)</code>，其理解为单个数字参与运算。另一类是作为不变的序列参与运算，如<code>(DIF-DEA)*2</code>中的数字常量2。</li>
+<li>在<code>DIF:EMA(CLOSE,12)-EMA(CLOSE,26)</code>部分,<code>EMA(CLOSE,12)</code>的结果是一个时间序列，<code>EMA(CLOSE,26)</code>的结果也是一个时间序列。两序列相减，即两序列中相同时间的两个值相减形成的一个新序列。序列与序列的其他基础运算同理。</li>
+<li>一个基础公式的入参接受时间序列，自然也可以接受结果为时间序列的子表达式。即表达式可以嵌套。</li>
+<li>完整解释上述公式为<ul>
+<li>输出DIF：收盘价的12日指数移动平均-收盘价的26日指数移动平均</li>
+<li>输出DEA：DIF的MID日指数移动平均</li>
+<li>输出平滑异同平均线：(DIF-DEA)*2</li>
+</ul>
+</li>
+</ul>
+<h3><span id="二-常见基础函数">二 常见基础函数</span></h3><h4><span id="1-平均类函数">1 平均类函数</span></h4><p>用于评价某一指标在一段时间内的平均表现，常见用来表示股价在一段时间的内的平均趋势。</p>
+<h5><span id="11-maxr-简单移动平均">1.1 MA(X,r) 简单移动平均</span></h5><p>计算时间序列X在最近r个时间周期的简单移动平均值</p>
+<p>其中序列<code>X</code>的实际值为<code>[X1,X2,X3,……,Xn]</code>则<code>MA(X,r)</code>的结果序列Y的每一项的通项公式为<br>$$<br>Y_{m} &#x3D;  \frac{(x_{m} +  x_{m+1} + \dots + x_{m+r-1})}{r}<br>$$<br>以序列X<code>[31,32,33,34,35]</code>的MA(X,3)为例，其结果值为</p>
+<p>$$<br>\left [  \frac{31+32+33}{3} ,\frac{32+33+34}{3},\frac{33+34+35}{3}\right ]<br>$$<br>也即<br>$$<br>[32,33,34]<br>$$<br>可以看到，取值如同一个宽度为<code>r</code>移动的窗口在序列中取值计算平均值，所以称之为序列<code>X</code>的简单移动平均。</p>
+<p>这一计算可以有效反应在一段时间内序列X的整体趋势，当r值越大，该结果序列表现的越为平滑，受到序列X短时间内变化的影响越小。</p>
+<p>也即r取值越大，越反应序列整体的变化情况。</p>
+<h5><span id="12-emaxr-指数移动平均">1.2 EMA(X,r) 指数移动平均</span></h5><p>在上一基础可以看到，简单移动平均对于序列中的新老数据敏感度是一视同仁的。当处于对近期数据更加敏感应用场景时，简单移动平均变得不再适用。指数移动平均可以解决这一问题。</p>
+<p>对于序列<code>X[X1,X2,X3,……,Xn]</code>，EMA(X,r)的迭代计算公式为<br>$$<br>Y_{m}  &#x3D; \frac{2X_{m} + Y_{m-1}*(r-1)}{r+1}<br>$$<br>可以看到，当前序列值<code>Ym</code>的值依赖于序列中上一个<code>Ym</code>的计算结果</p>
+<p><strong>以下的公式推导仅作为后续结论的补充说明，可以直接阅读结论</strong></p>
+<p>将公式变形为<code>式1-1</code><br>$$<br>Y_{m}  &#x3D; \frac{2X_{m} }{r+1} + \frac{r-1}{r+1}*Y_{m-1}<br>$$<br>迭代为<code>式1-2</code><br>$$<br>Y_{m-1}  &#x3D; \frac{2X_{m-1} }{r+1} + \frac{r-1}{r+1}*Y_{m-2}<br>$$<br>将<code>式1-2</code>带入<code>式1-1</code>并化简<br>$$<br>Y_{m}  &#x3D; \frac{2}{r+1}X_{m} + \frac{2(r-1)}{(r+1)^2}X_{m-1} + (\frac{r-1}{r+1})^{2} Y_{m-2}<br>$$<br>继续重复迭代<code>Ym-2</code>并代入得到下式子<br>$$<br>Y_{m}  &#x3D; \frac{2}{r+1}X_{m} + \frac{2(r-1)}{(r+1)^2}X_{m-1} + \frac{2(r-1)^2}{(r+1)^3}X_{m-2} +\frac{(r-1)^3}{(r+1)^3}Y_{m-3}<br>$$<br>重复迭代与代入，可以得到<code>式1-3</code><br>$$<br>Y_{m}  &#x3D; \frac{2}{r+1}X_{m} + \frac{2(r-1)}{(r+1)^2}X_{m-1} + \frac{2(r-1)^2}{(r+1)^3}X_{m-2} + \frac{2(r-1)^3}{(r+1)^4}X_{m-3} + \dots<br>$$<br>观察得到<code>Xm</code>的系数N为<code>式1-4</code><br>$$<br>N &#x3D; \frac{2}{r-1} * \left ( \frac{r-1}{r+1}  \right ) ^ n<br>$$<br>显而易见当n逐渐增大时该式的值将以指数叠加的速度逐渐缩小。当n趋向正无穷，N收敛于0。</p>
+<p>即对于结果序列Y的当前值，其结果由对应时间的X序列值往前的无限个序列值决定。但随着迭代次数逐渐增加，时间越是久远的数据对于当前值的影响则以指数级的速度减少。这也是<code>EMA(X,r)</code>被称为指数移动平均的原因。</p>
+<p>由上述推导可以得到以下结论：</p>
+<ul>
+<li><code>EMA(X,r)</code> 的计算结果是一个对于近期数据更加敏感的序列</li>
+<li>其迭代特点使得其在计算当前值时，往期数据对于当前值的影响以指数级的速度逐渐减少</li>
+<li>在实际计算时可以使用<code>式1-3</code>，当系数缩小至超出计算所需精度时可以将其后的项直接舍弃，避免大量的迭代计算</li>
+<li>当r越大，系数收敛于0的速度越慢，计算涉及到满足精度的X的项越多</li>
+</ul>
+<h5><span id="13-smaxrs-移动平均">1.3 SMA(X,r,s) 移动平均</span></h5><p>在EMA部分，介绍了一个近期数据敏感的基础公式。进一步思考，EMA本质是一个以指数函数对入参序列X的一个加权平均运算。这一指数函数的收敛速度是否适用于我们的需求？公式对于近期数据的敏感程度是否可自定义？指数函数的收敛速度是否可以自定义？</p>
+<p>基础公式<code>SMA(X,r,s) 移动平均</code>可以做到以上需求</p>
+<p>对于序列<code>X[X1,X2,X3,……,Xn]</code>，SMA(X,r,s)的迭代计算公式为<br>$$<br>Y_{m} &#x3D; \frac{ s \cdot X + Y_{m-1} \cdot (r-s) }{r}<br>$$<br>可以看到，该迭代公式与<code>EMA</code> 具有相似的结构，类似的推导过程不再赘述。</p>
+<p>经过迭代带入后可以得到关于<code>Xm</code>的系数公式<br>$$<br>N &#x3D;  \left (  1 - \frac{s}{r} \right ) ^ {n-1}<br>$$<br>观察系数公式，可以了解到常数参数<code>s</code>和<code>r</code>在求加权平均时是如何影响SMA的具体表现</p>
+<ul>
+<li>s和r的大小应当满足<code>1-s/r</code>的值大于0小于1，否则SMA的值没有实际意义</li>
+<li>s越大，则系数收敛到0越快，SMA的序列对于近期数据越敏感，SMA越灵敏</li>
+<li>r越大，则系数收敛到0越慢，计算涉及到满足精度的X的项越多，SMA对于近期数据越不敏感，SMA的序列越平滑。</li>
+</ul>
+<p>在实际使用中将SMA(X,r,s)&#96;称为X的r日移动平均值，s为权重。</p>
+<h4><span id="2-行情序列">2 行情序列</span></h4><p>作为编写量化选股公式中的基础，行情序列代表的是某一支股票的某个指标在一定时间周期内的具体时间序列。</p>
+<p>例如，某股票的收盘价价格就可以用变量<strong>CLOSE</strong>或者简写为<strong>C</strong>表示。而<code>MA(C,5)</code>则表示某股票收盘价的5日均线。</p>
+<p>常用的行情序列有：</p>
+<ul>
+<li>HIGH 最高价 简写为 H</li>
+<li>LOW 最低价 简写为L</li>
+<li>CLOSE 收盘价 简写为 C</li>
+<li>VOL 成交量（手）简写为 V</li>
+<li>OPEN 开盘价 简写为 O</li>
+<li>ADVANCE 上涨家数</li>
+<li>DECLINE 下跌家数</li>
+</ul>
+<h4><span id="3-引用函数">3 引用函数</span></h4><p>在编写公式中，常常存在指定某一时间周期的具体值的需求，如前一天的收盘价，5天内的最高价等。这时就需要用到引用函数</p>
+<p>常用的引用函数如下：</p>
+<ul>
+<li><code>COUNT(X,N)</code> 统计N个周期内条件X的满足次数，例如<code>COUNT(CLOSE&gt;OPEN,5)</code> 则表示5日内收盘价大于开盘价的天数。</li>
+<li><code>HHV(X,N)</code> 求 N 周期内 X 最高值，如<code>HHV(CLOSE,5)</code>则表示收盘价的5日最大值。</li>
+<li><code>LLV(X,N)</code> 求 N 周期内 X 最低值，如<code>LLV(CLOSE,5)</code>则表示收盘价的5日最小值。</li>
+<li><code>REF(X,A)</code>,引用A周期前的X值, 如<code>REF(CLOSE,1)</code>则表示前一日的收盘价。</li>
+</ul>
+<h4><span id="4-逻辑函数">4 逻辑函数</span></h4><p>有一类函数的结果为1和0的时间序列，其结果表示的是入参否满足函数函数要求的逻辑。其中结果1表示为真，结果0表示为假。</p>
+<p>常见的逻辑函数有：</p>
+<ul>
+<li><code>CROSS(A,B)</code>上穿，表示当A从下方向上穿过B时返回1,否则返回0，例如<code>CROSS(MA(C,10),MA(C,30))</code>则表示收盘价的10日均线上穿收盘价的30日均线。</li>
+<li><code>UPNDAY(X,M)</code> 连涨，表示是否连涨M个周期，M为常量，例如<code>UPNDAY(CLOSE,3)</code> 表示收盘价是否连续三天上涨。</li>
+<li><code>DOWNNDAY(CLOSE,M)</code>连跌，表示是否连跌M个周期，M为常量，例如<code>UPNDAY(CLOSE,3)</code> 表示收盘价是否连续三天下跌。</li>
+</ul>
+<p>其他未提到的公式请参考<a target="_blank" rel="noopener" href="https://www.tdx.com.cn/products/helpfile/tdxw/">通达信金融终端在线说明书</a> 第三章-公式平台章节，也可直接在说明书 文档中搜索。在此不再赘述</p>
+<h3><span id="三-选股公式的编写思路">三 选股公式的编写思路</span></h3><p>选股公式的首要目的，就是在大量的备选股票中筛选出符合要求的股票。经过经验总结出的股票指标特征，通过对股票指标的描述、过滤、比较，在给定的股票范围内选出符合经验的股票便是编写选股思路的一个基本思路。</p>
+<h4><span id="1-走势特征与双线">1 走势特征与双线</span></h4><p>双线思路是选股公式中最为常见的一个思路。其本质原理是两个<strong>随股价变化而灵敏度不同</strong>的指标在股价走势发生变化时会相互交叉。双线原理在表示走势特征时有着广泛的应用。</p>
+<p>以MA买入选股公式为例（默认参数值）：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CROSS(MA(CLOSE,5),MA(CLOSE,20));</span><br></pre></td></tr></table></figure>
 
+<p>这是一个非常基础的选股公式。其由两部分组成，<code>MA(CLOSE,5)</code>是收盘价的5日均线，<code>MA(CLOSE,20)</code>是收盘价的20日均线。由于前者当前周期在平均值计算的中占比更大。所以5日均线是一个相较20日均线而言更加灵敏的指标。</p>
+<p>当收盘价由下降趋势转为上升趋势时，5日均线的上涨趋势将比20日均线的上涨趋势更为明显。更为直观的表现就是，5日线从下方上穿20日线。当股价上升趋势转为下降趋势时，5日线则从上方下穿20日线。</p>
+<p>下面再来分析一下常见指标MACD的源码（默认参数值）：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DIF:EMA(CLOSE,12)-EMA(CLOSE,26);</span><br><span class="line">DEA:EMA(DIF,9);</span><br><span class="line">MACD:(DIF-DEA)*2;</span><br></pre></td></tr></table></figure>
 
-<p>可以看到setDataBase方法是通过注入设置了db号的connectionFactory对象来实现的切换redisTemplete。这一方式在单线程场景中没有什么问题，但是一旦进行异步调用，则偶发抛出io.lettuce.core.RedisException:异常提示<strong>Connection is closed</strong> </p>
-<p>在测试中还发现，当使用仅仅使用单一的redis库时并不会抛出这一异常，当使用不同的redis库时，偶发的抛出这一异常，且接口调用越频繁异常越容易抛出。甚至可能导致服务崩溃</p>
-<h3><span id="问题原因">问题原因</span></h3><p>在RedisConfig中获取到的redisTemplete为单例，在这种动态db库的方式下，当异步调用过程中存在着在某一线程中正在使用DB1的时，其他线程尝试以DB2的连接访问redis的情况，而redisTemplate实例中的连接已经不是DB2了，从而抛出该异常。</p>
-<h3><span id="解决方案">解决方案</span></h3><p>更换RedisConfig类，在项目启动时一次性新建预先配置了DB的redis连接池，根据不同DB号获得不同实例的redisTemplate。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisDbConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LogManager.getLogger(<span class="built_in">this</span>.getClass());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//nacos上的配置</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.redis.host&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String hostName;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.redis.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> port;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.redis.password&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String passWord;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.redis.jedis.pool.max-idle&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> maxIdl;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.redis.jedis.pool.min-idle&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> minIdl;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.redis.timeout&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> timeout;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> defaultDb;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//会用到的redisDB</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.redis.dbs&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; dbs;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Map&lt;Integer, RedisTemplate&lt;Serializable, Object&gt;&gt; redisTemplateMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 服务启动时加载并创建连接池</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initRedisTemp</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        logger.info(<span class="string">&quot;###### START 初始化 Redis 连接池 START ######&quot;</span>);</span><br><span class="line">        defaultDb = dbs.get(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (Integer db : dbs) &#123;</span><br><span class="line">            logger.info(<span class="string">&quot;###### 正在加载Redis-db-&quot;</span> + db+ <span class="string">&quot; ######&quot;</span>);</span><br><span class="line">            redisTemplateMap.put(db, redisTemplateObject(db));</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(<span class="string">&quot;###### END 初始化 Redis 连接池 END ######&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;Serializable, Object&gt; <span class="title function_">redisTemplateObject</span><span class="params">(Integer db)</span> &#123;</span><br><span class="line">        <span class="comment">//创建某一db的redisTemplate实例</span></span><br><span class="line">        RedisTemplate&lt;Serializable, Object&gt; redisTemplateObject = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;Serializable, Object&gt;();</span><br><span class="line">        redisTemplateObject.setConnectionFactory(redisConnectionFactory(jedisPoolConfig(),db));</span><br><span class="line">        setSerializer(redisTemplateObject);</span><br><span class="line">        redisTemplateObject.afterPropertiesSet();</span><br><span class="line">        <span class="keyword">return</span> redisTemplateObject;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">setSerializer</span><span class="params">(RedisTemplate&lt;Serializable, Object&gt; template)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">serializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line"><span class="comment">//        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span></span><br><span class="line">        serializer.setObjectMapper(mapper);</span><br><span class="line">        <span class="comment">//使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        template.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        template.setValueSerializer(serializer);</span><br><span class="line">        template.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        template.setHashValueSerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line"><span class="comment">//        redisTemplate.setEnableTransactionSupport(true);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*template.setKeySerializer(new StringRedisSerializer());</span></span><br><span class="line"><span class="comment">        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Serializable, Object&gt; <span class="title function_">getRedisTemplate</span><span class="params">(<span class="type">int</span> db)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplateMap.get(db);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Serializable, Object&gt; <span class="title function_">getRedisTemplate</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplateMap.get(defaultDb);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 连接池配置</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> JedisPoolConfig <span class="title function_">jedisPoolConfig</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">JedisPoolConfig</span> <span class="variable">poolConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JedisPoolConfig</span>();</span><br><span class="line">        <span class="comment">// 最大连接数</span></span><br><span class="line">        poolConfig.setMaxIdle(maxIdl);</span><br><span class="line">        <span class="comment">// 最小空闲连接数</span></span><br><span class="line">        poolConfig.setMinIdle(minIdl);</span><br><span class="line">        poolConfig.setTestOnBorrow(<span class="literal">true</span>);</span><br><span class="line">        poolConfig.setTestOnReturn(<span class="literal">true</span>);</span><br><span class="line">        poolConfig.setTestWhileIdle(<span class="literal">true</span>);</span><br><span class="line">        poolConfig.setNumTestsPerEvictionRun(<span class="number">10</span>);</span><br><span class="line">        poolConfig.setTimeBetweenEvictionRunsMillis(<span class="number">60000</span>);</span><br><span class="line">        <span class="comment">// 当池内没有可用的连接时，最大等待时间</span></span><br><span class="line">        poolConfig.setMaxWaitMillis(<span class="number">10000</span>);</span><br><span class="line">        <span class="comment">// ------其他属性根据需要自行添加-------------</span></span><br><span class="line">        <span class="keyword">return</span> poolConfig;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * jedis连接工厂</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> jedisPoolConfig</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> RedisConnectionFactory <span class="title function_">redisConnectionFactory</span><span class="params">(JedisPoolConfig jedisPoolConfig, <span class="type">int</span> db)</span> &#123;</span><br><span class="line">        <span class="comment">// 单机版jedis</span></span><br><span class="line">        <span class="type">RedisStandaloneConfiguration</span> <span class="variable">redisStandaloneConfiguration</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RedisStandaloneConfiguration</span>();</span><br><span class="line">        <span class="comment">// 设置redis服务器的host或者ip地址</span></span><br><span class="line">        redisStandaloneConfiguration.setHostName(hostName);</span><br><span class="line">        <span class="comment">// 设置默认使用的数据库</span></span><br><span class="line">        redisStandaloneConfiguration.setDatabase(db);</span><br><span class="line">        <span class="comment">// 设置密码</span></span><br><span class="line">        redisStandaloneConfiguration.setPassword(RedisPassword.of(passWord));</span><br><span class="line">        <span class="comment">// 设置redis的服务的端口号</span></span><br><span class="line">        redisStandaloneConfiguration.setPort(port);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获得默认的连接池构造器</span></span><br><span class="line">        JedisClientConfiguration.<span class="type">JedisPoolingClientConfigurationBuilder</span> <span class="variable">jpcb</span> <span class="operator">=</span> (JedisClientConfiguration.JedisPoolingClientConfigurationBuilder) JedisClientConfiguration</span><br><span class="line">                .builder();</span><br><span class="line">        <span class="comment">// 指定jedisPoolConifig来修改默认的连接池构造器</span></span><br><span class="line">        jpcb.poolConfig(jedisPoolConfig);</span><br><span class="line">        <span class="comment">// 通过构造器来构造jedis客户端配置</span></span><br><span class="line">        <span class="type">JedisClientConfiguration</span> <span class="variable">jedisClientConfiguration</span> <span class="operator">=</span> jpcb.build();</span><br><span class="line">        <span class="comment">// 单机配置 + 客户端配置 = jedis连接工厂</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">JedisConnectionFactory</span>(redisStandaloneConfiguration, jedisClientConfiguration);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这其中<code>DIF</code>指标由收盘价的12日指数移动平均减去收盘价的26日指数移动平均得出。试想一个极端情况，有一支股票从上市以来一直维持着同一收盘价，由EMA的计算过程可以显而易见的得到，这一支股票的<code>DIF</code>值将会一直为零。当这支股票收盘价上涨时，由于<code>EMA(CLOSE,12)</code>是一个对于近期数据比<code>EMA(CLOSE,26)</code>更为灵敏的指标，此时前者的值将比后者的值大，也即DIF表现为正数。同理当支股票收盘价下跌时，DIF表现为负数。当近期的收盘价持续性的上涨时，DIF则会表现出上升的趋势。当近期的收盘价持续性的下跌时，DIF则也会表现出下降的趋势。</p>
+<p>到这里可以看出仅仅是<code>DIF</code>指标本身就足以一定程度反应出股价的上涨或是下跌。但如果需要一个确定买卖信号点，则需要一个确切的“标准”来确定。在<code>MACD</code>中通常以<code>DEA</code>指标作为这一标准。</p>
+<p><code>DEA</code>是<code>DIF</code>的9日指数平均值。其本身反应了<code>DIF</code>指标在近期的总体趋势。当<code>DIF</code>从下方上穿<code>DEA</code>时，则表示<code>DIF</code>的当前值超过了在其近期的总体表现，也即<code>DIF</code>转入了上升趋势。而<code>DIF</code>转入上升趋势恰恰反应出了股价在近期的持续性上涨。当<code>DIF</code>从下穿<code>DEA</code>时也是同理，这里不再赘述。</p>
+<p>由上述分析不难看出，双线选股思路的目的便是要筛选出股价从下跌转为上涨或是由上涨转为下跌的形态特征。在更为复杂的选股公式中，双线的编写不再局限于固定的参数。双线的灵敏度往往会根据股价不同的震荡幅度，或者是根据大盘的表现不同，存在着动态的变化。如在大盘整体表现不佳时，同时降低双线的灵敏度，以求更加长线的收益。往往这部分编写更加需要具体的实践和经验。</p>
+<h4><span id="2-交易量">2 交易量</span></h4><p>对于交易量指标的过滤，基于股价变动时常常伴随着的交易量增多的经验。通过针对对交易量的过滤，将市场情绪较好的股票筛选出来。</p>
+<p>以条件选股公式持续放量为例(默认参数值)：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FINANCE(42)&gt;50 <span class="built_in">&amp;</span><span class="built_in">&amp;</span> EVERY(VOL&gt;=REF(VOL,1),5);</span><br></pre></td></tr></table></figure>
 
+<p>其中<code>FINANCE(42)</code>表示上市天数。<code>VOL</code>表示当前交易量，<code>REF(VOL,1)</code>表示前一天的交易量,<code>EVERY(X,5)</code>则表示连续是否连续5个周期都满足条件表达式X。<code>EVERY(VOL&gt;=REF(VOL,1),5)</code>则表示连续5个周期都满足当前交易量大于上一周期的交易量。</p>
+<p>综合来看，这一选股公式便是筛选上市的天数&gt;50 并且 最近5日交易量持续上升的股票。</p>
+<h4><span id="3-k线特征">3 K线特征</span></h4><p>由于K线直观表现出股价趋势，针对K线特征的直接筛选也是选股公式的一大思路</p>
+<p>以选股公式早晨之星之心为例</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">STAR:</span><br><span class="line">REF(CLOSE,2)/REF(OPEN,2)&lt;0.95<span class="built_in">&amp;</span><span class="built_in">&amp;</span></span><br><span class="line">REF(OPEN,1)&lt;REF(CLOSE,2)<span class="built_in">&amp;</span><span class="built_in">&amp;</span></span><br><span class="line">ABS(REF(OPEN,1)-REF(CLOSE,1))/REF(CLOSE,1)&lt;0.03<span class="built_in">&amp;</span><span class="built_in">&amp;</span></span><br><span class="line">CLOSE/OPEN&gt;1.05<span class="built_in">&amp;</span><span class="built_in">&amp;</span></span><br><span class="line">CLOSE&gt;REF(CLOSE,2);</span><br></pre></td></tr></table></figure>
 
-
+<ul>
+<li><code>REF(CLOSE,2)/REF(OPEN,2)&lt;0.95</code> 表示前日收盘价比前日开盘价小于0.95，也即前日为阴线</li>
+<li><code>REF(OPEN,1)&lt;REF(CLOSE,2)</code>表示昨日开盘小于前日开盘，即昨日开盘跳空低开</li>
+<li><code>ABS(REF(OPEN,1)-REF(CLOSE,1))/REF(CLOSE,1)&lt;0.03</code> 则是对昨日十字星线的描述<ul>
+<li><code>REF(OPEN,1)</code>为昨日开盘价，<code>REF(CLOSE,1)</code>为昨日收盘价。</li>
+<li><code>ABS(REF(OPEN,1)-REF(CLOSE,1))/REF(CLOSE,1)&lt;0.03</code>也即昨日开盘价与收盘价的差与收盘价的比值小于0.03。</li>
+</ul>
+</li>
+<li><code>CLOSE&gt;REF(CLOSE,2)</code> 则表示当前收盘价大于前天的收盘价。</li>
+</ul>
+<p>借助REF等函数以及各种操作符，对于K线的具体特征进行直接的筛选。</p>
+<h3><span id="四-总结">四 总结</span></h3><p>总的来说，条件选股公式无外乎对于某只股票的各种指标进行过滤，将待选股票中的满足要求的股票筛选出来。如何确定待选股票，更加依赖分析师自己对于市场风向的把握。期望仅仅以技术描述筛选出的股票能战无不胜显然是不现实的。学习如何编写选股公式更多的是在自动化选股中将抽象的经验总结转化为具体的、可描述、可量化的语言。</p>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢老板，老板大气<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/wcpay.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -249,11 +315,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">业务</a>
         		</li>
       		
 		</ul>
@@ -309,7 +371,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2022/11/09/%E5%8A%A8%E6%80%81redis%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lakemoun.github.io/2024/12/27/%E4%B8%9A%E5%8A%A1/%E9%87%8F%E5%8C%96%E9%80%89%E8%82%A1%E5%85%AC%E5%BC%8F%E7%9A%84%E5%9F%BA%E7%A1%80%E6%80%9D%E8%B7%AF/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -323,18 +385,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/11/11/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          awk学习笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2012/12/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo博客框架 Hello World汉化</div>
+    <a href="/2024/07/08/Python/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python虚拟环境配置</div>
       <i class="icon-circle-right"></i>
     </a>
   
