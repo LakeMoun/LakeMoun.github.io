@@ -16,7 +16,7 @@
 <meta property="og:description" content="经过一段时间相关工作的生产实践，对于如何运用公式过滤特定形态、特定指标、特定数据的股票产生了一些心得，遂记录如下。 需要提前说明的是，股票的技术分析只能起到辅助的作用。实际的投资决策还需要综合公司经营情况，市场变化等等多方面的因素，不能完全依赖技术分析。 一 计算对象需要明确的是在量化公式的计算中，计算的对象并非一个确定值，公式中的值通常来说是一个时间相关的序列。其形式可以理解为一个形如[val1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-27T09:17:46.000Z">
-<meta property="article:modified_time" content="2024-12-30T08:42:46.554Z">
+<meta property="article:modified_time" content="2025-01-02T07:44:34.623Z">
 <meta property="article:author" content="一个大头鬼">
 <meta property="article:tag" content="业务">
 <meta name="twitter:card" content="summary">
@@ -301,7 +301,49 @@
 <li><code>CLOSE&gt;REF(CLOSE,2)</code> 则表示当前收盘价大于前天的收盘价。</li>
 </ul>
 <p>借助REF等函数以及各种操作符，对于K线的具体特征进行直接的筛选。</p>
-<h3><span id="四-总结">四 总结</span></h3><p>总的来说，条件选股公式无外乎对于某只股票的各种指标进行过滤，将待选股票中的满足要求的股票筛选出来。如何确定待选股票，更加依赖分析师自己对于市场风向的把握。期望仅仅以技术描述筛选出的股票能战无不胜显然是不现实的。学习如何编写选股公式更多的是在自动化选股中将抽象的经验总结转化为具体的、可描述、可量化的语言。</p>
+<h3><span id="四-实战">四 实战</span></h3><p>经过上文的介绍，接下来面向假设的选股需求，实际编写一个选股公式。</p>
+<p>假设有需求如下，注意接下来的公式并未验证实际选股效果，仅用于展示编写选股公式的思路。</p>
+<ol>
+<li>股价由下降趋势转为上升趋势时为买入信号</li>
+<li>股价由上升趋势转为下降趋势时为卖出信号</li>
+<li>买入信号和卖出信号需要有交易量的增长</li>
+<li>当股价波动平缓时为减少交易频率</li>
+<li>若当日股价跳开且交易量涨幅超过50%则无视需求4</li>
+</ol>
+<p>从上文的分析需求1、需求2适用于使用双选原理来产生买入与卖出信号、这里选择使用两条均线。根据需求4，两条均线的参数由股票的震荡幅度决定。</p>
+<p>先表示出股票的震荡幅度：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOCK:=STD(CLOSE,30)&gt;0.4;</span><br></pre></td></tr></table></figure>
+
+<p><code>STD</code>是估算标准差函数，用于描述参数序列偏离平均值的程度。</p>
+<p>当收盘价30日方差大于0.4时视为股票近日震荡幅度较大，结果赋值给变量<code>SHOCK</code>,当大于0.4时<code>SHOCK</code>为1，反之<code>SHOCK</code>为0</p>
+<p>接下来根据变量<code>SHOCK</code>编写双线</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MA<span class="built_in">_</span>FAST:=MA(C,IF(SHOCK,5,10));</span><br><span class="line">MA<span class="built_in">_</span>SLOW:=MA(C,IF(SHOCK,20,30));</span><br></pre></td></tr></table></figure>
+
+<p>可以看到当<code>SHOCK</code>为1时，双线分别为收盘价的5日均线和20日均线，当<code>SHOCK</code>为0时，双线分别为收盘价的10日均线和30日均线。</p>
+<p>此时在双线交叉的位置做出买卖信号</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IS<span class="built_in">_</span>BUY:=CROSS(MA<span class="built_in">_</span>FAST,MA<span class="built_in">_</span>SLOW);</span><br><span class="line">IS<span class="built_in">_</span>SELL:=CROSS(MA<span class="built_in">_</span>SLOW,MA<span class="built_in">_</span>FAST);</span><br></pre></td></tr></table></figure>
+
+<p>为满足需求3，规定放量信号如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOL_INC:=(VOL-REF(VOL,1))/REF(VOL,1)&gt;0.2;</span><br></pre></td></tr></table></figure>
+
+<p>即当前交易量比前日上升超过20%时视为出现放量，修改买卖信号<code>IS_BUY</code>和<code>IS_SELL</code>如下:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IS<span class="built_in">_</span>BUY:=CROSS(MA<span class="built_in">_</span>FAST,MA<span class="built_in">_</span>SLOW) AND VOL<span class="built_in">_</span>INC;</span><br><span class="line">IS<span class="built_in">_</span>SELL:=CROSS(MA<span class="built_in">_</span>SLOW,MA<span class="built_in">_</span>FAST) AND VOL<span class="built_in">_</span>INC;</span><br></pre></td></tr></table></figure>
+
+<p>接下来处理需求5，首先描述出股价跳开且交易量涨幅超过50%如下：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JUMP:=(REF(CLOSE,1)/OPEN&lt;0.95 OR REF(CLOSE,1)/OPEN&gt;1.05) AND (VOL-REF(VOL,1))/REF(VOL,1)&gt;0.5;</span><br></pre></td></tr></table></figure>
+
+<p>这一公式操作符<code>AND</code>和<code>OR</code>复合组成，其中<code>AND</code>的左边部分<code>(REF(CLOSE,1)/OPEN&lt;0.95 OR REF(CLOSE,1)/OPEN&gt;1.05)</code>表示昨日收盘价比近日开盘价的比值小于0.95或者大于1.05，也即跳开。</p>
+<p>操作符<code>AND</code> 右边部分则表示交易量的涨幅相比昨人交易量上涨超过50。</p>
+<p>此时修改变量<code>SHOCK</code>如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOCK:=STD(CLOSE,30)&gt;0.4 OR JUMP;</span><br></pre></td></tr></table></figure>
+
+<p>此时当满足需求5的条件时<code>SHOCK</code>恒定为1，双线均为更加敏感的参数，也即满足了需求5条件满足时不要减少交易频率的特殊要求。</p>
+<p>最后为了便于观察，修改公式使得在叠加K线图的时候标志出明显个买卖信号。</p>
+<p>下面整体看一遍公式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">JUMP:=(REF(CLOSE,1)/OPEN&lt;0.95 OR REF(CLOSE,1)/OPEN&gt;1.05) AND (VOL-REF(VOL,1))/REF(VOL,1)&gt;0.5;</span><br><span class="line">SHOCK:=STD(CLOSE,30)&gt;0.4 OR JUMP;</span><br><span class="line"></span><br><span class="line">MA_FAST:=MA(C,IF(SHOCK,5,10));</span><br><span class="line">MA_SLOW:=MA(C,IF(SHOCK,20,30));</span><br><span class="line">VOL_INC:=(VOL-REF(VOL,1))/REF(VOL,1)&gt;0.2;</span><br><span class="line">IS_BUY:=CROSS(MA_FAST,MA_SLOW) AND VOL_INC;</span><br><span class="line">IS_SELL:=CROSS(MA_SLOW,MA_FAST) AND VOL_INC;</span><br><span class="line"></span><br><span class="line">DRAWICON(IS_BUY,L,7);</span><br><span class="line">DRAWICON(IS_SELL,H,8);</span><br></pre></td></tr></table></figure>
+
+<p>最后再次说明一下，上面的公式仅仅是为了演示如何将抽象选股需求转化为结构化的选股公式。实际的实践效果则依赖于后续的多次回归测试验证，以及针对公式中具体常量参数的反复调整。</p>
+<h3><span id="五-总结">五 总结</span></h3><p>总的来说，条件选股公式无外乎对于某只股票的各种指标进行过滤，将待选股票中的满足要求的股票筛选出来。如何确定待选股票，更加依赖分析师自己对于市场风向的把握。期望仅仅以技术描述筛选出的股票能战无不胜显然是不现实的。学习如何编写选股公式更多的是在自动化选股中将抽象的经验总结转化为具体的、可描述、可量化的语言。</p>
 
       
 
@@ -439,7 +481,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2024 一个大头鬼
+    		&copy; 2025 一个大头鬼
     	</div>
       	<div class="footer-right">
 
